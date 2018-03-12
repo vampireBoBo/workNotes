@@ -1,0 +1,58 @@
+window安装:https://www.cnblogs.com/lyr2015/p/6730476.html
+
+window下git常见指令的使用：http://blog.csdn.net/wangrenbao123/article/details/55511461
+
+一步到位：http://www.open-open.com/lib/view/open1423810370232.html
+
+详细介绍：https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000
+
+1、下载地址https://git-scm.com/download/win     https://desktop.github.com/
+
+2、一般教程：http://blog.csdn.net/baidu_27280587/article/details/51675430 
+	     https://www.cnblogs.com/jasonHome/p/5788912.html
+
+3、git和svn的区别：http://blog.csdn.net/Peter_tang6/article/details/76577108
+
+1. http://www.liaoxuefeng.com/   Git的完整学习教程
+2. https://git-for-windows.github.io/   windows上安装msysgit，内部包含模拟环境和Git
+3.如果英文不好，可以使用中文版，然后直接使用图形化界面Git Gui，而不使用Git bash
+
+其他学习网址：
+https://blog.cnbluebox.com/blog/2014/04/15/gitlabde-shi-yong/
+
+https://www.cnblogs.com/BugBrother/p/7119534.html
+http://www.oschina.net/translate/10-tips-git-next-level
+
+常见报错：http://blog.csdn.net/huahua78/article/details/52330792
+
+
+-----------------------------------------------------------------------------------------
+指令：
+
+    $ makdir ~/hello-world    //创建一个项目hello-world
+    $ cd ~/hello-world       //打开这个项目
+    $ git init             //初始化 
+    $ touch README       //touch可新建文件  vi：表示打开编辑该文件，若文件不存在则进行创建
+    $ git add README        //更新README文件
+    $ git commit -m 'first commit'     //提交更新，并注释信息“first commit” 
+    $ git remote add origin git@github.com:defnngj/hello-world.git（提交的路径也可以是github下的指定仓库的https连接，譬如：https://github.com/vampireBoBo/gitTest03_9）     //连接远程github项目  
+    $ git push -u origin master     //将本地项目更新到github项目上去
+
+
+
+查看远程分支
+git remote (git remote -v   查看详情)
+
+删除origin分支
+git remote rm origin
+
+若pull错误时   可使用
+git pull origin master --allow-unrelated-histories
+
+一次将多个文件提交值暂存区
+git add . 或者 git add --all 
+==============================================================================================================
+centos7的linux系统使用git
+引导：http://blog.csdn.net/king1741622927/article/details/77896841
+
+ 
