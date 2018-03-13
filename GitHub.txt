@@ -1,34 +1,22 @@
-window°²×°:https://www.cnblogs.com/lyr2015/p/6730476.html
+												git¡¢githubµÄÑ§Ï°
+---------------------------------------------------------------------------------------------------------------------
+Ò»£º¹¤¾ß½éÉÜ£º
+git==¡·Ö¸Áî°æ±¾°üº¬£¬git bash:»ùÓÚlinuxÖ¸Áî£¬git cmd£º»ùÓÚwindowÖ¸Áî£¬git gui£º»ùÓÚÊÓÍ¼
+git==¡·¿Í»§¶Ë°æ±¾ Ãû³ÆÍü¼ÇÁË
+github==¡·gitµÄÔ¶³Ì²Ö¿â£¬µØÖ·£ºhttps://github.com/
+github desktop==¡·githubµÄ¿Í»§¶Ë°æ±¾
 
-windowÏÂgit³£¼ûÖ¸ÁîµÄÊ¹ÓÃ£ºhttp://blog.csdn.net/wangrenbao123/article/details/55511461
-
-Ò»²½µ½Î»£ºhttp://www.open-open.com/lib/view/open1423810370232.html
-
-ÏêÏ¸½éÉÜ£ºhttps://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000
-
+----------------------------------------------------------------------------------------------------------------------
+¶ş¡¢Ñ§Ï°URL£º
+window°²×°: https://www.cnblogs.com/lyr2015/p/6730476.html  
+			http://www.open-open.com/lib/view/open1423810370232.html			
+¡¾!!!¡¿windowÏÂgitÊ¹ÓÃÖ¸ÄÏ£ºhttp://blog.csdn.net/wangrenbao123/article/details/55511461 
 1¡¢ÏÂÔØµØÖ·https://git-scm.com/download/win     https://desktop.github.com/
+2¡¢gitºÍsvnµÄÇø±ğ£ºhttp://blog.csdn.net/Peter_tang6/article/details/76577108
+3. http://www.liaoxuefeng.com/   GitµÄÍêÕûÑ§Ï°½Ì³Ì
 
-2¡¢Ò»°ã½Ì³Ì£ºhttp://blog.csdn.net/baidu_27280587/article/details/51675430 
-	     https://www.cnblogs.com/jasonHome/p/5788912.html
-
-3¡¢gitºÍsvnµÄÇø±ğ£ºhttp://blog.csdn.net/Peter_tang6/article/details/76577108
-
-1. http://www.liaoxuefeng.com/   GitµÄÍêÕûÑ§Ï°½Ì³Ì
-2. https://git-for-windows.github.io/   windowsÉÏ°²×°msysgit£¬ÄÚ²¿°üº¬Ä£Äâ»·¾³ºÍGit
-3.Èç¹ûÓ¢ÎÄ²»ºÃ£¬¿ÉÒÔÊ¹ÓÃÖĞÎÄ°æ£¬È»ºóÖ±½ÓÊ¹ÓÃÍ¼ĞÎ»¯½çÃæGit Gui£¬¶ø²»Ê¹ÓÃGit bash
-
-ÆäËûÑ§Ï°ÍøÖ·£º
-https://blog.cnbluebox.com/blog/2014/04/15/gitlabde-shi-yong/
-
-https://www.cnblogs.com/BugBrother/p/7119534.html
-http://www.oschina.net/translate/10-tips-git-next-level
-
-³£¼û±¨´í£ºhttp://blog.csdn.net/huahua78/article/details/52330792
-
-
------------------------------------------------------------------------------------------
-Ö¸Áî£º
-
+-----------------------------------------------------------------------------------------------------------------------
+Èı¡¢Git»ù±¾³£ÓÃÃüÁîÈçÏÂ£º
     $ makdir ~/hello-world    //´´½¨Ò»¸öÏîÄ¿hello-world
     $ cd ~/hello-world       //´ò¿ªÕâ¸öÏîÄ¿
     $ git init             //³õÊ¼»¯ 
@@ -37,26 +25,42 @@ http://www.oschina.net/translate/10-tips-git-next-level
     $ git commit -m 'first commit'     //Ìá½»¸üĞÂ£¬²¢×¢ÊÍĞÅÏ¢¡°first commit¡± 
     $ git remote add origin git@github.com:defnngj/hello-world.git£¨Ìá½»µÄÂ·¾¶Ò²¿ÉÒÔÊÇgithubÏÂµÄÖ¸¶¨²Ö¿âµÄhttpsÁ¬½Ó£¬Æ©Èç£ºhttps://github.com/vampireBoBo/gitTest03_9£©     //Á¬½ÓÔ¶³ÌgithubÏîÄ¿  
     $ git push -u origin master     //½«±¾µØÏîÄ¿¸üĞÂµ½githubÏîÄ¿ÉÏÈ¥
+¡¡¡¡
+	mkdir£º         XX (´´½¨Ò»¸ö¿ÕÄ¿Â¼ XXÖ¸Ä¿Â¼Ãû)
+¡¡¡¡pwd£º          ÏÔÊ¾µ±Ç°Ä¿Â¼µÄÂ·¾¶¡£
+¡¡¡¡git init          °Ñµ±Ç°µÄÄ¿Â¼±ä³É¿ÉÒÔ¹ÜÀíµÄgit²Ö¿â£¬Éú³ÉÒş²Ø.gitÎÄ¼ş¡£
+¡¡¡¡git add XX       °ÑxxÎÄ¼şÌí¼Óµ½Ôİ´æÇøÈ¥¡£
+¡¡¡¡git commit ¨Cm ¡°XX¡±  Ìá½»ÎÄ¼ş ¨Cm ºóÃæµÄÊÇ×¢ÊÍ¡£
+¡¡¡¡git status        ²é¿´²Ö¿â×´Ì¬
+¡¡¡¡git diff  XX      ²é¿´XXÎÄ¼şĞŞ¸ÄÁËÄÇĞ©ÄÚÈİ
+¡¡¡¡git log          ²é¿´ÀúÊ·¼ÇÂ¼
+¡¡¡¡git reset  --hard HEAD^ »òÕß git reset  --hard HEAD~ »ØÍËµ½ÉÏÒ»¸ö°æ±¾
+¡¡¡¡(Èç¹ûÏë»ØÍËµ½100¸ö°æ±¾£¬Ê¹ÓÃgit reset ¨Chard HEAD~100 )
+¡¡¡¡cat XX         ²é¿´XXÎÄ¼şÄÚÈİ
+¡¡¡¡git reflog       ²é¿´ÀúÊ·¼ÇÂ¼µÄ°æ±¾ºÅid
+¡¡¡¡git checkout -- XX  °ÑXXÎÄ¼şÔÚ¹¤×÷ÇøµÄĞŞ¸ÄÈ«²¿³·Ïú¡£
+¡¡¡¡git rm XX          É¾³ıXXÎÄ¼ş
+¡¡¡¡git remote add origin https://github.com/tugenhua0707/testgit ¹ØÁªÒ»¸öÔ¶³Ì¿â
+¡¡¡¡git push ¨Cu(µÚÒ»´ÎÒªÓÃ-u ÒÔºó²»ĞèÒª) origin master °Ñµ±Ç°master·ÖÖ§ÍÆËÍµ½Ô¶³Ì¿â
+¡¡¡¡git clone https://github.com/tugenhua0707/testgit  ´ÓÔ¶³Ì¿âÖĞ¿ËÂ¡
+¡¡¡¡git checkout ¨Cb dev  ´´½¨dev·ÖÖ§ ²¢ÇĞ»»µ½dev·ÖÖ§ÉÏ
+¡¡¡¡git branch  ²é¿´µ±Ç°ËùÓĞµÄ·ÖÖ§
+¡¡¡¡git checkout master ÇĞ»»»Ømaster·ÖÖ§
+¡¡¡¡git merge dev    ÔÚµ±Ç°µÄ·ÖÖ§ÉÏºÏ²¢dev·ÖÖ§
+¡¡¡¡git branch ¨Cd dev É¾³ıdev·ÖÖ§
+¡¡¡¡git branch name  ´´½¨·ÖÖ§
+¡¡¡¡git stash °Ñµ±Ç°µÄ¹¤×÷Òş²ØÆğÀ´ µÈÒÔºó»Ö¸´ÏÖ³¡ºó¼ÌĞø¹¤×÷
+¡¡¡¡git stash list ²é¿´ËùÓĞ±»Òş²ØµÄÎÄ¼şÁĞ±í
+¡¡¡¡git stash apply »Ö¸´±»Òş²ØµÄÎÄ¼ş£¬µ«ÊÇÄÚÈİ²»É¾³ı
+¡¡¡¡git stash drop É¾³ıÎÄ¼ş
+¡¡¡¡git stash pop »Ö¸´ÎÄ¼şµÄÍ¬Ê± Ò²É¾³ıÎÄ¼ş
+¡¡¡¡git remote ²é¿´Ô¶³Ì¿âµÄĞÅÏ¢
+¡¡¡¡git remote ¨Cv ²é¿´Ô¶³Ì¿âµÄÏêÏ¸ĞÅÏ¢
+¡¡¡¡git push origin master  Git»á°Ñmaster·ÖÖ§ÍÆËÍµ½Ô¶³Ì¿â¶ÔÓ¦µÄÔ¶³Ì·ÖÖ§ÉÏ
+	git add . »òÕß git add --all  //Ò»´Î½«¶à¸öÎÄ¼şÌá½»ÖµÔİ´æÇø
 
-
-
-²é¿´Ô¶³Ì·ÖÖ§
-git remote (git remote -v   ²é¿´ÏêÇé)
-
-É¾³ıorigin·ÖÖ§
-git remote rm origin
-
-Èôpull´íÎóÊ±   ¿ÉÊ¹ÓÃ
-git pull origin master --allow-unrelated-histories
-
-Ò»´Î½«¶à¸öÎÄ¼şÌá½»ÖµÔİ´æÇø
-git add . »òÕß git add --all 
-
-ÇĞ»»·ÖÖ§;git checkout -b origin/notes origin/master(´ÓmasterÇĞ»»Öµnotes)
-
-É¾³ıµ±Ç°·ÖÖ§£ºgit branch -D  name ,É¾³ı·Çµ±Ç°·ÖÖ§£ºgit branch -d name   [D ±íÊ¾Ç¿ÖÆÉ¾³ı]
-
-================================================================================================
+=========================================================================================================================
+ËÄ¡¢Ñ§Ï°ĞÄµÃ
 A¡¢¹¤×÷Çø£ºµçÄÔÉÏ´´½¨µÄÎÄ¼ş¼Ğ£¬ÒÔ¼°ÎÄ¼ş¼ĞÖĞ´æ·ÅµÄÎÄ¼ş£¬µÈ¶¼ÊÇ¹¤×÷Çø¡£
 B¡¢°æ±¾¿â£ºÔÚÊ¹ÓÃgit°æ±¾¿â£ºÔÚÊ¹ÓÃgit initÖ¸ÁîÖ®ºó£¬ÔÚÖ¸¶¨µÄÎÄ¼ş¼ĞÏÂÃæ»áÉú³É.gitÎÄ¼ş¼Ğ¡£¸ÃÎÄ¼ş¼ĞÎª°æ±¾¿â£¬¸Ã°æ±¾¿âÖĞ°üº¬Ôİ´æÇøstage£¬ÒÑ¾­µÚÒ»´ÎÉèÖÃÊ±´´½¨µÄmasterÖ÷·ÖÖ§
 
@@ -73,21 +77,28 @@ $ git reflog  //²é¿´ËùÓĞ°üº¬ÒÑ¾­±»É¾³ıµôµÄ°æ±¾ĞÅÏ¢
 $ git reset --hard [ĞèÒª»Ö¸´µÄ°æ±¾id£¬¸ÃidÍ¨¹ıreflog»ñÈ¡]   //Í¨¹ıÖ¸¶¨id»ØÍËµ½Ö¸¶¨°æ±¾
 $ git checkout -- filename   //¡¾ -- ºÜÖØÒª£¬Èç¹ûÃ»ÓĞ -- µÄ»°£¬ÄÇÃ´ÃüÁî±ä³É´´½¨·ÖÖ§ÁË¡£¡¿µ±¹¤×÷ÇøµÄÎÄ¼ş±»ĞŞ¸Ä£¬»¹Î´±»Ìá½»µ½Ôİ´æÇøÊ±£¬·¢ÏÖĞŞ¸Ä´íÎóĞèÒª»ØÍËµ½Ö®Ç°µÄ°æ±¾Ê±£¬¿ÉÊ¹ÓÃcheckoutÃüÁî£¬±íÊ¾³·Ïú/¶ªÆú¹¤×÷ÇøµÄĞŞ¸Ä£¬»Ö¸´µ½ĞŞ¸ÄÖ®Ç°µÄ×´Ì¬¡£
 
-********************¡¾ĞèÒªÌáÇ°ÔÚgithub´´½¨ºÃ²Ö¿â È»ºóÍ¨¹ıgit bashÃüÁî½«±¾µØ²Ö¿âºÍÔ¶³Ì²Ö¿â½øĞĞ¹ØÁª¡¿
+********************¡¾1.ĞèÒªÌáÇ°ÔÚgithub´´½¨ºÃ²Ö¿â È»ºóÍ¨¹ıgit bashÃüÁî½«±¾µØ²Ö¿âºÍÔ¶³Ì²Ö¿â½øĞĞ¹ØÁª  2. ÍÆËÍ·ÖÖ§¾ÍÊÇ°Ñ¸Ã·ÖÖ§ÉÏËùÓĞ±¾µØÌá½»µ½Ô¶³Ì¿âÖĞ£¬ÍÆËÍÊ±£¬ÒªÖ¸¶¨±¾µØ·ÖÖ§£¬ÕâÑù£¬Git¾Í»á°Ñ¸Ã·ÖÖ§ÍÆËÍµ½Ô¶³Ì¿â¶ÔÓ¦µÄÔ¶³Ì·ÖÖ§ÉÏ¡¿
 Á¬½ÓÔ¶³Ì²Ö¿â:
 $ ssh-keygen  -t rsa ¨CC ¡°url¡±  //gitÓëgithubÖ®¼äµÄÎÄ¼ş´«ÊäÊ¹ÓÃÁËssh¼ÓÃÜ¼¼Êõ£¬ĞèÒªÏÈ´´½¨¸Ã¹«Ô¿£¬È»ºó½«¹«Ô¿ĞÅÏ¢Ìí¼Óµ½githubµÄ¹«Ô¿ÁĞ±íÖĞ¼´¿É¡£Ô¶³Ì²Ö¿âµÄurl£¬Æ©Èç£ºhttps://github.com/vampireBoBo/workNotes
 $ git remote add origin url.git  //¹ØÁªÔ¶³Ì²Ö¿â£¬urlÎªÔ¶³Ì²Ö¿âµÄurl,ĞèÒªµÄ²Ö¿âËùÒÔÊÇurlºóÃæ¼Ó.git,±íÊ¾¸Ã°æ±¾¿â¡£
 $ git pull origin master --allow-unrelated-histories £¨git pull origin master£©//½«Ô¶³Ì²Ö¿âĞÅÏ¢ÏÂÀ­ÖÁ±¾µØ²Ö¿â
-$ git push -u origin master //½«±¾µØ²Ö¿âmasterÖ÷·ÖÖ§µÄÄÚÈİ£¬Í¬²½µ½¹ØÁªµÄÔ¶³ÌµÄmaster·ÖÖ§ÉÏ¡£½ìÊ±¿ÉÔÚgithubÖĞ²é¿´ÉÏ´«µÄÄÚÈİĞÅÏ¢¡£µÚ¶ş´ÎÌá½»Ê± ¿É¼ò»¯Ö¸Áî£ºgit push origin master
+$ git push -u origin master //½«±¾µØ²Ö¿âmasterÖ÷·ÖÖ§µÄÄÚÈİ£¬Í¬²½µ½¹ØÁªµÄÔ¶³ÌµÄmaster·ÖÖ§ÉÏ¡£½ìÊ±¿ÉÔÚgithubÖĞ²é¿´ÉÏ´«µÄÄÚÈİĞÅÏ¢¡£µÚ¶ş´ÎÌá½»Ê± ¿É¼ò»¯Ö¸Áî£ºgit push origin master£¬ÈôĞèÒª½«ÆäËûdev·ÖÖ§ÍÆËÍµ½Ô¶³ÌÖĞ£¬git push origin dev¡£
 $ git clone url //ĞèÒª½«Ô¶³ÌµÄĞÅÏ¢Í¬²½µ½±¾µØÊ±£¬Í¨¹ı¸ÃÖ¸Áî½«¿ËÂ¡Ò»¸öÔ¶³Ì²Ö¿âµ½±¾µØ¡£
+4 git remote ¨Cv  //²é¿´Ô¶³Ì²Ö¿âµÄÏêÏ¸ĞÅÏ¢
 
-*********************
+*********************¡¾Ê×ÏÈmasterÖ÷·ÖÖ§Ó¦¸ÃÊÇ·Ç³£ÎÈ¶¨µÄ£¬Ò²¾ÍÊÇÓÃÀ´·¢²¼ĞÂ°æ±¾£¬Ò»°ãÇé¿öÏÂ²»ÔÊĞíÔÚÉÏÃæ¸É»î£¬¸É»îÒ»°ãÇé¿öÏÂÔÚĞÂ½¨µÄdev·ÖÖ§ÉÏ¸É»î£¬¸ÉÍêºó£¬±ÈÈçÉÏÒª·¢²¼£¬»òÕßËµdev·ÖÖ§´úÂëÎÈ¶¨ºó¿ÉÒÔºÏ²¢µ½Ö÷·ÖÖ§masterÉÏÀ´¡£¡¿
 ·ÖÖ§²Ù×÷£º
 $ git branch name //´´½¨·ÖÖ§
 $ git checkout name //ÇĞ»»·ÖÖ§
 $ git checkout -b name //´´½¨²¢ÇĞ»»µ½¸Ã·ÖÖ§,git checkout ÃüÁî¼ÓÉÏ ¨Cb²ÎÊı±íÊ¾´´½¨²¢ÇĞ»»£¬Ïàµ±ÓÚÈçÏÂ2ÌõÃüÁîgit branch devgit checkout dev
 $ git branch //²é¿´µ±Ç°·ÖÖ§ £¬µ±Ç°·ÖÖ§Ç°ÃæÓĞ¸ö°×µÄĞ¡»¨¶ä
-$ 
+$ git merge --no-ff -m ¡°×¢ÊÍ¡± name //ºÏ²¢·ÖÖ§µ½µ±Ç°·ÖÖ§,--no-ff±íÊ¾½ûÓÃfast forward,[gitÒ»°ãÊ¹ÓÃ¡±Fast forward¡±Ä£Ê½£¬ÔÚÕâÖÖÄ£Ê½ÏÂ£¬É¾³ı·ÖÖ§ºó£¬»á¶ªµô·ÖÖ§ĞÅÏ¢£¬ÏÖÔÚÎÒÃÇÀ´Ê¹ÓÃ´ø²ÎÊı ¨Cno-ffÀ´½ûÓÃ¡±Fast forward¡±Ä£Ê½]
+$ git branch -d name //É¾³ı·ÖÖ§£¬Èô¾¯¸æÊ±Ê¹ÓÃ[-D] ½øĞĞÇ¿ÖÆÉ¾³ı¡£ 
+$ git stash //°Ñµ±Ç°¹¤×÷ÏÖ³¡ ¡±Òş²ØÆğÀ´¡±£¬µÈÒÔºó»Ö¸´ÏÖ³¡ºó¼ÌĞø¹¤×÷¡£Ê¹ÓÃ¸ÃÖ¸ÁîÖ®ºó½«µ±Ç°ÎÄ¼şĞÅÏ¢½øĞĞ±£´æÈ»ºóÒş²Ø¡£¸Ã·ÖÖ§ÓÖÊÇÒ»¸ö¸É¾»µÄ·ÖÖ§¡£
+$ git stash apply //»Ö¸´¹¤×÷ÏÖ³¡£¬»Ö¸´ºó£¬stashÄÚÈİ²¢²»É¾³ı£¬ÄãĞèÒªÊ¹ÓÃÃüÁîgit stash dropÀ´É¾³ı¡£
+$ git stash pop  //ÁíÍâÒ»ÖÖ»Ö¸´·½·¨£¬Í¬Ê±°ÑstashÄÚÈİÒ²É¾³ıÁË¡£
+$ git stash list  //²é¿´¸Ã·ÖÖ§ÉÏ±£´æµÄËùÓĞµÄ¹¤×÷ÏÖ³¡¡£
+$ git stash drop //É¾³ıÒ»Ìõ¹¤×÷ÏÖ³¡
 
 *******************
 linuxÖ¸Áî£º
@@ -96,10 +107,8 @@ $ vi filename   //±à¼­ÎÄ¼ş£¬ÈôÎÄ¼ş²»´æÔÚ¾Í´´½¨¡£½øÈë±à¼­Ò³ÃæÖ®ºó£¬°´¡¾i¡¿½øÈë±à¼
 $ pwd  //²é¿´µ±Ç°Â·¾¶
 $ rm filename //É¾³ıÎÄ¼ş,ÈôĞèÒªÉ¾³ı°æ±¾¿âÖĞ¸ÃÎÄ¼ş£¬ÔòĞèÒª½«¸Ã²Ù×÷Ìá½»Öµ°æ±¾¿â¡£ÈôĞèÒª»Ö¸´¸ÃÎÄ¼ş£¬Ôò´Ó°æ±¾¿âÖĞ»Ö¸´¼´¿É¡£
 
-
-
-==============================================================================================================
-centos7µÄlinuxÏµÍ³Ê¹ÓÃgit
+=====================================================================================================================
+Îå¡¢centos7µÄlinuxÏµÍ³Ê¹ÓÃgit
 Òıµ¼£ºhttp://blog.csdn.net/king1741622927/article/details/77896841
 
  
