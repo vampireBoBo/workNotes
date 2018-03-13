@@ -51,6 +51,53 @@ git pull origin master --allow-unrelated-histories
 
 一次将多个文件提交值暂存区
 git add . 或者 git add --all 
+
+切换分支;git checkout -b origin/notes origin/master(从master切换值notes)
+
+删除当前分支：git branch -D  name ,删除非当前分支：git branch -d name   [D 表示强制删除]
+
+================================================================================================
+A、工作区：电脑上创建的文件夹，以及文件夹中存放的文件，等都是工作区。
+B、版本库：在使用git版本库：在使用git init指令之后，在指定的文件夹下面会生成.git文件夹。该文件夹为版本库，该版本库中包含暂存区stage，已经第一次设置时创建的master主分支
+
+******************* 
+git指令：
+$ git config --global user.name "github账号"  //每次提交需要记录操作用户，故需要给git的设置默认的账号和邮箱
+$ git config --global user.email "github邮箱"  //每次提交需要记录操作用户，故需要给git的设置默认的账号和邮箱
+$ git add name //将工作区中需要备份的文件，使用该命令将文件添加至暂存区 
+$ git commit -m "备注信息" //将上传至暂存区的文件，提交到版本库中
+$ git diff name //通过status查看文件被修改时 可通过该指令 查看文件的修改部分 
+$ git status //查看目前该分支中文件的操作状态
+$ git log 或者 git log -pretty=oneline  //查看版本库中该分支文件的提交日志信息
+$ git reflog  //查看所有包含已经被删除掉的版本信息  
+$ git reset --hard [需要恢复的版本id，该id通过reflog获取]   //通过指定id回退到指定版本
+$ git checkout -- filename   //【 -- 很重要，如果没有 -- 的话，那么命令变成创建分支了。】当工作区的文件被修改，还未被提交到暂存区时，发现修改错误需要回退到之前的版本时，可使用checkout命令，表示撤销/丢弃工作区的修改，恢复到修改之前的状态。
+
+********************【需要提前在github创建好仓库 然后通过git bash命令将本地仓库和远程仓库进行关联】
+连接远程仓库:
+$ ssh-keygen  -t rsa –C “url”  //git与github之间的文件传输使用了ssh加密技术，需要先创建该公钥，然后将公钥信息添加到github的公钥列表中即可。远程仓库的url，譬如：https://github.com/vampireBoBo/workNotes
+$ git remote add origin url.git  //关联远程仓库，url为远程仓库的url,需要的仓库所以是url后面加.git,表示该版本库。
+$ git pull origin master --allow-unrelated-histories （git pull origin master）//将远程仓库信息下拉至本地仓库
+$ git push -u origin master //将本地仓库master主分支的内容，同步到关联的远程的master分支上。届时可在github中查看上传的内容信息。第二次提交时 可简化指令：git push origin master
+$ git clone url //需要将远程的信息同步到本地时，通过该指令将克隆一个远程仓库到本地。
+
+*********************
+分支操作：
+$ git branch name //创建分支
+$ git checkout name //切换分支
+$ git checkout -b name //创建并切换到该分支,git checkout 命令加上 –b参数表示创建并切换，相当于如下2条命令git branch devgit checkout dev
+$ git branch //查看当前分支 ，当前分支前面有个白的小花朵
+$ 
+
+*******************
+linux指令：
+$ mkdir filename //创建文件夹
+$ vi filename   //编辑文件，若文件不存在就创建。进入编辑页面之后，按【i】进入编辑状态，需要退出时，不保存强制退出:ESC-->:-->q！,保存退出:ESC-->:-->x,
+$ pwd  //查看当前路径
+$ rm filename //删除文件,若需要删除版本库中该文件，则需要将该操作提交值版本库。若需要恢复该文件，则从版本库中恢复即可。
+
+
+
 ==============================================================================================================
 centos7的linux系统使用git
 引导：http://blog.csdn.net/king1741622927/article/details/77896841
