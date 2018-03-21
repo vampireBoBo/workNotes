@@ -1,0 +1,37 @@
+一、概念
+	REST 指的是一组架构约束条件和原则。满足这些约束条件和原则的应用程序或设计就是 RESTful。
+二、请求方式：
+	put（新增） delete（删除）  post（修改） get(查看)
+	1.测试时可使用火狐的RESTClient插件进行测试 ：https://addons.mozilla.org/zh-CN/firefox/addon/restclient/
+	2.下载RESTClient组件，下载路径：http://blog.csdn.net/loongshawn/article/details/69267494?locationNum=1&fps=1   使用步骤：https://jingyan.baidu.com/article/dca1fa6f7cba4cf1a44052a0.html
+
+三、使用步骤
+	1、web.xml中配置HiddenHttpMethodFilter 。因为通常的浏览器都只是支持post跟get，这时候就需要HiddenHttpMethodFilter 过滤器来将post请求转换为put跟delete请求。
+	过滤器将post请求转换为我们对应的put跟delete请求的时候需要有一个name为_method的参数才行。
+	
+	2、
+
+
+
+
+四、学习连接：
+	注册restful格式的dubbo接口、调用restful格式的dubbo接口：http://blog.csdn.net/hezemin0315/article/details/52749553
+
+注意点：
+1.put的参数获取方式：@RequestBody MultiValueMap<String, String> valueMap
+2.var mydata = {'name':'tom'};
+	$.ajax({  
+        	type : 'get',  
+        	url : 'http://localhost/TestSpring3.2R/coc/body',
+        	data : mydata       
+    	});
+
+
+$.ajax({  
+        type : 'get',  
+        url : 'http://localhost/TestSpring3.2R/coc/body?name=tom'
+    });
+
+
+这两种 访问方式对get post都没有影响  但是put的取值需要使用1中的方式.
+3.
