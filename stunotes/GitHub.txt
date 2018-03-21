@@ -72,6 +72,7 @@ $ git add name //将工作区中需要备份的文件，使用该命令将文件添加至暂存区
 $ git commit -m "备注信息" //将上传至暂存区的文件，提交到版本库中
 $ git diff name //通过status查看文件被修改时 可通过该指令 查看文件的修改部分 
 $ git status //查看目前该分支中文件的操作状态
+$ git config --global core.quotepath false  //当status指令时  出现乱码 则可使用该指令进行设置
 $ git log 或者 git log -pretty=oneline  //查看版本库中该分支文件的提交日志信息
 $ git reflog  //查看所有包含已经被删除掉的版本信息  
 $ git reset --hard [需要恢复的版本id，该id通过reflog获取]   //通过指定id回退到指定版本
@@ -92,6 +93,9 @@ $ git branch name //创建分支
 $ git checkout name //切换分支
 $ git checkout -b name //创建并切换到该分支,git checkout 命令加上 –b参数表示创建并切换，相当于如下2条命令git branch devgit checkout dev
 $ git branch //查看当前分支 ，当前分支前面有个白的小花朵
+$ git branch -a //查看所有分支内容
+$ git push origin --delete name //删除远程分支
+$ git fetch -p  //当远程分支已经删除 但是本地任然显示时  可以使用该命令进行同步
 $ git merge --no-ff -m “注释” name //合并分支到当前分支,--no-ff表示禁用fast forward,[git一般使用”Fast forward”模式，在这种模式下，删除分支后，会丢掉分支信息，现在我们来使用带参数 –no-ff来禁用”Fast forward”模式]
 $ git branch -d name //删除分支，若警告时使用[-D] 进行强制删除。 
 $ git stash //把当前工作现场 ”隐藏起来”，等以后恢复现场后继续工作。使用该指令之后将当前文件信息进行保存然后隐藏。该分支又是一个干净的分支。
