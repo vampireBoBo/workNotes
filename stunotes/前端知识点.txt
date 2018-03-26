@@ -1,2 +1,3 @@
 1、template 前端模板
 2、bootstrap 使用mergeCells合并单元格 
+3、页面引入js时，必须使用爽标签<script></script>,不能使用省略标签<script />，否则引入文件不生效！
