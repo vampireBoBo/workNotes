@@ -85,7 +85,8 @@ $ git remote add origin url.git  //关联远程仓库，url为远程仓库的url,需要的仓库所
 $ git pull origin master --allow-unrelated-histories （git pull origin master）//将远程仓库信息下拉至本地仓库
 $ git push -u origin master //将本地仓库master主分支的内容，同步到关联的远程的master分支上。届时可在github中查看上传的内容信息。第二次提交时 可简化指令：git push origin master，若需要将其他dev分支推送到远程中，git push origin dev。
 $ git clone url //需要将远程的信息同步到本地时，通过该指令将克隆一个远程仓库到本地。
-4 git remote –v  //查看远程仓库的详细信息
+$ git remote –v  //查看远程仓库的详细信息
+$ git remote set-url origin URL  //切换不同的远程仓库
 
 *********************【首先master主分支应该是非常稳定的，也就是用来发布新版本，一般情况下不允许在上面干活，干活一般情况下在新建的dev分支上干活，干完后，比如上要发布，或者说dev分支代码稳定后可以合并到主分支master上来。】
 分支操作：
