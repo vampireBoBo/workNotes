@@ -1,0 +1,94 @@
+
+
+
+eclipse中配置SpringBoot方法：
+	1、安装STS插件：
+		Help --> eclipse Marketplace -->Popular -->选择STS 点击install
+		-->等待下载后安装。
+	2、搭建SpringBoot框架 （https://start.spring.io/）
+		登录http://spring.io后找到SpringBoot点击选择Getting Started Guide
+		第一段选择Spring Initializr 进去之后选择Generate a为Maven Project
+		with为Java  版本号选择2.0.0 填写项目名后回车。选择第一个然后将该文
+		件导入eclipse，等待加载完成（切记）运行项目不报错即可  
+	3、pom文件选择性的删除test依赖，加入spring-boot-starter-web（复制
+		spring-boot-starter该依赖后加web即可，如：spring-boot-starter-web），
+
+	4、springBoot的热部署（devtools）  热部署不自动加载pom文件 
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+			<optional>true</optional>
+		</dependency>
+		将该依赖部署至pom.xml
+	5、springBoot资源文件属性配置
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-configuration-processor</artifactId>
+			<optional>true</optional>
+		</dependency>
+		将该依赖部署至pom.xml
+		该配置是配置对应的application.properties文件，将资源文件的值赋给实体类，
+		然后传给服务层或者控制层，其控制层就有对应的资源文件传的值 。
+	6、springBoot资源文件配置server
+	7、#jsp 页面扫描路径配置
+		spring.mvc.view.suffix=.jsp
+		spring.mvc.view.prefix=/WEB-INF/deploy/
+	8、jsp页面要加的配置：
+		<dependency>  
+         		<groupId>org.apache.tomcat.embed</groupId>  
+         		<artifactId>tomcat-embed-jasper</artifactId>  
+       	 		<scope>provided</scope>  
+        	</dependency>
+		
+	9、springBoot整合模板引擎（该配置会默认去templates目录下找对应HTML页面，所以访问jsp页面时要把该
+		配置去掉，并且jsp页面要写在WEB_INF下面 若jsp页面扫描路径和模板引擎都配的话默认模板引擎；
+		注：不用模板引的时候就用controller  不要用RestController和@ResponseBody）
+		
+		springBoot整合freemarker
+		
+		springBoot整合thymeleaf
+
+	10、springBoot整合mybatis
+		a、添加maven依赖：<dependency>  
+    					<groupId>org.mybatis.spring.boot</groupId>  
+    					<artifactId>mybatis-spring-boot-starter</artifactId>  
+    					<version>1.1.1</version>  
+				  </dependency>
+				  <dependency>  
+    					<groupId>mysql</groupId>  
+    					<artifactId>mysql-connector-java</artifactId>  
+				  </dependency>
+		b、application.properties文件中进行数据库配置 
+	 		mybatis.type-aliases-package=com.future.boot.entity  
+			spring.datasource.driverClassName = com.mysql.jdbc.Driver  
+			spring.datasource.url = jdbc:mysql://localhost:3306/user 
+			spring.datasource.username = root 
+			spring.datasource.password = 000000 
+		c、在启动类中添加对mapper包扫描
+                	@MapperScan(value ="com.future.mapper")
+		d、mapper接口书写
+			public interface UserMapper {
+	
+			@Select("select * from peple")
+			User QueryOne();
+			
+			}
+		e、编写controller
+			跟以前一样
+	11、分层service的实现
+		只需要在对应目录下加入service接口与实现类，并在实现类中注解声明service即可
+
+	12、关于事务
+		最好在服务层service实现类当中注入一下配置
+		增、删、改配：@Transactional(propagation = Propagation.REQUIRED)
+		查询配：@Transactional(propagation = Propagation.SUPPORTS)
+	13、mybatis的mapper使用xml映射文件的方式（也可使用注解）
+	
+	14、springBoot整合缓存Redis
+		
+		
+
+
+
+
+	
