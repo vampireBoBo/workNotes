@@ -63,6 +63,8 @@ window安装: https://www.cnblogs.com/lyr2015/p/6730476.html
 四、学习心得
 A、工作区：电脑上创建的文件夹，以及文件夹中存放的文件，等都是工作区。
 B、版本库：在使用git版本库：在使用git init指令之后，在指定的文件夹下面会生成.git文件夹。该文件夹为版本库，该版本库中包含暂存区stage，已经第一次设置时创建的master主分支
+https://git-scm.com/book/zh/v2/Git-%E5%9F%BA%E7%A1%80-%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8
+
 
 ******************* 
 git指令：
