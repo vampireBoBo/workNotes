@@ -1,0 +1,4 @@
+1.request
+	${requestScope}操作的是request的作用域，相当于request.getAttribute();不过EL比这个更智能些，它不用强制类型转换就可以拿到了真实对象的值。
+request.getParamter(),获取的是页面传递的值，可以是jsp传jsp,jsp传servle，常见的就是表单传过来或者是url传过来?xx=xx形式这种形式下，${requestScope是拿不到的}，需要使用${param.xxx}
+学习连接：https://zhidao.baidu.com/question/536614066.html

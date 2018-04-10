@@ -8,7 +8,14 @@
 2.需要的插件STS
 	Spring Tools Suite (STS)其实就是一个被包装过的Eclipse，主要用于快速的开发Spring项目，我们不用再去编辑繁琐的xml配置文件，而是由工具自动生成。
 
+3.springboot 热部署问题（监测的是classpath下面的文件）
+	需求：集成热部署后，当java文件或者jsp文件修改之后 不需要重新启动tomcat就可以获取新内容，热部署一般是用于测试，而热加载一般用于开发
 
+	实现：（1）spring-boot-maven-plugin  这个插件基于maven去加载，若非mvn指令启动项目 则该插件不会生效
+	      （2）spring-boot-devtools  这种方式无论怎么启动应用，都可以达到修改文件后重启应用。
+	
+	学习：https://www.cnblogs.com/EasonJim/p/7609911.html
+		
 
 ======================================使用步骤=======================================
 eclipse中配置SpringBoot方法：
