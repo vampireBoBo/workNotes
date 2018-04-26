@@ -85,6 +85,7 @@
 	2.若添加的数据库的中文是乱码需要在连接数据库时指定编码方式，譬如：jdbc:mysql://192.168.9.19:3306/demo?useUnicode=true&characterEncoding=UTF-8 
 	3.若接口的调用返回结果中文乱码，需要在接口调用的RequestMapping中指定编码参数：produces = "application/json;charset=utf-8"
 
-
-
-
+五、学习连接
+	方法注解的解释：https://blog.csdn.net/shinebar/article/details/54408020
+	请求参数json转换成实体：http://www.jb51.net/article/76182.htm
+	完整案例：https://www.cnblogs.com/black-spike/p/7813244.html
