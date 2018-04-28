@@ -1,0 +1,8 @@
+ <!-- 部署在同一个web容器中的项目，要配置不同的param-value（比如”项目名.root”），不然会造成冲突,默认webapp.root -->
+    <context-param>
+		<param-name>webAppRootKey</param-name>
+		<param-value>deptser.root</param-value>
+	</context-param>
+
+
+注：在项目的web.xml中添加这个配置

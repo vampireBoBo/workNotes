@@ -1,0 +1,19 @@
+一、创建并访问jsp：https://blog.csdn.net/hk_CSDN/article/details/76805472
+二、热部署：https://www.cnblogs.com/EasonJim/p/7609911.html
+	1. 添加依赖  <!-- 热部署模块 -->【如果依赖添加之后 pom提示该依赖解析失败时  在本地maven仓库中找到该插件的文件夹 删除 重新保存pom文件让其重新去下载】
+
+		<dependency>
+		    <groupId>org.springframework.boot</groupId>    
+		    <artifactId>spring-boot-devtools</artifactId>      
+		    <optional>true</optional> <!-- 这个需要为 true 热部署才有效 -->
+		</dependency>
+	2.添加plugin 这一步必须添加 否则热部署 不生效
+		<plugin>
+		        <groupId>org.springframework.boot</groupId>
+		        <artifactId>spring-boot-maven-plugin</artifactId>
+		        <configuration>
+		          <!-- 没有该配置，devtools 不生效 -->
+		          <fork>true</fork>
+		          <addResources>true</addResources>
+		        </configuration>
+		 </plugin>
