@@ -1,0 +1,22 @@
+bootstrap是基于jquery设计的前端框架 故在使用时 需要先导入jquery的插件
+
+
+bootstrap主要包含：基本结构、css、组件、javaScript的插件、定制
+	基本机构：Bootstrap 提供了一个带有网格系统、链接样式、背景的基本结构。
+	css:
+	组件：
+	javascript插件：
+	定制：
+
+
+================= Bootstrap 基本结构====================
+一、注意点：
+	1、Bootstrap 使用了一些 HTML5 元素和 CSS 属性。为了让这些正常工作，您需要使用 HTML5 文档类型（Doctype）。 因此，请在使用 Bootstrap 项目的开头包含下面的代码段。
+
+<!DOCTYPE html>
+
+	2、为了让 Bootstrap 开发的网站对移动设备友好，确保适当的绘制和触屏缩放，需要在网页的 head 之中添加 viewport meta 标签，如下所示：
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	3、
+
