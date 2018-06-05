@@ -1,0 +1,3 @@
+学习连接：https://blog.csdn.net/ytangdigl/article/details/72903267
+1、layer.msg中的icon是弹窗的不同样式的属性值
+	
