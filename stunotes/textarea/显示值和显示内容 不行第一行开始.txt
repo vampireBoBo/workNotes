@@ -1,0 +1,2 @@
+1、textarea是没有value属性的  ，如需要回显数据在在标签之间${data} 直接取值就可以
+2、回显的数据不从第一行开始 ，不要在<textarea></textarea> 中间换行
