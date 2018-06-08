@@ -1,0 +1,6 @@
+$(function(){
+	var _deviceInfo='${data.machineInfo}'; // 这样在js中可以直接获取存放在model中的数据 ，如果需要遍历  在后台将在信息直接转换成json字符串 
+然后在前台使用  JSON.parse(_deviceInfo);  就可以将json字符串转换成json对象 进行遍历
+
+	
+}）；
