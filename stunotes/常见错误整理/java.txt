@@ -1,0 +1,2 @@
+1、[java.lang.ClassNotFoundException: com/sun/tools/internal/xjc/api/XJC]
+	可能情况：项目的运行环境设置成jre，需要修改成jdk
