@@ -1,0 +1,11 @@
+学习连接：
+https://www.cnblogs.com/fnlingnzb-learner/p/6009153.html
+https://www.cnblogs.com/fnlingnzb-learner/p/6009153.html
+
+1、官网下载所需的zip文件
+2、解压文件，复制my-default.ini文件为my.ini文件  并制定mysql文件的位置和数据存放位置及其他参数
+3、以管理员的身份运行cmd 并切换到文件中的bin下面  输入指令:mysqld install 【注意是：mysqld  不是mysql】
+4、安装成功以后 输入指令 net start mysql 启动服务器
+5、mysql自带用户root  第一次登陆没有密码
+6、使用mysql的客户端sqlyoug 或者 navicat，连接mysql server。连接成功以后，点击用户图标、然后选中需要修改密码的用户，进行密码修改集合。注意：不管真实密码是什么，系统在密码框中默认显示8位的加密数字。
+7、注意：在修改密码时 ，连接成功以后 ，通过直接修改user表单中的密码时不生效的，因为密码是需要进行加密处理，即只能通过步骤6进行保存设置或者通过指令进行修改。
