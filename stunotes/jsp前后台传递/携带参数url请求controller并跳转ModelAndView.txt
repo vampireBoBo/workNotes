@@ -1,0 +1,11 @@
+1、请求方式：
+	window.location=_variousURL.deptserURL+"index.jsp#spring/busSysDeploy/toDetail/1/"+id;
+2、controller：
+	@RequestMapping(value = "/toForwardModify/{flag}/{id}", method = RequestMethod.GET)
+3、View的jsp
+	js中获取：var _flag = '${flag}';
+	jsp中获取：${flag}
+
+注意：在controller中进行view跳转的参数封装中  没有封装key为flag的值  直接在jsp中以请求controlle的参数key进行获取
+
+目前不清楚具体是什么  自我预计应该是这一串请求都为一个request 故请求参数可以直接传递
