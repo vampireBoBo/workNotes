@@ -1,0 +1,16 @@
+1、请求时传递参数
+	parent.location.href="<%=request.getContextPath() %>/businessSystemDetail.jsp?id="+data;
+
+2、接收方获取参数,并将其存放在本页面的标签中
+	
+	<script type="text/javascript">
+		$('#appID').val(GetQueryString('id'));
+	
+
+		function GetQueryString(name)
+		    {
+		         var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+		         var r = window.location.search.substr(1).match(reg);
+		         if(r!=null)return  unescape(r[2]); return null;
+		    }
+	</script>
