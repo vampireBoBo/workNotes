@@ -1,0 +1,5 @@
+var requestParam = {limit : _limit,offset:_offset};
+requestParam.findJson=JSON.stringify({'business_name':$('#business_name').val(),'state':$('#state').val(),'startTime':$('#startTime').val(),'endTime':$('#endTime').val()});
+	
+
+使用	目标json对象调用findJson方法将json字符串添加到目标json中
