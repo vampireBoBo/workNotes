@@ -1,0 +1,6 @@
+$.get(param1,param2,function(){}，param4);
+
+param1:请求路径
+param2:请求参数
+param3：请求成功以后的回调函数
+param4：参数格式 可选值  默认为字符串  可选json，   一般使用json，使用时需要用单引号引起来
