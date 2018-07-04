@@ -1,0 +1,66 @@
+1、引入js和css
+2、jsp中指定table标签<table id="catalogTable" style="font-size: 14px;text-align: center"></table>
+3、在js中的预编译函数中初始化表单属性
+	
+
+<script type="text/javascript">
+	var bsTable = $('#catalogTable');
+	$(function(){
+		// bootstrap列表初始化
+		bsTable.bootstrapTable({
+		cache: false,
+	        striped:false,
+	        classes:'table table-hover',
+	        pagination:true,
+	        paginationLoop:false,
+	        sidePagination:"server",   //正式环境下请设置为 server,
+	        queryParamsType: "limit",
+	        paginationDetailHAlign:'left',
+	        paginationHAlign:'right',
+	        pageSize:10,
+	        pageNumber:1,
+	        pageList:"",
+	        paginationPreText:'上一页',
+	        paginationNextText:'下一页',
+	        columns: [
+	          { field: 'id', title: 'ID',visible:false},
+	          { field: 'servicenumber', title: '服务编号',halign:'center',align:'center',width:'200px',formatter:function(value,row,index){
+	        	  return	'<div style="overflow: hidden; white-space: nowrap; text-overflow:ellipsis;width:300px;" title="'+value+'"><a href="<%=request.getContextPath()%>/spring/serviceCatalog/toDetail/'+row.id+'">'+value+'</div></a>';
+	          }},
+	          { field: 'name', title: '服务名称',halign:'center',align:'center',valign:'middle',width:'200px',formatter:function(value,row,index){
+	        	  return	'<div style="overflow: hidden; white-space: nowrap; text-overflow:ellipsis;width:200px;" title="'+value+'"><a href="<%=request.getContextPath()%>/spring/serviceCatalog/toDetail/'+row.id+'">'+row.name+'</div></a>';
+	          }},
+	          { field: 'description', title: '服务内容',halign:'center',width:'200px', valign:'middle',formatter:function(value, row, index){
+	   		      return '<div style="overflow: hidden; white-space: nowrap; text-overflow:ellipsis;width:300px;" title="'+value+'">'+value+'</div>';  
+	   		  }},
+	          { field:'controle' , title: '操作',halign:'center',align:'center',width:'200px',formatter:function(value, row, index){
+	        	  return '<a href="javascript:;" class="tit-btn tit-btn_settle" onclick="showModel(\''+row.id+'\',\''+row.service_id+'\',\''+row.name+'\',\''+row.status+'\');">服务申请</a>';  
+	   		  }},
+	        ]
+		});
+		// 调用表单加载方法
+		loadTableDatas();
+		// 分页查询监听
+		bsTable.on('page-change.bs.table', function (number, size) {
+    	  		loadTableDatas();
+      		});
+	});
+	// 表单加载方式
+	function loadTableDatas(){
+		var _opts = bsTable.bootstrapTable('getOptions'); // 获取表单元素
+		var _limit = _opts.pageSize;	// 获取表单元素中的pagesize每页显示大小
+		var _offset = _opts.pageNumber;	// 获取表单元素中的当前页数
+		var requestParam = {limit:_limit,offset:_offset};
+		$.get('<%=request.getContextPath()%>/spring/serviceCatalog/selectPage',
+			requestParam,function(data){
+				if(data.status==0){
+					bsTable.bootstrapTable('load',{"total":data.total,"rows":data.rows});
+				}else{
+					layer.msg("系统异常",{icon:2});
+				}
+				// 子页面高度自适应
+				parent.iFrameHeight();
+			},'json'
+		);
+	}
+</script>

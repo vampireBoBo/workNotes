@@ -1,0 +1,107 @@
+学习地址：http://www.runoob.com/angularjs/angularjs-tutorial.html
+
+注意：AngularJS 是一个 JavaScript 框架。它可通过 <script> 标签添加到 HTML 页面。
+
+
+
+==========================================================================================
+1、引入：<script src="https://cdn.bootcss.com/angular.js/1.4.6/angular.min.js"></script>
+
+1、ng-app=" "  定义angularJS的使用范围；
+
+2、ng-init="变量=值;变量='值'"  初始化变量的值，有多个变量时，中间用分号隔开；
+
+3、ng-model="变量"  定义变量名；
+
+4、ng-bind="变量"  绑定变量名，获取该变量的数据。这里的变量就是第3条的变量名。但是一般都用双重花括号来获取变量的值，比如：{{变量}}。
+
+
+总结：引入angular的js，ng-app指定angular的应用范围，ng-init可以直接初始化变量的值，多个值之间使用;隔开【但是这种初始化方法不推荐，推荐使用控制器进行数据库初始化】。ng-model申请一个变量
+类似于jsp中的id，使用ng-bind来绑定一个变量即显示该变量的值相当于jsp的输出，输出某个变量的值 可以直接使用{{}}进行获取，{{}}可以使用el表达式进行计算
+
+
+===============================================================================================
+AngularJS 模块（Module） 定义了 AngularJS 应用。
+
+AngularJS 控制器（Controller） 用于控制 AngularJS 应用。
+
+ng-app指令指明了应用, ng-controller 指明了控制器。
+
+例子===========：
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<script src="https://cdn.bootcss.com/angular.js/1.4.6/angular.min.js"></script> 
+</head>
+<body>
+
+<p>尝试修改以下表单。</p>
+
+<div ng-app="myApp" ng-controller="myCtrl">
+
+名: <input type="text" ng-model="firstName"><br>
+姓: <input type="text" ng-model="lastName"><br>
+<br>
+姓名: {{firstName + " " + lastName}}
+
+</div>
+
+
+<script>
+var app = angular.module('myApp', []);
+app.controller('myCtrl', function($scope) {
+    $scope.firstName= "John";
+    $scope.lastName= "Doe";
+});
+</script>
+</body>
+</html>
+
+==========================================================
+ng-repeat指令 用来循环
+
+<div data-ng-app="" data-ng-init="names=['Jani','Hege','Kai']">
+  <p>使用 ng-repeat 来循环数组</p>
+  <ul>
+    <li data-ng-repeat="x in names">
+      {{ x }}
+    </li>
+  </ul>
+</div>
+
+=========================================================================
+可以自定义指令
+
+
+<body ng-app="myApp">
+
+<runoob-directive></runoob-directive>
+
+<script>
+var app = angular.module("myApp", []);
+app.directive("runoobDirective", function() {
+    return {
+        template : "<h1>自定义指令!</h1>"
+    };
+});
+</script>
+
+</body>
+
+自定义指令的调用：元素名（标签）、属性、类名（class=""）、注释（<!--指令-->）
+
+
+=============================================================================
+ng-model 指令根据表单域的状态添加/移除以下类：
+
+    ng-empty
+    ng-not-empty
+    ng-touched
+    ng-untouched
+    ng-valid
+    ng-invalid
+    ng-dirty  // 是否发生改变
+    ng-pending
+    ng-pristine
