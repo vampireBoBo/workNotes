@@ -1,0 +1,64 @@
+1】基本使用---http://www.runoob.com/bootstrap/bootstrap-forms.html
+基本的表单结构是 Bootstrap 自带的，个别的表单控件自动接收一些全局样式。下面列出了创建基本表单的步骤：
+    向父 <form> 元素添加 role="form"。
+    把标签和控件放在一个带有 class .form-group 的 <div> 中。这是获取最佳间距所必需的。
+    向所有的文本元素 <input>、<textarea> 和 <select> 添加 class ="form-control" 。
+
+2】表单在同一行显示
+如果需要创建一个表单它的所有元素是内联的，向左对齐的，标签是并排的，请向 <form> 标签添加 class .form-inline。
+
+3】水平表单
+
+水平表单与其他表单不仅标记的数量上不同，而且表单的呈现形式也不同。如需创建一个水平布局的表单，请按下面的几个步骤进行：
+
+    向父 <form> 元素添加 class .form-horizontal。
+    把标签和控件放在一个带有 class .form-group 的 <div> 中。
+    向标签添加 class .control-label。
+
+<form class="form-horizontal" role="form">
+  <div class="form-group">
+    <label for="firstname" class="col-sm-2 control-label">名字</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" id="firstname" placeholder="请输入名字">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="lastname" class="col-sm-2 control-label">姓</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" id="lastname" placeholder="请输入姓">
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <div class="checkbox">
+        <label>
+          <input type="checkbox">请记住我
+        </label>
+      </div>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <button type="submit" class="btn btn-default">登录</button>
+    </div>
+  </div>
+</form>
+
+4】表单控件---http://www.runoob.com/bootstrap/bootstrap-forms.html
+Bootstrap 支持最常见的表单控件，主要是 input、textarea、checkbox、radio 和 select。
+
+input:最常见的表单文本字段是输入框 input。用户可以在其中输入大多数必要的表单数据。Bootstrap 提供了对所有原生的 HTML5 的 input 类型的支持，包括：text、password、datetime、datetime-local、date、month、time、week、number、email、url、search、tel 和 color。适当的 type 声明是必需的，这样才能让 input 获得完整的样式。
+
+文本框（Textarea）
+当您需要进行多行输入的时，则可以使用文本框 textarea。必要时可以改变 rows 属性（较少的行 = 较小的盒子，较多的行 = 较大的盒子）。
+
+复选框（Checkbox）和单选框（Radio）
+对一系列复选框和单选框使用 .checkbox-inline 或 .radio-inline class，控制它们显示在同一行上。
+
+选择框（Select）
+当您想让用户从多个选项中进行选择，但是默认情况下只能选择一个选项时，则使用选择框。
+    使用 <select> 展示列表选项，通常是那些用户很熟悉的选择列表，比如州或者数字。
+    使用 multiple="multiple" 允许用户选择多个选项。
+
+!!!!表单控件大小
+您可以分别使用 class .input-lg 和 .col-lg-* 来设置表单的高度和宽度。

@@ -9,6 +9,9 @@ bootstrap主要包含：基本结构、css、组件、javaScript的插件、定制
 	定制：
 
 
+
+!!!<!-- JavaScript 放置在文档最后面可以使页面加载速度更快 -->
+
 ================= Bootstrap 基本结构====================
 一、注意点：
 	1、Bootstrap 使用了一些 HTML5 元素和 CSS 属性。为了让这些正常工作，您需要使用 HTML5 文档类型（Doctype）。 因此，请在使用 Bootstrap 项目的开头包含下面的代码段。
