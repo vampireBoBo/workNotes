@@ -1,3 +1,5 @@
+完整demo：https://www.cnblogs.com/cnmenglang/p/6420940.html
+
 一、创建并访问jsp：https://blog.csdn.net/hk_CSDN/article/details/76805472
 二、热部署：https://www.cnblogs.com/EasonJim/p/7609911.html
 	1. 添加依赖  <!-- 热部署模块 -->【如果依赖添加之后 pom提示该依赖解析失败时  在本地maven仓库中找到该插件的文件夹 删除 重新保存pom文件让其重新去下载】
@@ -17,3 +19,23 @@
 		          <addResources>true</addResources>
 		        </configuration>
 		 </plugin>
+
+三、springboot logo操作---https://blog.csdn.net/q15150676766/article/details/76563294
+1、在线生成字符图标工具
+    http://www.network-science.de/ascii/
+    http://patorjk.com/software/taag/
+2、更换logo
+    在src/main/resource下新建一个banner.txt文件，然后去http://patorjk.com/software/taag/下自定义自己所要显示的文字，然后点击下面的select & copy把复制的内容复制到banner.txt文件中，重启一下Springboot，图标就会发生变化。 
+3、关闭logo
+	public static void main(String[] args) {
+		// 携带logo
+		//SpringApplication.run(DemoApplication.class, args);
+		
+		// 关闭logo 
+		SpringApplication app = new SpringApplication(DemoApplication.class);
+		app.setBannerMode(Mode.OFF);
+		app.run(args);
+	}
+
+四、连接mysql---https://www.cnblogs.com/liangblog/p/5228548.html
+
