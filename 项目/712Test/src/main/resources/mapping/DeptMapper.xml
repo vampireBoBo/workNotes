@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.dao.IDeptMapper">
+	<!-- 新增信息 -->
+	<insert id="insertObject" parameterType="Dept" flushCache="true">
+		  insert into Dept
+			<trim prefix="(" suffix=")" suffixOverrides="," >
+		  	
+		  	<if test="id!=null and id!=''">
+		  		id,
+		  	</if>
+		  	
+		  	<if test="no!=null and no!=''">
+		  		no,
+		  	</if>
+		  	
+		  	<if test="name!=null and name!=''">
+		  		name,
+		  	</if>
+		  	
+		  </trim>
+		 <trim prefix="values (" suffix=")" suffixOverrides="," >
+		 	
+		   	<if test="id!=null and id!=''">
+		  		#{id},
+		  	</if>
+		   	
+		   	<if test="no!=null and no!=''">
+		  		#{no},
+		  	</if>
+		   	
+		   	<if test="name!=null and name!=''">
+		  		#{name},
+		  	</if>
+		   	
+		  </trim>
+	</insert><!-- 注：最后一列的,应该删除 -->
+	
+	<!-- 更新信息 -->
+	<update id="updateObject" parameterType="Dept">
+	update Dept
+		<set>
+		
+		<if test="id!=null and id!=''">
+	  		id=#{id},
+	  	</if>
+		
+		<if test="no!=null and no!=''">
+	  		no=#{no},
+	  	</if>
+		
+		<if test="name!=null and name!=''">
+	  		name=#{name},
+	  	</if>
+		
+		</set>
+		where id=#{id}
+	</update><!-- 注：最后一列的,应该删除 -->
+	
+	<!-- 根据id查询对象 -->
+	<select id="getObject" parameterType="Dept" resultType="Dept">
+		SELECT 
+			 
+	 		id,
+	 		 
+	 		no,
+	 		 
+	 		name,
+	 		 
+		from Dept
+		WHERE id=#{id}
+	</select>
+	
+	
+	<!-- 物理单个删除 -->
+	<delete id="deleteObject" parameterType="Dept">
+		DELETE FROM Dept WHERE  
+		id=#{id}
+	</delete>
+	
+	<!-- 多条件查询 -->
+	<select id="selectList" parameterType="java.util.Map"
+		resultType="java.util.Map">
+		select 
+			 
+	 		id,
+	 		 
+	 		no,
+	 		 
+	 		name,
+	 		 
+		from Dept where 1=1
+		<if test="sort!=null and sort!=''">
+		  		ORDER BY ${sort} ${order}
+		</if>
+		<if test="sort==null or sort==''">
+				ORDER BY name asc
+		</if>
+	</select>
+</mapper>

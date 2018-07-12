@@ -1,0 +1,2 @@
+1、jsonarray格式的字符串转换成jsonarray
+JSONArray jsonArray = JSONArray.parseArray(array);

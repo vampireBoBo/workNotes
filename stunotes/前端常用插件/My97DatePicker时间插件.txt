@@ -1,0 +1,8 @@
+调用
+<input id="entry_time" name="entry_time" style="width: 60px;" class="form-control sip-finput" onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})" data-rule="required;">
+
+如果需要设置选择日期要大于当前年月日  则如下添加：minDate:'%y-%M-%d'
+<input id="entry_time" name="entry_time" style="width: 60px;" class="form-control sip-finput" onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss', minDate:'%y-%M-%d'})" data-rule="required;">
+
+设置时间间隔的最大值和最小值，表示最大值不能超过当前页面id=endTime 这个时间框的输入值
+<input class="form-control" type="text" id="startTime" onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',minDate:'%y-%M-%d',maxDate:'#F{$dp.$D(\'endTime\')}'})">
