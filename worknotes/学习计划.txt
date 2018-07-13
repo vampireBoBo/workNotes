@@ -9,9 +9,9 @@
 
 1、springboot的使用
 
-2、shiro框架的应用
+2、bootstrap的使用
 
-3、bootstrap的使用
+3、shiro框架的应用
 
 4、springcloud分布式技术的学习
 
