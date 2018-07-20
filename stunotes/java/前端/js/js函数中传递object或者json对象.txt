@@ -14,3 +14,11 @@ var ele = '<a onclick="edit(' + JSON.stringify(user).replace(/"/g, '&quot;') + '
 var ele = '<a onclick="edit(\'' + JSON.stringify(user).replace(/"/g, '&quot;') + '\');">修改</a>';
 
 前者取到的是json对象，后者取到的是json字符串。
+
+
+
+
+
+
+onclick事件中传递实体：JSON.stringify(_hasDepositResourceInfo[i]).replace(/"/g, '&quot;')
+在事件内部将传递的实体转换成json对象：var resource=JSON.parse(currentData.replace(/\n/g,"\\n").replace(/\r/g,"\\r"));

@@ -1,3 +1,6 @@
+https://www.w3cschool.cn/shiro/
+
+
 1、概念
 	Apache Shiro是一个功能强大且易于使用的Java安全框架，提供了认证，授权，加密，和会话管理
 
@@ -13,7 +16,7 @@
 
 	在shiro的用户权限认证过程中其通过两个方法来实现：
 
-	Authentication[?:?θent?'ke??n]：是验证用户身份的过程。
+	Authentication[?:?θent?'ke??n]：是验证用户身份的过程。身份认证/登录，验证用户是不是拥有相应的身份。
 
 	Authorization[??:θ?r??ze??n]：是授权访问控制，用于对用户进行的操作进行人证授权，证明该用户是否允许进行当前操作，如访问某个链接，某个资源文件等。
 
@@ -35,3 +38,5 @@
 	   http://blog.csdn.net/i402097836/article/details/75043207  
 	I、去掉mapper配置文件中的背景颜色
 	   在颜色开始的地方---》 alt+enter  ---》 un-inject Language/refence
+
+
