@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+					http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+					http://www.springframework.org/schema/context
+                    http://www.springframework.org/schema/context/spring-context-4.0.xsd">
+
+	<!-- Shiro 的Web过滤器     启用shiro授权注解拦截方式 -->
+	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+		<!-- 装配 securityManager -->
+		<property name="securityManager" ref="securityManager" />
+		<property name="unauthorizedUrl" value="/403.jsp" />
+		<!-- 配置登陆页面 -->
+        <!-- <property name="loginUrl" value="/index.jsp"/> -->
+        <!-- 登陆成功后的一面 -->
+        <!-- <property name="successUrl" value="/jsp/success.jsp"/> -->
+		<!-- 
+			具体配置需要拦截哪些 URL, 以及访问对应的 URL 时使用 Shiro 的什么 Filter 进行拦截.
+			Anon：不指定过滤器,这个过滤器是空的，什么都没做，跟没有一样。 
+			Authc:验证，这些页面必须验证后才能访问，也就是我们说的登录后才能访问。
+			过虑器链定义，从上向下顺序执行，一般将/**放在最下边 
+		 -->	
+		<property name="filterChainDefinitions">
+			<value>
+				/login=anon
+				<!-- /jsp/user.jsp = roles[user] user页面登录使用user过滤，页面路径以webapp下第一层开始-->
+              	<!-- /jsp/admin.jsp = roles[admin] admin页面登录使用admin过滤-->
+              	<!-- /logout = logout -->
+              	<!-- /** = authc  表示需要登录才能访问的页面-->
+			</value>
+		</property>
+	</bean>
+
+	<!-- 安全管理器 -->
+	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+		<property name="realm" ref="customRealm" />
+	</bean>
+
+	<!-- 自定义 realm -->
+	<bean id="customRealm" class="org.lhb.shiro.CustomRealm"></bean>
+
+	<!-- 保证实现了Shiro内部lifecycle函数的bean执行 -->
+	<bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor" />
+
+</beans>

@@ -19,6 +19,9 @@
 
 7、python语言的爬虫技术学习
 
+=======前端js
+1、vue.js http://www.runoob.com/vue2/vue-tutorial.html
+
 
 
 
