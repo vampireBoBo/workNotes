@@ -1,0 +1,3 @@
+like "%"#{title}"%"
+
+and sysName like concat('%',#{sysName},'%')

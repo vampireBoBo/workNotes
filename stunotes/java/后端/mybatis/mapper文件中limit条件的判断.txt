@@ -1,0 +1,16 @@
+分页条件判断
+===========可行方案  两个值都要判断
+<if test="pageNo!=null and pageSize !=null">
+	limit ${pageNo},${pageSize}
+</if>
+
+==========不可行情况
+<if test="pageNo!=null and pageNo !="" ">
+	limit ${pageNo},${pageSize}
+</if>
+
+<if test="pageNo!=null and pageNo !="" and  pageSize!=null and pageSize !=""">
+	limit ${pageNo},${pageSize}
+</if>
+
+=====原因不清楚  其他情况 并没有测试

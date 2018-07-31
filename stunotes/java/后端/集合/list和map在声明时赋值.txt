@@ -1,0 +1,5 @@
+List<Integer> statusList = new ArrayList<Integer>(){{add(1);add(2);add(3);add(7);}};
+
+
+
+https://blog.csdn.net/zzq900503/article/details/40863399

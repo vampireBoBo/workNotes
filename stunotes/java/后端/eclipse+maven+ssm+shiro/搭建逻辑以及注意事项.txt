@@ -3,7 +3,7 @@
 2、右键-项目配置-动态发布-添加tomcat的lib库，此时项目的架构就会有出现指定格式的文件。或者直接手动创建。
 3、添加ssm的pom依赖
 4、配置db.properties spring-mybatis,xml  spring-mvc.xml web.xml
-5、使用maven方式创新项目 此时项目会从java项目标识转换成spring项目标识，即出现s标识。
+5、使用maven update更新项目 此时项目会从java项目标识转换成spring项目标识，即出现s标识。
 6、项目启动正常，使用mybaits-generator 自动生成代码，需注意，如果二次生成同一个数据表单数据时，则会在mapper.xml进行追加，则需要手动删除之前的。或者设置成不追加
 	mapper覆盖方式：https://blog.csdn.net/zengqiang1/article/details/79381418：
 7、启动项目
