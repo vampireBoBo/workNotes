@@ -1,0 +1,10 @@
+1¡¢jsp
+	var encodeName = encodeURI(encodeURI(servername));
+	var encodeTitle=encodeURIComponent(encodeURI(_title));
+	var encodefDescription=encodeURIComponent(encodeURI(_describe));
+
+2¡¢java
+		String catalog_name=URLDecoder.decode(URLDecoder.decode(request.getParameter("name"),"UTF-8"),"UTF-8").trim();
+		String description=java.net.URLDecoder.decode(request.getParameter("description"),"UTF-8");
+		String title=java.net.URLDecoder.decode(request.getParameter("title"),"UTF-8");
+		String catalog_id=request.getParameter("serviceid");
