@@ -1,0 +1,4 @@
+https://blog.csdn.net/sinat_27639721/article/details/73480781
+
+
+若使用xshell的rz指令打开window的war包 需提前设备xshell的编码是utf-8 否则出现乱码  并一直打包不过去  xshell的编码是在窗口中的地球下面选择的

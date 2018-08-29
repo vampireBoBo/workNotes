@@ -1,0 +1,44 @@
+1、安装vmware
+2、创建vm
+3、安装centos
+
+=====================================================
+1、安装登录成功以后 检查网络问题，开放远程连接功能  xshell远程连接---https://www.cnblogs.com/iskylite/p/7689751.html
+	使用# ip address 查看： inet 之后的为ip地址
+	使用xshell进行连接 成功
+
+2、xshell连接以后中文乱码问题---https://www.linuxidc.com/Linux/2017-03/141385.htm
+shell中工具栏中有个小地球 设置编码方式为utf-8
+
+
+
+
+=========================================================
+卸载自带jdk安装指定版本jdk--https://blog.csdn.net/hui_2016/article/details/69941850
+
+安装tomcat-https://www.cnblogs.com/jerrylz/p/5647094.html
+
+图形界面工具类安装GTK--https://blog.csdn.net/u012394808/article/details/20204075
+
+xshell连接linux图形界面的方式https://blog.csdn.net/superman_xxx/article/details/50044423
+
+提示图形界面的安装 http://blog.51cto.com/zbaihh/1652745
+
+本机安装xserver--https://blog.csdn.net/Rong_Toa/article/details/80365932
+
+yum install xorg-x11-xauth
+
+安装时钟插件：yum  install xclock xterm xorg* -y
+
+xming进行远程连接https://blog.csdn.net/Aaronzzq/article/details/8207231?locationNum=2
+
+
+======================================================
+常用指令
+1、进入某个路径 cd /XX/
+2、查看该路径下所有文件信息 ls
+3、vi 编辑某文件  编辑之后 esc + ： 之后输入指令：wq保存退出  q 不保存退出
+4、rpm是删除指令
+5、mkdir 创建指令
+6.给某个文件夹开放读写权限给其他的用户#chmod a+w /root  root为文件目录   该指令要以root执行【授权功能临时性开启关闭：https://blog.csdn.net/miaoqiucheng/article/details/78698588】
+7、rm -rf 目录名称  【删除目录】  rm -f 文件 【删除文件】

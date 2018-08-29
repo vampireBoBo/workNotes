@@ -74,5 +74,5 @@ chkconfig docker on
 4.echo是对文字显示进行控制的指令
 5.export环境变量设置
 6.如果使用其他账号登录 执行指令没有权限时  需要添加  sudo
-7.centos操作系统  ctrl+alt+f2  ==》可从可视化界面进入dos   ctrl_alt+f1 ==》可从dos进入可视化界面
+7.centos操作系统  ctrl+alt+f1  ==》可从可视化界面进入dos   ctrl_alt+f2 ==》可从dos进入可视化界面
 8.wget命令用来从指定的URL下载文件

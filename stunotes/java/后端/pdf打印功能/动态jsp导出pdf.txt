@@ -1,1 +1,44 @@
 https://www.cnblogs.com/Iran1112/p/6013474.html
+
+
+
+ps是显示当前状态处于running的进程，grep表示在这些里搜索，而ps aux是显示所有进程和其状态。
+
+$ ps aux | grep amoeba
+
+
+
+查到amoeba的进程
+
+$ kill -s 9 pid
+
+杀死进程
+
+
+linux支持java.awt.color插件
+https://blog.csdn.net/samlover/article/details/239210
+
+https://blog.csdn.net/chocolate_Qing/article/details/80402887
+https://blog.csdn.net/qq_32451699/article/details/52344581
+
+https://blog.csdn.net/qq_16485855/article/details/50211823
+
+
+https://blog.csdn.net/ronger924/article/details/226030 】】】
+
+http://blog.sina.com.cn/s/blog_6826662b01018tbf.html
+
+===关闭防火墙
+systemctl stop firewalld.service
+
+
+
+=====tomcat启动不了
+
+解决方法：
+
+在tomcat 的bin目录下 执行这条命令
+chmod +x *.sh  
+再次执行 sh catalina.sh通过，
+
+然后用sh startup.sh启动成功
