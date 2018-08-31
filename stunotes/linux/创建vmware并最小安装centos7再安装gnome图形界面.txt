@@ -9,3 +9,8 @@
 
 ============================================
 3、安装gnome图形界面
+	a、linux一般为服务器，而视图界面一般是不需要安装。
+	b、linux系统安装视图界面时  需要先安装x11，X 仅为 GUI 环境构建提供了基本的框架，在屏幕上绘图和移动窗口，以及与鼠标和键盘交互。X 并没有定义 UI 的呈现方式 — 独立的客户程序窗口管理器处理这部分功能。安装指令：yum groupinstall -y "X Window System"
+	c、安装成功以后，通过指令：yum grouplist  查看当前系统版本对应的gnome对应的安装名称 然后进行安装。指令：yum groupinstall "GNOME Desktop" -y 【"GNOME Desktop"；这个为当前系统对应的名称】
+	d、安装以后若需要远程进入linux的视图界面，则需要安装vncService并对指定用户配置远程连接文件。具体查看对应文档。
+	e、需注意：若后端使用的JFileChooser类设置的弹窗 在linux系统已经安装了以上视图工具后仍不支持时  可尝试安装图形工具类：  图形界面工具类安装GTK--https://blog.csdn.net/u012394808/article/details/20204075

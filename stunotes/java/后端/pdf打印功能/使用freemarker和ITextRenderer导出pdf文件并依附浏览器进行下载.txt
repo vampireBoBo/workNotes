@@ -78,7 +78,9 @@ public static void createPDF(Object data, HttpServletResponse response, String p
 			writer.flush();
 			/*
 			*4、得到pdf文件创建工具类 ITextRenderer  【需要设置字体否则主中文显示异常】，通过setDocumentFromString将步骤3中通过模板写入的内容作为参数赋给此对象 ，
-			*   最后通过createPDF给响应流中写pdf格式内容 finishPDF结束  最后关闭流  此时 浏览器会自动下载指定的文件 保存路径为当前浏览器的默认保存位置 
+			*   最后通过createPDF给响应流中写pdf格式内容 finishPDF结束  最后关闭流  此时 浏览器会自动下载指定的文件 保存路径为当前浏览器的默认保存位置
+			*   http://blog.51cto.com/microe/1736156
+			*   https://blog.csdn.net/u012228718/article/details/40706499 
 			*/
 			ITextRenderer renderer = new ITextRenderer();
 			// 设置 css中 的字体样式（暂时仅支持宋体和黑体）
