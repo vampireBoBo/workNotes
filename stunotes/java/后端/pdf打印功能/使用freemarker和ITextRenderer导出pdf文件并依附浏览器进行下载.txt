@@ -1,4 +1,15 @@
 1、添加依赖
+<!--文件上传下载  -->
+				<dependency>
+				        <groupId>commons-io</groupId>
+				        <artifactId>commons-io</artifactId>
+				        <version>2.4</version>
+				</dependency> 
+				<dependency>
+				        <groupId>commons-fileupload</groupId>
+				        <artifactId>commons-fileupload</artifactId>
+				        <version>1.3.1</version>
+				</dependency>
 <!-- pdf导出 -->
 				<dependency>
 					<groupId>javax.servlet</groupId>
@@ -17,7 +28,7 @@
 					<version>${flying-saucer}</version>
 				</dependency>
 				
-		<!-- 字体 ：itext的字符需要用这个包 否则linux系统不支持中文字体 -->
+<!-- 字体 ：itext的字符需要用这个包 否则linux系统不支持中文字体 -->
 				<dependency>
 				    <groupId>com.itextpdf</groupId>
 				    <artifactId>itextpdf</artifactId>
