@@ -1,0 +1,89 @@
+1、添加依赖
+<!-- pdf导出 -->
+				<dependency>
+					<groupId>javax.servlet</groupId>
+					<artifactId>javax.servlet-api</artifactId>
+					<version>${servlet}</version>
+					<scope>provided</scope>
+				</dependency>
+				<dependency>
+					<groupId>org.freemarker</groupId>
+					<artifactId>freemarker</artifactId>
+					<version>${freemarker}</version>
+				</dependency>
+				<dependency>
+					<groupId>org.xhtmlrenderer</groupId>
+					<artifactId>flying-saucer-pdf</artifactId>
+					<version>${flying-saucer}</version>
+				</dependency>
+				
+		<!-- 字体 ：itext的字符需要用这个包 否则linux系统不支持中文字体 -->
+				<dependency>
+				    <groupId>com.itextpdf</groupId>
+				    <artifactId>itextpdf</artifactId>
+				    <version>5.5.13</version>
+				</dependency> 
+2、jsp调用
+<a href="<%=request.getContextPath()%>/pdf/param1">
+
+3、controller调用
+
+PDFTemplateUtil.createPDF(Object,response,request.getSession().getServletContext().getRealPath("/"), "busSysDeploy.ftl");
+
+参数解析：
+Object：需要进行解析的实体  
+参2：request.getSession().getServletContext().getRealPath("/")  获取到当前项目所部署的tomcat的路径 从而去获取项目中保存的freemarker的ftl模板和所需的ttc和ttf字体文件
+参3：freemark模板名称 "busSysDeploy.ftl"
+【注意：为了避免在不同的系统下  所需字体无法找到等问题，可将字体的ttc和ttf文件保存在项目中  跟项目的发布保持在一起  设置字体时通过项目路径去获取即可 就会避免各种字体不匹配等问题】
+
+4、核心代码：
+public static void createPDF(Object data, HttpServletResponse response, String path, String templateFileName)
+			throws IOException {
+		/*
+		* 1、通过路径获取freemarker
+		*/
+		Configuration cfg = new Configuration();                                // 创建一个FreeMarker实例, 负责管理FreeMarker模板的Configuration实例
+		
+		cfg.setDirectoryForTemplateLoading(new File(path + "/WEB-INF/ftl"));    // 指定FreeMarker模板文件的位置
+		
+		cfg.setEncoding(Locale.CHINA, "UTF-8");                                 // 设置模板的编码格式
+		
+		/*
+		*2、 配置响应内容告知浏览器进行文件下载
+		*/
+        	response.setContentType("multipart/form-data");                         //1.设置文件ContentType类型，这样设置，会自动判断下载文件类型  
+        	
+        	response.setHeader("Content-Disposition", "attachment;fileName=a.pdf"); //2.设置文件头：最后一个参数是设置下载文件名(假如我们叫a.pdf) 文件名若乱码 则进行编码转换：new String(name.getBytes("gbk"),"ISO-8859-1")
+		
+		OutputStream out = response.getOutputStream();                          //3.从reponse获取输出流 将对应问价内容写入即可  
+		
+		/*
+		/3、通过模板名称得到freemarker的template模板  并通过模板的process功能将动态获取的实体Object去渲染模板  使得模块内容为动态获取  最后将渲染之后的信息写入到StringWiter流中 
+		*/
+		Template template = cfg.getTemplate(templateFileName, "UTF-8");
+		try {
+			StringWriter writer = new StringWriter();
+			template.process(data, writer);
+			writer.flush();
+			/*
+			*4、得到pdf文件创建工具类 ITextRenderer  【需要设置字体否则主中文显示异常】，通过setDocumentFromString将步骤3中通过模板写入的内容作为参数赋给此对象 ，
+			*   最后通过createPDF给响应流中写pdf格式内容 finishPDF结束  最后关闭流  此时 浏览器会自动下载指定的文件 保存路径为当前浏览器的默认保存位置 
+			*/
+			ITextRenderer renderer = new ITextRenderer();
+			// 设置 css中 的字体样式（暂时仅支持宋体和黑体）
+			// import com.itextpdf.text.pdf.BaseFont;  BaseFont该类的包需为这个包  该包中字体支持换行  并且在linux系统下中文可以正常显示
+			renderer.getFontResolver().addFont(path + "/resources/font/SIMSUN.TTC", BaseFont.IDENTITY_H,
+					BaseFont.NOT_EMBEDDED);
+			renderer.getFontResolver().addFont(path + "/resources/font/simhei.ttf", BaseFont.IDENTITY_H,
+					BaseFont.NOT_EMBEDDED);
+			
+			renderer.setDocumentFromString(writer.toString());
+			renderer.layout();
+			renderer.createPDF(out, false);
+			renderer.finishPDF();
+			out.flush();
+			out.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
