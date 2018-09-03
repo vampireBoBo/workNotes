@@ -50,17 +50,11 @@ Object：需要进行解析的实体
 4、核心代码：
 public static void createPDF(Object data, HttpServletResponse response, String path, String templateFileName)
 			throws IOException {
+		
+	try {
+
 		/*
-		* 1、通过路径获取freemarker
-		*/
-		Configuration cfg = new Configuration();                                // 创建一个FreeMarker实例, 负责管理FreeMarker模板的Configuration实例
-		
-		cfg.setDirectoryForTemplateLoading(new File(path + "/WEB-INF/ftl"));    // 指定FreeMarker模板文件的位置
-		
-		cfg.setEncoding(Locale.CHINA, "UTF-8");                                 // 设置模板的编码格式
-		
-		/*
-		*2、 配置响应内容告知浏览器进行文件下载
+		*1、 配置响应内容告知浏览器进行文件下载
 		*/
         	response.setContentType("multipart/form-data");                         //1.设置文件ContentType类型，这样设置，会自动判断下载文件类型  
         	
@@ -68,35 +62,54 @@ public static void createPDF(Object data, HttpServletResponse response, String p
 		
 		OutputStream out = response.getOutputStream();                          //3.从reponse获取输出流 将对应问价内容写入即可  
 		
+
+		/*
+		* 2、通过路径获取freemarker
+		*/
+		Configuration cfg = new Configuration();                                // 创建一个FreeMarker实例, 负责管理FreeMarker模板的Configuration实例
+		
+		cfg.setDirectoryForTemplateLoading(new File(path + "/WEB-INF/ftl"));    // 指定FreeMarker模板文件的位置
+		
+		cfg.setEncoding(Locale.CHINA, "UTF-8");                                 // 设置模板的编码格式
+		
+		
 		/*
 		/3、通过模板名称得到freemarker的template模板  并通过模板的process功能将动态获取的实体Object去渲染模板  使得模块内容为动态获取  最后将渲染之后的信息写入到StringWiter流中 
 		*/
 		Template template = cfg.getTemplate(templateFileName, "UTF-8");
-		try {
-			StringWriter writer = new StringWriter();
-			template.process(data, writer);
-			writer.flush();
-			/*
-			*4、得到pdf文件创建工具类 ITextRenderer  【需要设置字体否则主中文显示异常】，通过setDocumentFromString将步骤3中通过模板写入的内容作为参数赋给此对象 ，
-			*   最后通过createPDF给响应流中写pdf格式内容 finishPDF结束  最后关闭流  此时 浏览器会自动下载指定的文件 保存路径为当前浏览器的默认保存位置
-			*   http://blog.51cto.com/microe/1736156
-			*   https://blog.csdn.net/u012228718/article/details/40706499 
-			*/
-			ITextRenderer renderer = new ITextRenderer();
-			// 设置 css中 的字体样式（暂时仅支持宋体和黑体）
-			// import com.itextpdf.text.pdf.BaseFont;  BaseFont该类的包需为这个包  该包中字体支持换行  并且在linux系统下中文可以正常显示
-			renderer.getFontResolver().addFont(path + "/resources/font/SIMSUN.TTC", BaseFont.IDENTITY_H,
+		StringWriter writer = new StringWriter();
+		template.process(data, writer);
+		writer.flush();
+		String content = writer.toString();		
+
+		/*
+		*4、得到pdf文件创建工具类 ITextRenderer  【需要设置字体否则主中文显示异常】，通过setDocumentFromString将步骤3中通过模板写入的内容作为参数赋给此对象 ，
+		*   最后通过createPDF给响应流中写pdf格式内容 finishPDF结束  最后关闭流  此时 浏览器会自动下载指定的文件 保存路径为当前浏览器的默认保存位置
+		*   http://blog.51cto.com/microe/1736156
+		*   https://blog.csdn.net/u012228718/article/details/40706499 
+		*/
+		ITextRenderer renderer = new ITextRenderer();
+		// 设置 css中 的字体样式（暂时仅支持宋体和黑体）
+		// import com.itextpdf.text.pdf.BaseFont;  BaseFont该类的包需为这个包  该包中字体支持换行  并且在linux系统下中文可以正常显示
+		renderer.getFontResolver().addFont(path + "/resources/font/SIMSUN.TTC", BaseFont.IDENTITY_H,
 					BaseFont.NOT_EMBEDDED);
-			renderer.getFontResolver().addFont(path + "/resources/font/simhei.ttf", BaseFont.IDENTITY_H,
+		renderer.getFontResolver().addFont(path + "/resources/font/simhei.ttf", BaseFont.IDENTITY_H,
 					BaseFont.NOT_EMBEDDED);
 			
-			renderer.setDocumentFromString(writer.toString());
-			renderer.layout();
-			renderer.createPDF(out, false);
-			renderer.finishPDF();
-			out.flush();
-			out.close();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		renderer.setDocumentFromString(content);
+		renderer.layout();
+		renderer.createPDF(out, false);
+		renderer.finishPDF();
+		out.flush();
+		out.close();
+	} catch (Exception e) {
+		e.printStackTrace();
 	}
+}
+
+5、导出时一行的内容被分割在不同的页面 ，则需要在ftl的模板中设定tabel和tr的属性==https://blog.csdn.net/qq_31980421/article/details/79662988
+
+<style>
+	tr{page-break-inside:avoid; page-break-after:auto;}
+  	table{page-break-inside:auto;-fs-table-paginate:paginate;border-spacing:0;}
+</style>
