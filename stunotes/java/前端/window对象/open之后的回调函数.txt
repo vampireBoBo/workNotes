@@ -1,0 +1,67 @@
+======================http://www.w3school.com.cn/jsref/met_win_setinterval.asp
+
+jsp中需open窗口进行跨域请求，当窗口关闭时 需执行下一个方法，处理逻辑：
+1、需使用 setInterval() 和 clearInterval()进行窗口状态的监听和下一个方法的执行的调用
+2、下一个方法的必须为同步请求方式  不能为异步
+
+  var closeWin = ''; // 流程办理打开的新窗口对象
+  var loop =''; // 监听事件执行时间间隔
+  function todo(id,nodeId){
+	if(nodeId == "service_catalog_approve"){
+		 window.location = ('<%=request.getContextPath()%>/index.jsp#spring/servicecatalog/task?id='+id);
+	}else if(nodeId=='Implement'){
+		// 服务实施
+		window.location = ('<%=request.getContextPath()%>/index.jsp#spring/serviceImplement/deployService?id='+id);
+	}else if(nodeId=='ImplemnetFeedback'){
+		// 服务实施
+		window.location = ('<%=request.getContextPath()%>/index.jsp#spring/serviceImplement/toImplementFeedbackPage?id='+id);
+	}else if(nodeId=="UserApply"){
+		// 服务申请修改
+		window.location = ('<%=request.getContextPath()%>/index.jsp#spring/busSysDeploy/toModify/'+id);
+	}else{
+		closeWin = window.open(''+_variousURL.managerxURL+'/flow/task/taskApprove?id='+id);
+	}
+	if (closeWin){
+		// 设置新窗口的监听事件 第二个参数为事件执行时间长度	
+	    loop = window.setInterval("uploadDatas()",10); 
+    }
+  }
+  // 新窗口监听事件  该事件必须为同步请求
+  function uploadDatas(){
+	  if(closeWin.closed){  
+		var _opts = bsTable.bootstrapTable('getOptions'),_limit = _opts.pageSize,_offset = _opts.pageNumber||1;
+		var _arr = [];
+		$('.filter-item>dd').find('a.on').each(function(){
+		  	var _that = $(this),_thattxt = _that.text(),_thatcode = _that.data('tid'),_ddqtype = _that.parents('dd').data('qtype');
+		    _arr.push(_thatcode);
+		});
+		console.info('同步请求页面数据信息');
+		$.ajax({
+		    method: "get",
+		    url: "<%=request.getContextPath()%>/spring/supervise/todoList",
+		    data:{
+		    	  "type-sj":_arr[0],
+		    	  limit : _limit,
+		          offset:_offset
+		    },
+		    async: false, //设置为同步请求
+		    success: function(_d){
+		    	console.info('获取到了同步请求数据');
+		    	// 结束监听  因为 这儿目前只需要统计一次  无需多次执行
+		    	window.clearInterval(loop);
+		    	if(_d.status==0){
+		            bsTable.bootstrapTable('load', {
+		                "total": _d.total,
+		                "rows":_d.rows
+		            });
+		            // 重新设置 代码事项的统计值
+		             window.parent.document.getElementById("itemCount").innerHTML=_d.total;
+		        }else{
+		            layer.msg("系统异常",{icon: 2});
+		        }
+		        // 子页面高度自适应
+				window.parent.iFrameHeight();
+		    }
+	  	});
+		}  
+	}

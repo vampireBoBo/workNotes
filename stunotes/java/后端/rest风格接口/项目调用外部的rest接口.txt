@@ -24,10 +24,11 @@ https://blog.csdn.net/king13127/article/details/70800376
 
 
 	==================调用
-	JSONObject json = saveData(request);
-	// String result= FlowUtil.startFlow(constants,json.toString());
-	// 调用测试rest接口
 	HttpHeaders headers = new HttpHeaders();
 	headers.add("X-Auth-Token", UUID.randomUUID().toString());
+	MediaType type = MediaType.parseMediaType("application/json; charset=UTF-8");
+	headers.setContentType(type);
+	headers.add("Accept", MediaType.APPLICATION_JSON.toString());
 	HttpEntity<JSONObject> person= new HttpEntity<JSONObject>(json, headers);
-	String result= template.postForObject("http://127.0.0.1/managerx/flowRest",json,String.class);
+		
+	String result= template.postForObject("http://127.0.0.1/ProjectURL/flowRest",json,String.class);

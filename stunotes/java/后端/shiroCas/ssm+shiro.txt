@@ -1,0 +1,73 @@
+===============================
+一、搭建ssm框架  此处省略
+二、pom文件添加shiro依赖
+	<dependency>
+			<groupId>org.apache.shiro</groupId>
+			<artifactId>shiro-core</artifactId>
+			<version>${org.apache.shiro.version}</version>
+	</dependency>
+	<dependency>
+			<groupId>org.apache.shiro</groupId>
+			<artifactId>shiro-spring</artifactId>
+			<version>${org.apache.shiro.version}</version>
+	</dependency>
+	<dependency>
+			<groupId>org.apache.shiro</groupId>
+			<artifactId>shiro-all</artifactId>
+			<version>${org.apache.shiro.version}</version>
+	</dependency>
+	<dependency>
+			<groupId>org.apache.shiro</groupId>
+			<artifactId>shiro-web</artifactId>
+			<version>${org.apache.shiro.version}</version>
+	</dependency>
+	<dependency>
+			<groupId>org.apache.shiro</groupId>
+			<artifactId>shiro-ehcache</artifactId>
+			<version>${org.apache.shiro.version}</version>
+	</dependency>
+	<dependency>
+			<groupId>org.apache.shiro</groupId>
+			<artifactId>shiro-quartz</artifactId>
+			<version>${org.apache.shiro.version}</version>
+	</dependency>
+	<dependency>
+			<groupId>org.apache.xbean</groupId>
+			<artifactId>xbean-spring</artifactId>
+			<version>4.1</version>
+	</dependency>
+
+
+三、创建
+
+
+
+
+
+
+
+
+
+三、web.xml配置shirofilter
+
+    <!-- 配置  Shiro 的 Filter -->
+    <filter>
+	    <description>shiro 权限拦截</description>
+	    <filter-name>shiroFilter</filter-name>
+	    <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+	    <!-- 设置true由servlet容器控制filter的生命周期 -->
+	    <init-param>
+	        <param-name>targetFilterLifecycle</param-name>
+	        <param-value>true</param-value>
+	    </init-param>
+	    <!-- 设置spring容器filter的bean id，如果不设置则找与filter-name一致的bean-->
+	    <init-param>
+			<param-name>targetBeanName</param-name>
+			<param-value>shiroFilter</param-value>
+		</init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>shiroFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+

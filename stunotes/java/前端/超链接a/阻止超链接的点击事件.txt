@@ -1,0 +1,5 @@
+$("a").css('pointer-events','none');        //阻止a标签鼠标单击事件
+
+===============================https://blog.csdn.net/zzq900503/article/details/50879278
+在js中设置该方法则对应的a将不再执行href  若为表单提交按钮  则表单将不再提交
+window.event.returnValue=false

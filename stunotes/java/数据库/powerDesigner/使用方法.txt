@@ -1,0 +1,11 @@
+==============https://blog.csdn.net/xb565517830/article/details/80401801
+
+1、下载安装pd并替换破解文件
+
+2、使用pd连接mysql时  需要用odbc进行连接 无论当前操作系统是什么 odbc要选择32位，安装时需要注意将安装iso文件放在pd的安装
+目录下 再进行安装
+
+3、odbc安装成功以后 若pd以管理员的身份启动单仍提示没有管理员权限无法配置odbc连接信息时 则需要在C:\Windows\System32路径下以管理员方式
+运行odbcsf32.exe文件 添加对应的连接===https://jingyan.baidu.com/article/da1091fb1d30ab027949d652.html
+
+4、添加成功以后在pd连接数据库若提示PowerDesigner Unable to list the users 则选择菜单栏中的Database -> Change Current DBMS ,给DBMS选择你的数据库类型 确定即可 。
