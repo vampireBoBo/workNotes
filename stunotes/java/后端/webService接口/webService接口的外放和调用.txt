@@ -16,7 +16,7 @@ https://blog.csdn.net/GoGleTech/article/details/78616121
 ======== 外放
 
 1、外放类的注解为：@WebService  
-2、创建需要发布的方法时需注意，static方法和在@WebMethod中设置参数exclude=true 不能被发布。
+2、创建需要发布的方法时需注意，static方法和在@WebMethod中设置参数exclude=true 不能被发布，被final修饰的方法也不能被发布。
 3、创建main方法使用端点服务器类 EndPoint中的publish方法将该类，发布到指定端口上，即完成webservice接口的外放
 4、外放校验，执行main，项目运行成功以后，在浏览器中输入路径并在后面拼上？wsdl,如果出现xml格式文件，表示外放成功。 
 

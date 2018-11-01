@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans 
+       http://www.springframework.org/schema/beans/spring-beans.xsd 
+       http://www.springframework.org/schema/context 
+       http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+	
+	<context:annotation-config/>
+    <context:component-scan base-package="com.future" />
+    
+    <bean id="propertiesConfiguration" class="com.future.dconf.client.PropertiesConfigurationFactoryBean">
+		<constructor-arg index="0" value="${dconf_url}" />
+		<constructor-arg index="1" value="8283" />
+		<constructor-arg index="2" value="itsm" />
+		<constructor-arg index="3" value="development" />
+		<constructor-arg index="4" value="share,lager" /> 
+	</bean>
+	<bean class="org.springframework.context.support.PropertySourcesPlaceholderConfigurer">
+		<property name="properties" ref="propertiesConfiguration" />
+	</bean>
+	
+	
+  
+    <!-- Spring提供的JMS工具类，它可以进行消息发送、接收等 -->
+    <bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate">
+        <!-- 这个connectionFactory对应的是我们定义的Spring提供的那个ConnectionFactory对象 -->
+        <property name="connectionFactory" ref="connectionFactory"/>
+    </bean>
+	<bean id="jmsTopicTemplate" class="org.springframework.jms.core.JmsTemplate">
+		 <!-- 这个connectionFactory对应的是我们定义的Spring提供的那个ConnectionFactory对象 -->  
+		<constructor-arg ref="connectionFactory" />
+		<!-- pub/sub模型（发布/订阅） -->
+		<property name="pubSubDomain" value="true" />
+	</bean>
+	
+    <!-- 真正可以产生Connection的ConnectionFactory，由对应的 JMS服务厂商提供-->
+    <bean id="targetConnectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
+        <property name="userName" value="admin"/>
+        <property name="password" value="admin"/>
+        <property name="brokerURL" value="${mq_server_url}"/>
+    </bean>
+
+    <!-- Spring用于管理真正的ConnectionFactory的ConnectionFactory -->
+    <bean id="connectionFactory" class="org.springframework.jms.connection.SingleConnectionFactory">
+        <!-- 目标ConnectionFactory对应真实的可以产生JMS Connection的ConnectionFactory -->
+        <property name="targetConnectionFactory" ref="targetConnectionFactory"/>
+    </bean>
+
+    <!--队列目的地-->
+    <bean id="queueDestination" class="org.apache.activemq.command.ActiveMQQueue">
+        <constructor-arg>
+            <value>csc_vagent_recv_queue</value>
+        </constructor-arg>
+    </bean>
+    
+    <!--主题目的地-->
+    <bean id="topicDestination" class="org.apache.activemq.command.ActiveMQTopic">
+        <constructor-arg>
+            <value>sysconfig_userroleorg_send_topic</value>
+        </constructor-arg>
+    </bean>
+   
+    <!--目的地-->
+    <bean id="consumerDestination" class="org.apache.activemq.command.ActiveMQQueue">
+        <constructor-arg>
+            <value>csc_vagent_send_queue</value>
+        </constructor-arg>
+    </bean>
+    
+</beans>

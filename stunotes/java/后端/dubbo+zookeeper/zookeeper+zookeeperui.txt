@@ -1,0 +1,14 @@
+====zookeeper服务启动学习网址：https://blog.csdn.net/xht555/article/details/81571389
+====zookeeper ui服务启动学习网址：https://blog.csdn.net/lx1309244704/article/details/82790965
+====duboo admin 即dubbo的ui web项目===https://blog.csdn.net/qq_28988969/article/details/79866111
+
+
+====Dubbo-Admin为管理平台 Zookeeper为注册中心
+
+使用者通过dubbo配置文件将对应接口注册到zookeeper服务上，消费者通过dubbo配置文件从对应的zookeeper服务器上进行读取。而通过dubbo-admin
+
+可直观的了解该zookeeper服务器上dubbo接口的注册和消费情况。
+
+
+
+======zookeeper服务只需从官网下载对应的程序进行本地启动作为注册服务器

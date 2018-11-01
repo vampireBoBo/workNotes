@@ -2,7 +2,7 @@ https://blog.csdn.net/legend11/article/details/53408459
 
 
 
-
+==========================拼接
 怎么在onclick事件中传递对象参数，这个问题困扰了好久，终于测试通过，遂记录之。
 
 var user = {id:1, name:'zs', age:20};
@@ -22,3 +22,7 @@ var ele = '<a onclick="edit(\'' + JSON.stringify(user).replace(/"/g, '&quot;') +
 
 onclick事件中传递实体：JSON.stringify(_hasDepositResourceInfo[i]).replace(/"/g, '&quot;')
 在事件内部将传递的实体转换成json对象：var resource=JSON.parse(currentData.replace(/\n/g,"\\n").replace(/\r/g,"\\r"));
+
+
+=========================非拼接
+非拼接onclick事件中 实体的传递https://www.cnblogs.com/Y-zhiwei/p/6858004.html

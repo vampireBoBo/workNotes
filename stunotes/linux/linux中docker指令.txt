@@ -23,7 +23,7 @@ jdk1.8.0_161   apache-tomcat-8.5.27
 4.编辑完成之后 exit进行退出
 5.将容器制作成镜像 ：docker commit [容器id] [该镜像的名称]
 
-4、杀死一个容器：docker rm -f  7de76c8f067a
+4、杀死一个容器：docker rm -f  7de76c8f067a   
 5、删除一个镜像:docker rmi [镜像id]
 
 

@@ -1,0 +1,116 @@
+学习网址：
+http://elim.iteye.com/blog/1893038
+https://blog.csdn.net/mypurse/article/details/6265073
+https://blog.csdn.net/vsddvsd/article/details/54632913
+
+一、未包装的activemq基础流程
+    
+在讨论具体方式的时候，我们先看看使用activemq需要启动服务的主要过程。
+
+按照JMS的规范，我们首先需要获得一个JMS connection factory.，通过这个connection factory来创建connection.在这个基础之上我们再创建session, destination, producer和consumer。因此主要的几个步骤如下：
+
+1. 获得JMS connection factory. 通过我们提供特定环境的连接信息来构造factory。
+
+2. 利用factory构造JMS connection
+
+3. 启动connection
+
+4. 通过connection创建JMS session.
+
+5. 指定JMS destination.
+
+6. 创建JMS producer或者创建JMS message并提供destination.
+
+7. 创建JMS consumer或注册JMS message listener.
+
+8. 发送和接收JMS message.
+
+9. 关闭所有JMS资源，包括connection, session, producer, consumer等。
+
+
+二、广播模式 
+ 在点对点（PTP）消息传递域中，目的地被成为队列（queue）；在发布/订阅（PUB/SUB）消息传递域中，目的地被成为主题（topic）。
+
+三、JMS
+  JMS的全称是Java Message Service，即Java消息服务。它主要用于在生产者和消费者之间进行消息传递，生产者负责产生消息，而消费者负责接收消息。把它应用到实际的业务需求中的话我们可以在特定的时候利用生产者生成一消息，并进行发送，对应的消费者在接收到对应的消息后去完成对应的业务逻辑。对于消息的传递有两种类型，一种是点对点的，即一个生产者和一个消费者一一对应；另一种是发布/订阅模式，即一个生产者产生消息并进行发送后，可以由多个消费者进行接收。
+
+四、操作步骤，以maven项目为例，jms以apache的activemq为具体实现类
+	1、搭建activemq服务器：进入http://activemq.apache.org/download.html  下载所需的activemq项目并在本机运行，作为mq服务器。进行解压后运行其bin目录下面的activemq.bat文件启动activeMQ。启动完毕，使用:【http://127.0.0.1:8161/demo】 访问
+	2、消息发送者发送消息
+		a、pom添加对应的项目依赖。例如：spring-jms、activemq-core。或者直接使用activemq-all  这个包含所有的activemq类
+		b、配置activemq.xml。例如：创建spring管理connectionFactory工厂的对象：org.springframework.jms.connection.SingleConnectionFactory---》设置jms的具体实现类及activemq类的对象：org.apache.activemq.ActiveMQConnectionFactory，该对象中需设置brokerURL参数值，即mq服务器的地址及端口，一般为默认值即可tcp://127.0.0.1:61616
+		c、为了优化可将mq的请求池化，降低资源消耗。可将activemq类进行封装处理，例如：<bean id="pooledConnectionFactory" class="org.apache.activemq.pool.PooledConnectionFactory">  
+    									<property name="connectionFactory" ref="targetConnectionFactory"/>  
+    									<property name="maxConnections" value="10"/>  
+								  </bean>
+		d、设置目的地。例如：  <!--这个是队列目的地，点对点的-->  
+<bean id="queueDestination" class="org.apache.activemq.command.ActiveMQQueue">  
+    <constructor-arg>  
+        <value>queue</value>  
+    </constructor-arg>  
+</bean>  
+<!--这个是主题目的地，一对多的-->  
+<bean id="topicDestination" class="org.apache.activemq.command.ActiveMQTopic">  
+    <constructor-arg value="topic"/>  
+</bean> 
+		e、实现类中发送消息。例如：private JmsTemplate jmsTemplate;  【其中jmsTemplate，destination是通过依赖注入创建的对应的工厂和目的地对象】
+      
+    public void sendMessage(Destination destination, final String message) {  
+        System.out.println("---------------生产者发送消息-----------------");  
+        System.out.println("---------------生产者发了一个消息：" + message);  
+        jmsTemplate.send(destination, new MessageCreator() {  
+            public Message createMessage(Session session) throws JMSException {  
+                return session.createTextMessage(message);  
+            }  
+        });  
+    }   
+
+
+	3、消息接受者监听消息：我们可以看到我们定义了一个名叫queue的ActiveMQQueue目的地，我们的监听器就是监听了发送到这个目的地的消息。
+		在配置一个MessageListenerContainer的时候有三个属性必须指定，一个是表示从哪里监听的ConnectionFactory；一个是表示监听什么的Destination；一个是接收到消息以后进行消息处理的MessageListener。
+		接收者的xml配置：<!--这个是队列目的地-->  
+<bean id="queueDestination" class="org.apache.activemq.command.ActiveMQQueue">  
+    <constructor-arg>  
+        <value>queue</value>  
+    </constructor-arg>  
+</bean>  
+<!-- 消息监听器 -->  
+<bean id="consumerMessageListener" class="com.tiantian.springintejms.listener.ConsumerMessageListener"/>      
+  
+<!-- 消息监听容器 -->  
+<bean id="jmsContainer"        class="org.springframework.jms.listener.DefaultMessageListenerContainer">  
+    <property name="connectionFactory" ref="connectionFactory" />  
+    <property name="destination" ref="queueDestination" />  
+    <property name="messageListener" ref="consumerMessageListener" />  【消息处理类的实现  如下】
+</bean>  
+
+
+
+
+【消息处理类的实现 ==============================】
+要定义处理消息的MessageListener我们只需要实现JMS规范中的MessageListener接口就可以了。MessageListener接口中只有一个方法onMessage方法，当接收到消息的时候会自动调用该方法。
+
+
+package com.tiantian.springintejms.listener;  
+   
+import javax.jms.JMSException;  
+import javax.jms.Message;  
+import javax.jms.MessageListener;  
+import javax.jms.TextMessage;  
+   
+public class ConsumerMessageListener implements MessageListener {  
+   
+    public void onMessage(Message message) {  
+        //这里我们知道生产者发送的就是一个纯文本消息，所以这里可以直接进行强制转换  
+        TextMessage textMsg = (TextMessage) message;  
+        System.out.println("接收到一个纯文本消息。");  
+        try {  
+            System.out.println("消息内容是：" + textMsg.getText());  
+        } catch (JMSException e) {  
+            e.printStackTrace();  
+        }  
+    }  
+   
+}  
+
+		
