@@ -1,0 +1,40 @@
+1、添加maven依赖
+	<!-- 共享文件读取jar -->		
+	<dependency>
+		<groupId>jcifs</groupId>
+		<artifactId>jcifs</artifactId>
+		<version>1.3.17</version>
+	</dependency>
+
+2、controller层
+	设置远程url 需要密码与不需要密码的访问连接不同 需要注意
+	import jcifs.smb.SmbFile;
+	import jcifs.smb.SmbFileInputStream;
+	
+	
+	@ResponseBody
+	@RequestMapping(value="scanImg")
+	public void scanImg(@RequestParam String fileName,HttpServletResponse rep){
+		try {
+			fileName = new String(fileName.getBytes("utf-8"), "utf-8");
+			String pathName = constants.getFileURL()+fileName;
+			SmbFile fileTrue = new SmbFile(pathName);
+			SmbFile fileError = new SmbFile(pathName);
+			rep.setContentType("text/html;charset=UTF-8;");
+			if(fileTrue.exists() || (fileError.exists() && !fileTrue.exists())){
+				rep.setContentType("image/jpeg");
+				SmbFile file = fileTrue.exists()?fileTrue:fileError;
+				SmbFileInputStream sfis = new SmbFileInputStream(file);
+				byte[] cache = new byte[file.getContentLength()];
+				sfis.read(cache);
+				rep.getOutputStream().write(cache);
+				rep.getOutputStream().close();
+				sfis.close();
+			}else{
+				rep.getWriter().write("照片不存在或其他问题导致图片加载失败！");
+				rep.getWriter().close();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}

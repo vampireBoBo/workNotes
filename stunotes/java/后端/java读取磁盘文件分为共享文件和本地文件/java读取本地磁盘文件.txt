@@ -1,0 +1,36 @@
+@ResponseBody
+	@RequestMapping(value="scanImg")
+	public void scanImg(@RequestParam String fileName,HttpServletResponse rep){
+		try {
+			// 使用工具类实体读取磁盘路径  方法请求方法传递访问的文件名称
+			fileName = new String(fileName.getBytes("utf-8"), "utf-8");
+			String pathName = constants.getFileURL()+fileName;
+			File fileTrue = new File(pathName);
+			File fileError = new File(pathName);
+			rep.setContentType("text/html;charset=UTF-8;");
+			if(fileTrue.exists() || (fileError.exists() && !fileTrue.exists())){
+				rep.setContentType("image/jpeg");
+				File file = fileTrue.exists()?fileTrue:fileError;
+				FileInputStream fis = new FileInputStream(file);
+				BufferedInputStream bis = new BufferedInputStream(fis, fis.available());
+				ByteArrayOutputStream bos = new ByteArrayOutputStream();
+				byte[] cache = new byte[fis.available()];
+				int length = 0;
+				while((length=bis.read(cache))!=-1){
+					System.out.println("长度"+length);
+					bos.write(cache, 0, length);
+				}
+				bos.flush();
+				rep.getOutputStream().write(bos.toByteArray());
+				rep.getOutputStream().close();
+				bos.close();
+				bis.close();
+				fis.close();
+			}else{
+				rep.getWriter().write("照片不存在或其他问题导致图片加载失败！");
+				rep.getWriter().close();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}

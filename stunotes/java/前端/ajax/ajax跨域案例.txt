@@ -1,0 +1,73 @@
+解决方案：https://blog.csdn.net/csdn_ds/article/details/73691134
+
+https://www.cnblogs.com/sunxucool/p/3433992.html
+
+跨域关键点：	1、请求时设置参数为jsonp   默认请求的回调函数名称为callback
+
+			也可使用自定义方式  dataType : "jsonp",
+             		jsonp: "callbackparam",//传递给请求处理程序或页面的，用以获得jsonp回调函数名的参数名(默认为:callback)
+             		jsonpCallback:"success_jsonpCallback",//自定义的jsonp回调函数名称，默认为jQuery自动生成的随机函数名
+
+			
+			【
+				1. jsonp: 回掉函数名的参数名，默认callback，服务端通过它来获取到回掉函数名
+
+				2. jsonpCallback: 回掉函数名，默认jquery自动生成
+
+				
+			】
+
+			返回值：success_jsonpCallback（jsonString）
+
+		2、controller中获取请求的callback参数 并请其他类型的参数以json字符串的方式拼接在callback函数中，格式callback(jsonstring)
+		controlle的返回值的类型为text/html
+
+		【
+			text/html :浏览器在获取到这种文件时会自动调用html的解析器对文件进行相应的处理
+			text/plain:浏览器在获取到这种文件时并不会对其进行处理
+		】
+
+		3、返回值为jsonp时 请求方式只能为get 
+
+
+1、用户请求：
+   var url='http://localhost:8080/WorkGroupManagment/getGroupById?id=1&callback=?';
+   $.ajax({
+     url:url,
+     dataType:'jsonp',
+     processData: false, 
+     type:'get',
+     contentType:"application/json; charset=UTF-8",  // 请求参数data的数据类型  若不指定则data可为对象
+     data:JSON.stringify( {
+	        		"name": $("#name").val()
+	        	  } 
+			), 
+     success:function(data){
+       alert(data.name);
+     },
+     error:function(XMLHttpRequest, textStatus, errorThrown) {
+       alert(XMLHttpRequest.status);
+       alert(XMLHttpRequest.readyState);
+       alert(textStatus);
+     }});
+
+2、controller层
+
+	@ResponseBody
+	@RequestMapping(value="/getGroupById",method=RequestMethod.GET,produces={"text/html;charset=UTF-8"})
+	public String selectCurrentInoutPerson( @RequestParam("id") Long id,HttpServletRequest request, HttpServletResponse response){
+		String callback = request.getParameter("callback");
+		List<InOutApplyView> inOutPers;
+		Map<String,Object> map = new HashMap<>();
+		try {
+			inOutPers = inOutApplyViewService.selectCurrentInoutPerson();
+			map.put("status", "0");
+			map.put("total",inOutPers.size() );
+			map.put("rows", inOutPers);
+		} catch (Exception e) {
+			map.put("status", "-1");
+			e.printStackTrace();
+		}finally {
+			return callback+"("+JSON.toJSONString(map).toString()+")";
+		}
+	}
