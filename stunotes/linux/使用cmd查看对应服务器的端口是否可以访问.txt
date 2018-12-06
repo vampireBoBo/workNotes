@@ -1,0 +1,14 @@
+
+1、通过cmd查看本地外放的端口信息
+	指令：netstat -ano   
+	若需要指定端口：netstat -aon|findstr “3306” 【3306为端口号】    
+	根据对应端口的pid 查看具体是什么服务占用了本端口： tasklist|findstr “2360” 【通过指令查询到的端口所占用的具体的pid值】  
+	
+2、通过cmd查看是否可以访问其他服务器的某端口  
+	telnet ip 端口  例如：telnet 192.168.13.141 8080
+	测试结果：1》然后回车 如果192.168.13.141的8080端口开放的话 命令窗口会进入完全黑屏的状态  
+			  2》如果没有开放 则过几秒钟之后 cmd提示行会提示端口连接失败
+			  
+3、通过cmd 启动某个服务
+	启动：net start serviceName 【 serviceName 对应的服务名称  通过services.msc指令查看到的服务列表中的名称】
+	删除：sc delete serviceName

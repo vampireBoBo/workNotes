@@ -1,0 +1,2 @@
+1、查看java线程是否启动
+	ps -ef | grep java
