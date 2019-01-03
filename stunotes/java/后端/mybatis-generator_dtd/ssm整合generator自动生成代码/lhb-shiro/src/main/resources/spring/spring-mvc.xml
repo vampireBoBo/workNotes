@@ -18,6 +18,9 @@
     	<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
     </context:component-scan>
     
+    <!-- 开启注解 -->
+    <mvc:annotation-driven/>
+    
     <!-- 静态资源放行 -->
     <mvc:resources location="/resources/" mapping="/resources/**/*"/>
     
