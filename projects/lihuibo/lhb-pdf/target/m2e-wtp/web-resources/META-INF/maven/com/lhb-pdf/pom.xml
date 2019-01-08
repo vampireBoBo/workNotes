@@ -5,7 +5,6 @@
 		<groupId>com</groupId>
 		<artifactId>lihuibo</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
-		<relativePath>../lihuibo/pom.xml</relativePath>
 	</parent>
 	<artifactId>lhb-pdf</artifactId>
 	<packaging>war</packaging>
