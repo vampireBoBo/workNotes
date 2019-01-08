@@ -10,6 +10,31 @@
   <sql id="Base_Column_List">
     rid, rcode, rname, remark
   </sql>
+  <!-- 根据添加查询用户集合 支持分页  -->
+  <select id="selectByParams" resultMap="BaseResultMap">
+  	select 
+  		<include refid="Base_Column_List" />
+  	from s_role 
+  	where 1=1 
+  	<if test="(index!=null and index!='') and (pagesize!=null and pagesize!='')">
+  		LIMIT #{index},#{pagesize}
+  	</if>
+  </select>
+  
+  <!-- 根据条件查询 总条数 -->
+  <select id="selectCountByParams" resultMap="int">
+  	select count(*) from s_role where 1=1 
+  </select>
+  
+  <!-- 根据用户ID 查看所有的角色信息 -->
+  <select id="selectByUser" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  	select 
+  		 <include refid="Base_Column_List" />
+  	from s_role where rid IN
+		( 
+			select rid from s_user_role where uid = #{uid}
+		)
+  </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />

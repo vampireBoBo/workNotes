@@ -1,7 +1,14 @@
 package com.lhb.entity;
 
-public class Role {
-    private Integer rid;
+import java.io.Serializable;
+
+public class Role implements Serializable {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	private Integer rid;
 
     private String rcode;
 

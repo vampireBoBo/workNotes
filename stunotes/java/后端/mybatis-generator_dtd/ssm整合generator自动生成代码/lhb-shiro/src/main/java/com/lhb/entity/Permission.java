@@ -1,7 +1,14 @@
 package com.lhb.entity;
 
-public class Permission {
-    private Integer pid;
+import java.io.Serializable;
+
+public class Permission implements Serializable{
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	private Integer pid;
 
     private String pname;
 

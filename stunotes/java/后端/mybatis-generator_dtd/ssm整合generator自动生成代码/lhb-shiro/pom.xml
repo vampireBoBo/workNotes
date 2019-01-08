@@ -14,6 +14,7 @@
 		<mysql.version>5.1.30</mysql.version>
 		<druid.version>1.0.28</druid.version>
 		<fastjson.version>1.2.32</fastjson.version>
+		<jackson.version>2.8.8</jackson.version>
   </properties>
   
   <dependencies>
@@ -119,6 +120,12 @@
 	  <groupId>log4j</groupId>
 	  <artifactId>log4j</artifactId>
 	  <version>1.2.16</version>
+	</dependency>
+	<!-- Jackson Json处理工具包  注解responseBody将对应实体 转换成json格式数据-->
+	<dependency>
+		<groupId>com.fasterxml.jackson.core</groupId>
+		<artifactId>jackson-databind</artifactId>
+		<version>${jackson.version}</version>
 	</dependency>
   </dependencies>
   <build>

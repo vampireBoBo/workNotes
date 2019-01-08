@@ -1,5 +1,9 @@
 package com.lhb.service;
 
+import java.util.HashMap;
+
+import java.util.List;
+
 import com.lhb.entity.Role;
 
 public interface IRoleService {
@@ -14,4 +18,13 @@ public interface IRoleService {
     int updateByPrimaryKeySelective(Role record);
 
     int updateByPrimaryKey(Role record);
+    
+    // 根据用户ID 获取对应角色集合
+    List<Role> selectByUser(Integer uid);
+    
+    // 条件查询  支持分页
+    List<Role> selectByParams(HashMap<String, Object> params);
+    
+ // 添加查询 总条数
+    int selectCountByParams(HashMap<String, Object> params);
 }

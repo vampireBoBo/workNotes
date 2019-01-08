@@ -1,7 +1,15 @@
 package com.lhb.entity;
 
-public class User {
-    private Integer uid;
+import java.io.Serializable;
+import java.util.List;
+
+public class User implements Serializable{
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	private Integer uid;
 
     private String loginname;
 
@@ -13,7 +21,30 @@ public class User {
 
     private String gender;
 
-    public Integer getUid() {
+    // 角色集合
+    private List<Role> roleList;
+    
+    // 权限集合 
+    private List<Permission> permissionList;
+    
+    
+    public List<Role> getRoleList() {
+		return roleList;
+	}
+
+	public void setRoleList(List<Role> roleList) {
+		this.roleList = roleList;
+	}
+
+	public List<Permission> getPermissionList() {
+		return permissionList;
+	}
+
+	public void setPermissionList(List<Permission> permissionList) {
+		this.permissionList = permissionList;
+	}
+
+	public Integer getUid() {
         return uid;
     }
 
