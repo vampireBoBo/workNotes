@@ -1,0 +1,76 @@
+1、添加jar包
+	<!-- 日志文件管理包 -->
+	<dependency>
+	    <groupId>log4j</groupId>
+	    <artifactId>log4j</artifactId>
+	    <version>1.2.17</version>
+	</dependency>
+	<dependency>
+	    <groupId>org.slf4j</groupId>
+	    <artifactId>slf4j-api</artifactId>
+	    <version>1.7.12</version>
+	</dependency>
+	<dependency>
+	    <groupId>org.slf4j</groupId>
+	    <artifactId>slf4j-log4j12</artifactId>
+	    <version>1.7.12</version>
+	</dependency>
+	
+	<!-- sql数据的打印 -->
+	
+	
+2、web.xml 配置监听
+	<!-- 部署在同一个web容器中的项目，要配置不同的param-value（比如”项目名.root”），不然会造成冲突,默认webapp.root -->
+    <listener>
+       <listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
+    </listener>
+	<context-param>
+		<param-name>log4jConfigLocation</param-name>
+		<param-value>classpath:properties/log4j.properties</param-value>
+	</context-param>
+   
+ 3、log4j.properties 配置文件  --- 内容详解：https://blog.csdn.net/u011794238/article/details/50720087   https://blog.csdn.net/xiaoxiong_web/article/details/77932655
+	#日志输出级别（off、fatal、error、warn、info、debug、all）
+	log4j.rootLogger=error,console,E
+
+	#日志输出位置为控制台
+	log4j.appender.console=org.apache.log4j.ConsoleAppender
+	log4j.appender.console.Target=System.err
+	log4j.appender.console.Threshold=error
+	log4j.appender.console.layout=org.apache.log4j.PatternLayout
+	log4j.appender.console.layout.ConversionPattern=[%p] %d{yyyy-MM-ddHH:mm:ss,SSS} [%t:%r] %l - %m%n
+
+	#日志输出位置为文件（debug）
+	log4j.appender.E=org.apache.log4j.DailyRollingFileAppender
+	log4j.appender.E.File=${my.root}/lhbLogs/my-debug.log
+	log4j.appender.E.Append=true
+	log4j.appender.E.Threshold=debug
+	log4j.appender.E.layout=org.apache.log4j.PatternLayout
+	log4j.appender.E.layout.ConversionPattern=[%p] %d{yyyy-MM-ddHH:mm:ss,SSS} [%t:%r] %l - %m%n
+
+	### 打印SQL ###
+	#log4j.logger.com.ibatis=DEBUG
+	#log4j.logger.com.ibatis.common.jdbc.SimpleDataSource=DEBUG
+	#log4j.logger.com.ibatis.common.jdbc.ScriptRunner=DEBUG
+	#log4j.logger.com.ibatis.sqlmap.engine.impl.SqlMapClientDelegate=DEBUG
+	log4j.logger.java.sql.Connection=DEBUG
+	log4j.logger.java.sql.Statement=DEBUG
+	log4j.logger.java.sql.PreparedStatement=DEBUG
+	#log4j.logger.java.sql.ResultSet=DEBUG
+
+4、日志文件输出路径的获取 
+	1.若web.xml 没有设置属性webAppRootKey  ，则通过系统默认值${webapp.root} 得到当前项目的路径  然后可在该路径的基础上设置日志文件的输出路径
+	2.当tomcat部署多个项目导致默认的webapp.root冲突时，可在web.xml自定义当前项目的名称，然后通过该名称在log4j的配置文件中读取该项目的名称。
+		例如：
+		<context-param>
+			<param-name>webAppRootKey</param-name>
+			<param-value>my.root</param-value>
+		</context-param>
+		读取：${my.root}
+		注意：webAppRootKey 的内容可以任意写 因为该参数为一个字符串 ，只要在获取的时候与定义的时候保持一致即可
+	3、若使用tomcat时，可通过tomcat自带的初始化系统属性${catalina.home}直接读取的当前项目tomcat的部署路径，该值不需要配置，
+	因为tomcat\bin\catalina.bat(startup,shutdown都是调用这个)里面自带有-Dcatalina.home= "%CATALINA_HOME%" 。继承这个思想，所以你也可以自己设定一个参数-Dmylog.home="D:/abc/log"到对应的服务器java启动的vm参数中 
+		读取：${catalina.home} 
+	4、jvm在初始化时会将System的属性值以键值对的形式进行匹配，tomcat的配置文件中默认配置了catalina.home的系统变量，故会直接读取到，若想使用其他路径，可通过servlet的方式，配置system的属性key。
+		学习连接：https://bbs.csdn.net/topics/360041556
+	5、可以直接写固定盘符路径
