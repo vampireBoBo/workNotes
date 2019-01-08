@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lhb.dao.RoleMapper">
+  <resultMap id="BaseResultMap" type="com.lhb.entity.Role">
+    <id column="rid" jdbcType="INTEGER" property="rid" />
+    <result column="rcode" jdbcType="VARCHAR" property="rcode" />
+    <result column="rname" jdbcType="VARCHAR" property="rname" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    rid, rcode, rname, remark
+  </sql>
+  <!-- 根据添加查询用户集合 支持分页  -->
+  <select id="selectByParams" resultMap="BaseResultMap">
+  	select 
+  		<include refid="Base_Column_List" />
+  	from s_role 
+  	where 1=1 
+  	<if test="(index!=null and index!='') and (pagesize!=null and pagesize!='')">
+  		LIMIT #{index},#{pagesize}
+  	</if>
+  </select>
+  
+  <!-- 根据条件查询 总条数 -->
+  <select id="selectCountByParams" resultMap="int">
+  	select count(*) from s_role where 1=1 
+  </select>
+  
+  <!-- 根据用户ID 查看所有的角色信息 -->
+  <select id="selectByUser" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  	select 
+  		 <include refid="Base_Column_List" />
+  	from s_role where rid IN
+		( 
+			select rid from s_user_role where uid = #{uid}
+		)
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from s_role
+    where rid = #{rid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from s_role
+    where rid = #{rid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.lhb.entity.Role">
+    insert into s_role (rid, rcode, rname, 
+      remark)
+    values (#{rid,jdbcType=INTEGER}, #{rcode,jdbcType=VARCHAR}, #{rname,jdbcType=VARCHAR}, 
+      #{remark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lhb.entity.Role">
+    insert into s_role
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="rid != null">
+        rid,
+      </if>
+      <if test="rcode != null">
+        rcode,
+      </if>
+      <if test="rname != null">
+        rname,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="rid != null">
+        #{rid,jdbcType=INTEGER},
+      </if>
+      <if test="rcode != null">
+        #{rcode,jdbcType=VARCHAR},
+      </if>
+      <if test="rname != null">
+        #{rname,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lhb.entity.Role">
+    update s_role
+    <set>
+      <if test="rcode != null">
+        rcode = #{rcode,jdbcType=VARCHAR},
+      </if>
+      <if test="rname != null">
+        rname = #{rname,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where rid = #{rid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lhb.entity.Role">
+    update s_role
+    set rcode = #{rcode,jdbcType=VARCHAR},
+      rname = #{rname,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR}
+    where rid = #{rid,jdbcType=INTEGER}
+  </update>
+</mapper>
