@@ -1,4 +1,4 @@
-问题：linux部署了项目，项目启动正常，dubbo接口注册成功。但是本地调用dubbo接口时，提示没有注册者，但通过dubbo-admin是可以看到注册成功的情况。
+问题：linux部署了项目，项目启动正常，dubbo接口注册成功。但是本地调用dubbo接口时，提示没有提供者，但通过dubbo-admin是可以看到注册成功的情况。
 
 
 解决方案：使用指令 sudo iptables -F  即可
