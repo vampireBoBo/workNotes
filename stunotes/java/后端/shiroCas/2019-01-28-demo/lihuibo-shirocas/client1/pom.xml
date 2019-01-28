@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <parent>
+    <groupId>com</groupId>
+    <artifactId>lihuibo-shirocas</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+  </parent>
+  
+  <modelVersion>4.0.0</modelVersion>
+  <artifactId>client1</artifactId>
+  <packaging>war</packaging>
+  
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>3.8.1</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+		<groupId>org.apache.shiro</groupId>
+		<artifactId>shiro-aspectj</artifactId>
+	</dependency>
+	<dependency>
+		<groupId>org.apache.shiro</groupId>
+		<artifactId>shiro-spring</artifactId>
+	</dependency>
+	<dependency>
+		<groupId>org.apache.shiro</groupId>
+		<artifactId>shiro-core</artifactId>
+	</dependency>
+  </dependencies>
+  <build>
+    <finalName>client1</finalName>
+    <plugins>
+    	<!-- generator  -->
+    	<plugin>
+    		<groupId>org.mybatis.generator</groupId>
+    		<artifactId>mybatis-generator-maven-plugin</artifactId>
+    		<configuration>
+    			 <verbose>true</verbose>
+		         <overwrite>true</overwrite>
+		         <configurationFile>src/main/resources/util/generatorConfig.xml</configurationFile>
+    		</configuration>
+    		<dependencies>
+    			<!-- 数据库驱动 -->
+	            <dependency>
+				    <groupId>mysql</groupId>
+				    <artifactId>mysql-connector-java</artifactId>
+				    <version>5.1.30</version>
+			    </dependency>
+    		</dependencies>
+    	</plugin>
+    	
+    	<!-- tomcat -->
+    	<plugin>
+    		 <groupId>org.apache.tomcat.maven</groupId>
+             <artifactId>tomcat7-maven-plugin</artifactId>
+             <version>2.1</version> 
+             <configuration>
+                 <path>/${project.build.finalName}</path>
+                 <port>8081</port>
+                 <uriEncoding>UTF-8</uriEncoding>
+                 <update>true</update> <!-- 热部署 -->
+             </configuration>
+    	</plugin>
+    </plugins>
+  </build>
+</project>
