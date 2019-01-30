@@ -169,6 +169,14 @@
 		<artifactId>slf4j-log4j12</artifactId>
 		<version>${slf4j.version}</version> 
 	</dependency>
+	
+	<!-- 测试 -->
+	<dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>3.8.1</version>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
   
   <!-- 依赖控制  此模式下 子模块 需手动去继承  同时 不需要设置版本号 版本号由此处的父级模块进行管控 -->
@@ -223,5 +231,6 @@
   
   <modules>
   	<module>client1</module>
+  	<module>client2</module>
   </modules>
 </project>

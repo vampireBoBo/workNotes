@@ -1,11 +1,6 @@
-<!DOCTYPE web-app PUBLIC
- "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
- "http://java.sun.com/dtd/web-app_2_3.dtd" >
-
-<web-app>
-  	<display-name>Archetype Created Web Application</display-name>
-  
-  	<!-- spring 监听 -->
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app id="WebApp_ID" version="3.0" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+	<!-- spring 监听 -->
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>
@@ -26,7 +21,7 @@
 	<listener>
     	<listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
     </listener>
-	
+    
 	<!-- shiro 代理过滤器 -->
   	<filter>
   		<filter-name>shiroFilter</filter-name>
@@ -74,10 +69,9 @@
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
 	
-<!-- 部署在同一个web容器中的项目，要配置不同的param-value（比如”项目名.root”），不然会造成冲突,默认webapp.root -->
+	<!-- 部署在同一个web容器中的项目，要配置不同的param-value（比如”项目名.root”），不然会造成冲突,默认webapp.root -->
     <context-param>
 		<param-name>webAppRootKey</param-name>
-		<param-value>client1.root</param-value>
+		<param-value>client2.root</param-value>
 	</context-param>
 </web-app>
-

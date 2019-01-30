@@ -1,0 +1,61 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <parent>
+    <groupId>com</groupId>
+    <artifactId>lihuibo-shirocas</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+  </parent>
+  
+  <modelVersion>4.0.0</modelVersion>
+  <artifactId>client2</artifactId>
+  <packaging>war</packaging>
+  
+  <!-- 依赖 -->
+  <dependencies>
+  	<dependency>
+  		<groupId>org.apache.shiro</groupId>
+  		<artifactId>shiro-aspectj</artifactId>
+  	</dependency>
+  	<dependency>
+  		<groupId>org.apache.shiro</groupId>
+  		<artifactId>shiro-spring</artifactId>
+  	</dependency>
+  	<dependency>
+  		<groupId>org.apache.shiro</groupId>
+  		<artifactId>shiro-core</artifactId>
+  	</dependency>
+  </dependencies>
+  
+  <!-- 插件 -->
+  <build>
+  	<finalName>client2</finalName>
+  	<plugins>
+  		<plugin>
+  			<groupId>org.mybatis.generator</groupId>
+  			<artifactId>mybatis-generator-maven-plugin</artifactId>
+  			<configuration>
+  				<verbose>true</verbose>
+  				<overwrite>true</overwrite>
+  				<configurationFile>src/main/resources/util/generatorConfig.xml</configurationFile>
+  			</configuration>
+  			<!-- 指定数据库驱动  则在xml文件中 不需要指定驱动位置 -->
+  			<dependencies>
+  				<dependency>
+  					<groupId>mysql</groupId>
+  					<artifactId>mysql-connector-java</artifactId>
+  					<version>5.1.30</version>
+  				</dependency>
+  			</dependencies>
+  		</plugin>
+  		<!--  -->
+        <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.0</version>
+                <configuration>
+                   <source>1.7</source>
+                   <target>1.7</target>
+                </configuration>
+        </plugin>
+  	</plugins>
+  </build>
+</project>
