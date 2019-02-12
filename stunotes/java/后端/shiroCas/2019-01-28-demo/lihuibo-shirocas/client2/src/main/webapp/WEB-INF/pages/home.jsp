@@ -5,7 +5,7 @@
 <html lang="zh">
 	<head>
 		<meta charset="utf-8" />
-		<title>client1-home</title>
+		<title>client2-home</title>
 		<meta name="keywords" content="权限控制系统" />
 		<meta name="description" content="自定义权限控制系统" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />

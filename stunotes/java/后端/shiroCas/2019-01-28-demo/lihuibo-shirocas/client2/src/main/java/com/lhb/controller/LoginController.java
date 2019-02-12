@@ -52,11 +52,4 @@ public class LoginController {
 		req.setAttribute("loginUser", user);
 		return "home";
 	}
-	/**
-	 * 用户退出的登录 手动注销缓存信息
-	 * @return 登录视图
-	 */
-	@RequestMapping("/logout")
-	public void logout(){
-	}
 }

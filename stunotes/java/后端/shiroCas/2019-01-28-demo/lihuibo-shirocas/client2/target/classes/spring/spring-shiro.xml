@@ -10,9 +10,16 @@
     <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
     	<property name="securityManager" ref="securityManager" />
     	<property name="unauthorizedUrl" value="/403.jsp" />
+    	<!-- 自定义filter -->
+    	<property name="filters">
+    		<map>
+    			<entry key="logout" value-ref="systemLogoutFilter" />
+    		</map>
+    	</property>
     	<property name="filterChainDefinitions">
     		<value>
     			/login = anon
+    			/logout = logout
     		</value>
     	</property>
     </bean>
