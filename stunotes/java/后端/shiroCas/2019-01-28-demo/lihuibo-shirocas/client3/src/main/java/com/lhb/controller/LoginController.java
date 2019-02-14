@@ -7,6 +7,8 @@ import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,6 +26,8 @@ import com.lhb.util.Result;
 @Controller
 public class LoginController {
 	
+	private static final Logger log = LoggerFactory.getLogger(LoginController.class);
+	
 	/**
 	 * 进行用户登录处理
 	 * @return
@@ -33,6 +37,9 @@ public class LoginController {
 	public Result login(String userName,String password){
 		UsernamePasswordToken token = new UsernamePasswordToken(userName,password);
 		Subject subject = SecurityUtils.getSubject();
+		// 打印测试日志 
+		log.error("client3logback的日志输出---error");
+		log.debug("client3logback的日志输出----debug");
 		try {
 			subject.login(token);
 		} catch (UnknownAccountException e) {

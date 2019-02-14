@@ -14,3 +14,10 @@
 4、项目启动
 	直接部署在tomcat中
 	使用maven-tomcat插件进行启动,指令：tomcat7:run  、  clean tomcat7:run
+	
+5、日志
+	slf4j + logback 
+	1.添加jar包
+	2.添加logback.xml文件
+	3.如果logback.xml文件的位置不是src/main/resource的根目录下  则需要在web.xml中指定配置文件的位置,并配置对应的监听否则配置文件任然找不着。反之不需要，可直接使用日志打印进行测试了。
+	

@@ -2,11 +2,14 @@ package com.lhb.controller;
 
 import javax.servlet.http.HttpServletRequest;
 
+
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.lhb.entity.User;
 import com.lhb.util.Result;
+
 
 /**
  * <p>Titile: 用户类controller</p>
@@ -24,6 +28,8 @@ import com.lhb.util.Result;
 @Controller
 public class LoginController {
 	
+	private static final Logger log = LoggerFactory.getLogger(LoginController.class);
+	
 	/**
 	 * 进行用户登录处理
 	 * @return
@@ -33,6 +39,7 @@ public class LoginController {
 	public Result login(String userName,String password){
 		UsernamePasswordToken token = new UsernamePasswordToken(userName,password);
 		Subject subject = SecurityUtils.getSubject();
+		log.error("用户正在执行登录");
 		try {
 			subject.login(token);
 		} catch (UnknownAccountException e) {
@@ -48,6 +55,7 @@ public class LoginController {
 	 */
 	@RequestMapping("/home")
 	public String home(HttpServletRequest req){
+		log.error("用户校验通过，跳转至home页面并携带对应的权限和角色信息");
 		User user = (User) SecurityUtils.getSubject().getPrincipal();
 		req.setAttribute("loginUser", user);
 		return "home";

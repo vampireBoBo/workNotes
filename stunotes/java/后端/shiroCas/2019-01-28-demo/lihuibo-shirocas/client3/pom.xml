@@ -11,7 +11,14 @@
   <artifactId>client3</artifactId>
   <packaging>war</packaging>
   
+  <!-- 版本控制 -->
+  <properties>
+  	<slf4j.version>1.7.5</slf4j.version>
+  	<logback.version>1.0.13</logback.version>
+  </properties>
+  
   <dependencies>
+  	<!-- shiro jar -->
     <dependency>
   		<groupId>org.apache.shiro</groupId>
   		<artifactId>shiro-aspectj</artifactId>
@@ -24,6 +31,27 @@
   		<groupId>org.apache.shiro</groupId>
   		<artifactId>shiro-core</artifactId>
   	</dependency>
+  	
+  	<!-- 日志 jar -->
+  	<!--slf4j jar  -->
+  	<dependency>
+  		<groupId>org.slf4j</groupId>
+  		<artifactId>slf4j-api</artifactId>
+  		<version>${slf4j.version}</version>
+  		<scope>compile</scope>
+  	</dependency>
+  	<!-- logback jar maven等能够自动处理依赖的工具可以不用引入core包 -->
+  	<dependency>
+  		<groupId>ch.qos.logback</groupId>
+  		<artifactId>logback-classic</artifactId>
+  		<version>${logback.version}</version>
+  	</dependency>
+  	<dependency>
+	    <groupId>org.logback-extensions</groupId>
+	    <artifactId>logback-ext-spring</artifactId>
+    <version>0.1.4</version>
+</dependency>
+  	
   </dependencies>
   <build>
     <finalName>client3</finalName>
