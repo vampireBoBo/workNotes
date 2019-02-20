@@ -82,7 +82,7 @@ $ git config --global core.quotepath false  //µ±statusÖ¸ÁîÊ±  ³öÏÖÂÒÂë Ôò¿ÉÊ¹ÓÃ¸
 $ git log »òÕß git log -pretty=oneline  //²é¿´°æ±¾¿âÖÐ¸Ã·ÖÖ§ÎÄ¼þµÄÌá½»ÈÕÖ¾ÐÅÏ¢
 $ git reflog  //²é¿´ËùÓÐ°üº¬ÒÑ¾­±»É¾³ýµôµÄ°æ±¾ÐÅÏ¢  
 $ git reset --hard [ÐèÒª»Ö¸´µÄ°æ±¾id£¬¸ÃidÍ¨¹ýreflog»ñÈ¡]   //Í¨¹ýÖ¸¶¨id»ØÍËµ½Ö¸¶¨°æ±¾
-$ git checkout -- filename   //¡¾ -- ºÜÖØÒª£¬Èç¹ûÃ»ÓÐ -- µÄ»°£¬ÄÇÃ´ÃüÁî±ä³É´´½¨·ÖÖ§ÁË¡£¡¿µ±¹¤×÷ÇøµÄÎÄ¼þ±»ÐÞ¸Ä£¬»¹Î´±»Ìá½»µ½ÔÝ´æÇøÊ±£¬·¢ÏÖÐÞ¸Ä´íÎóÐèÒª»ØÍËµ½Ö®Ç°µÄ°æ±¾Ê±£¬¿ÉÊ¹ÓÃcheckoutÃüÁî£¬±íÊ¾³·Ïú/¶ªÆú¹¤×÷ÇøµÄÐÞ¸Ä£¬»Ö¸´µ½ÐÞ¸ÄÖ®Ç°µÄ×´Ì¬¡£
+$ git checkout -- filename   //¡¾ ¡¾TODO ¾­ºËÊµ-- ¿ÉÒÔÃ»ÓÐ  ºóÆÚ¾­¹ýÊµ¼ùÔÙ½øÐÐÍêÉÆ¸ÃÖ¸Áî¡¿-- ºÜÖØÒª£¬Èç¹ûÃ»ÓÐ -- µÄ»°£¬ÄÇÃ´ÃüÁî±ä³É´´½¨·ÖÖ§ÁË¡£¡¿µ±¹¤×÷ÇøµÄÎÄ¼þ±»ÐÞ¸Ä£¬»¹Î´±»Ìá½»µ½ÔÝ´æÇøÊ±£¬·¢ÏÖÐÞ¸Ä´íÎóÐèÒª»ØÍËµ½Ö®Ç°µÄ°æ±¾Ê±£¬¿ÉÊ¹ÓÃcheckoutÃüÁî£¬±íÊ¾³·Ïú/¶ªÆú¹¤×÷ÇøµÄÐÞ¸Ä£¬»Ö¸´µ½ÐÞ¸ÄÖ®Ç°µÄ×´Ì¬¡£
 
 ********************¡¾1.ÐèÒªÌáÇ°ÔÚgithub´´½¨ºÃ²Ö¿â È»ºóÍ¨¹ýgit bashÃüÁî½«±¾µØ²Ö¿âºÍÔ¶³Ì²Ö¿â½øÐÐ¹ØÁª  2. ÍÆËÍ·ÖÖ§¾ÍÊÇ°Ñ¸Ã·ÖÖ§ÉÏËùÓÐ±¾µØÌá½»µ½Ô¶³Ì¿âÖÐ£¬ÍÆËÍÊ±£¬ÒªÖ¸¶¨±¾µØ·ÖÖ§£¬ÕâÑù£¬Git¾Í»á°Ñ¸Ã·ÖÖ§ÍÆËÍµ½Ô¶³Ì¿â¶ÔÓ¦µÄÔ¶³Ì·ÖÖ§ÉÏ¡¿
 Á¬½ÓÔ¶³Ì²Ö¿â:
@@ -112,6 +112,18 @@ $ git stash apply //»Ö¸´¹¤×÷ÏÖ³¡£¬»Ö¸´ºó£¬stashÄÚÈÝ²¢²»É¾³ý£¬ÄãÐèÒªÊ¹ÓÃÃüÁîgit s
 $ git stash pop  //ÁíÍâÒ»ÖÖ»Ö¸´·½·¨£¬Í¬Ê±°ÑstashÄÚÈÝÒ²É¾³ýÁË¡£
 $ git stash list  //²é¿´¸Ã·ÖÖ§ÉÏ±£´æµÄËùÓÐµÄ¹¤×÷ÏÖ³¡¡£
 $ git stash drop //É¾³ýÒ»Ìõ¹¤×÷ÏÖ³¡
+
+*******************
+±¾µØ´úÂëÎóÉ¾»òÕßÐèÒªÖØÐÂÍ¬²½Ô¶¶ËÊ±£¬¿ÉÍ¨¹ýÈçÏÂÖ¸Áî½«ÔÝ´æÇøµÄ´úÂëÍ¬²½µ½±¾µØ
+git checkout  ÎÄ¼þÃû
+
+*******************
+¸øÄ³¸öÎÄ¼þ¼ÐÐÞ¸ÄÃû³Æa ÐÞ¸Ä³É lhb
+git mv a lhb
+
+È»ºóÌá½» git commit -m "½«ÎÄ¼þ¼ÐaÐÞ¸Ä³Élhb"
+Í¬²½Ô¶¶Ë git push origin master
+
 
 *******************
 linuxÖ¸Áî£º
