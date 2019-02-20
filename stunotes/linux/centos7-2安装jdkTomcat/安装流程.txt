@@ -1,0 +1,15 @@
+卸载自带jdk安装指定版本jdk--https://blog.csdn.net/hui_2016/article/details/69941850
+
+安装tomcat-https://www.cnblogs.com/jerrylz/p/5647094.html
+
+检测jdk是否安装成功
+------通过java -version 
+
+检测tomcat是否安装成功【tomcat进程查看指令:ps -ef | grep tomcat】
+-----使用指令ps -ef |grep firewall   【查看防火漆是否开启】
+-----若防火墙有进程号，则证明防火墙是工作的。则需要关闭防火墙或者将tomcat的端口进行外放，此处我们进行防火墙的关闭操作。指令：systemctl  stop firewalld.service  然后再次查看防火墙是否关闭成功。
+-----启动tomcat，进入tomcat路径  然后进入/bin路径  输入指令./startup.sh  启动tomcat，然后在浏览器中通过ip和端口查看 ，若出现tomcat的猫标识则成功。
+
+
+
+
