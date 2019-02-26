@@ -2,7 +2,9 @@ jdk1.8.0_161   apache-tomcat-8.5.27
 
 【ctrl+c  中断ping】
 
-1.依靠镜像产生容器：docker run -it -d --name="centos-test" docker.io/centos:latest
+1.依靠镜像产生容器：【具体对应的image的名称可以通过docker images 进行查看】
+	docker run --name mycentos centos /bin/bash
+	docker run -it -d --name="centos-test" docker.io/centos:latest
 	docker run  -p 192.168.40.128:8080:8080 -it -v /root/software/:/mnt/software/ --name tomcat01 centos/test01
 	【	-v:表示挂载，其作用在于在启动容器时  将宿主机中的文件存放在容器中的文件中  如果该容器需要某文件可直接调用cp指令进行复制】
  		
