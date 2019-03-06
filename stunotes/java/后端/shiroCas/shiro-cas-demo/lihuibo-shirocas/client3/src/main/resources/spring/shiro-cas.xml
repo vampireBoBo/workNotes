@@ -6,7 +6,7 @@
 					http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
 					http://www.springframework.org/schema/context
                     http://www.springframework.org/schema/context/spring-context-4.0.xsd">
-    <!-- web  shiro 过滤代理 -->                
+	<!-- web  shiro 过滤代理 -->                
     <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
     	<property name="securityManager" ref="securityManager" />
     	<property name="unauthorizedUrl" value="/403.jsp" />
@@ -20,22 +20,21 @@
     	</property>
     	<property name="filterChainDefinitions">
     		<value>
-    			/login = casFilter
-    			/home = user
+    			/shiro-cas = login
+    			/home = authc
     			/logout = logout
     			/** = anon
     		</value>
     	</property>
     </bean>
-    
-    <!-- 配置安全管理器 -->
+	 <!-- 配置安全管理器 -->
     <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
     	<property name="realm" ref="myCasRealm"/>
     	<property name="cacheManager" ref="cacheManager"/>
     </bean>
     
     <!-- 自定义realm -->
-    <bean id="myCasRealm" class="com.lhb.realm.MyCasRealm">
+    <bean id="myCasRealm" class="com.lhb.realm.MyShiroCasRealm">
     	<property name="casServerUrlPrefix" value="${shiro.cas.serverUrlPrefix}"/>
     	<property name="casService" value="${shiro.cas.service}"/>
     </bean>
@@ -51,11 +50,7 @@
     	<property name="redirectUrl" value="${shiro.logoutUrl}" />
     </bean>
     
-    <!--托管 缓存机制 -->
-    <bean id="cacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager">
-        <property name="cacheManagerConfigFile" value="classpath:spring/ehcache-shiro.xml" />
-    </bean>
-    
     <!-- shiro 生命周期  -->
     <bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"></bean>
+	
 </beans>

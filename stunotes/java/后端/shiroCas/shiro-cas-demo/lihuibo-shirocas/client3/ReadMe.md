@@ -20,4 +20,6 @@
 	1.添加jar包
 	2.添加logback.xml文件
 	3.如果logback.xml文件的位置不是src/main/resource的根目录下  则需要在web.xml中指定配置文件的位置,并配置对应的监听否则配置文件任然找不着。反之不需要，可直接使用日志打印进行测试了。
+6、集成cas
+	
 	
