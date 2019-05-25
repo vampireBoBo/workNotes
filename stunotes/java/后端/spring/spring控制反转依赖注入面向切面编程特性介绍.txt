@@ -1,0 +1,37 @@
+http://www.monkey1024.com/framework/1421
+https://www.cnblogs.com/xxzhuang/p/5948902.html
+
+1、控制反转
+	将对象中对象属性的创建权交给IOC容器，而不是通过new的方式主动去创建对应的属性对象类。
+	控制反转：Inversion Of Control 即 IOC容器 【容器的初始化？？？TODO】
+	本质：实体的创建由IOC容器去负责 而不是通过new的方式创建
+	
+2、依赖注入
+	将对象所需的属性对象交给IOC容器控制后，需要通过spring的依赖注入方式得到对应的属性对象。
+	依赖注入：Dependency  Injection 即 DI 
+	本质：通过IOC获取所需的属性对象
+	
+3、使用方式
+	案例：在A类中调用B类
+	xml：控制反转===》通过<bean>标签申明托管所需的实体类B
+		 依赖注入===》A、在对应的调用类A中提供属性类B的setter方法，然后在上面托管B的<bean>中通过<property>属性赋值方式进行注入
+					  B、在对应的调用类A中提供属性类B的构造方法，然后再上面托管B的<bean>中通过<constructor-arg>以构造方法的方式实现B在A中的注入
+					  
+		注意：A类的使用亦是如此
+	
+	
+	【当托管类很多时，会导致xml文件变的很臃肿，所以注解的方式诞生了】
+	注解使用前提：在applicationContext 中对基础包进行扫描 并 开启注解功能
+	注解：控制反转===》所有的类可为:@Component 即表示对该类进行控制反转，后来spring针对于不同层的类提供了专门的注解。dao层使用@Repository,service层使用@Service,控制层使用@Controller.===这些注解的原理即为spring的面向切面编程
+		  依赖注入===》在A类中通过提供属性类B的setter方法或者构造方法可进行依赖注入
+				  ===》在属性声明时使用：===》@Autowired：默认以类进行匹配，可以使用@Qualifier指定名称配合使用 该注解由spring提供
+				                         ===》@Resource：默认以名称进行匹配，找不到时以类型进行匹配  该注解由jdk提供，jdk1.6以上的版本才有该注解
+										 【注解区别：https://blog.csdn.net/weixin_40423597/article/details/80643990】
+										 
+										 
+										 @Resource装配顺序
+										　　1. 如果同时指定了name和type，则从Spring上下文中找到唯一匹配的bean进行装配，找不到则抛出异常
+										　　2. 如果指定了name，则从上下文中查找名称（id）匹配的bean进行装配，找不到则抛出异常
+										　　3. 如果指定了type，则从上下文中找到类型匹配的唯一bean进行装配，找不到或者找到多个，都会抛出异常
+										　　4. 如果既没有指定name，又没有指定type，则自动按照byName方式进行装配；如果没有匹配，则回退为一个原始类型进行匹配，如果匹配则自动装配；
+										 @Autowired默认按类型装配（这个注解是属业spring的），默认情况下必须要求依赖对象必须存在，如果要允许null值，可以设置它的required属性为false，如：@Autowired(required=false) ，如果我们想使用名称装配可以结合@Qualifier注解进行使用

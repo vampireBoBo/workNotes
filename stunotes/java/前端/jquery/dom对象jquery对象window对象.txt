@@ -1,0 +1,7 @@
+dom对象和jquery对象互转
+	https://www.jb51.net/article/53391.htm
+
+windo对象、document即dom对象区别
+	https://blog.csdn.net/weixin_43274829/article/details/85070423
+	
+w3c：http://www.w3school.com.cn/jsref/dom_obj_window.asp

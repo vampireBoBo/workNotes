@@ -43,7 +43,13 @@ https://blog.csdn.net/vsddvsd/article/details/54632913
     									<property name="connectionFactory" ref="targetConnectionFactory"/>  
     									<property name="maxConnections" value="10"/>  
 								  </bean>
-		d、设置目的地。例如：  <!--这个是队列目的地，点对点的-->  
+		d、创建jmsTemplate模块 ，通过该模板进行消息的发送
+			<!-- Spring提供的JMS工具类，它可以进行消息发送、接收等 -->  
+			<bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate">  
+				<!-- 这个connectionFactory对应的是我们定义的Spring提供的那个ConnectionFactory对象 -->  
+				<property name="connectionFactory" ref="connectionFactory"/>  
+			</bean>  
+		e、设置目的地。例如：  <!--这个是队列目的地，点对点的-->  
 <bean id="queueDestination" class="org.apache.activemq.command.ActiveMQQueue">  
     <constructor-arg>  
         <value>queue</value>  

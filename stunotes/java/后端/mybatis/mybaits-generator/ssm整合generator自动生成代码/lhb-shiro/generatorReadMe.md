@@ -4,7 +4,7 @@
 2、pom文件中配置项目的bulid，配置时需要注意：
 
 	默认情况下  项目会从resource项目下查找generatorConfig.xml文件，故如果项目文件及路径不是默认值时，则进行configuration的配置。同时，可在plugin中的dependencies中配置mysql的连接驱动。
-	使用generator会需要三个jar包：mybatis的jar包、mybatis-generator的jar包，mysql-connection驱动jar。ssm框架项目中，通过配置mybatis-generator-maven-plugin后直接配置了mybaits和generator的jar包，故只需要再指定mysql-connection的jar即可。需要注意若不成功时，可尝试是使用mysql的驱动版本号为：5.1.30
+	使用generator会需要三个jar包：mybatis的jar包、mybatis-generator的jar包，mysql-connection驱动jar。ssm框架项目中，通过配置mybatis-generator-maven-plugin后直接包含了mybaits和generator的jar包，故只需要再指定mysql-connection的jar即可。需要注意若不成功时，可尝试是使用mysql的驱动版本号为：5.1.30
 	
 	例如：	<plugin>
 		        <groupId>org.mybatis.generator</groupId>

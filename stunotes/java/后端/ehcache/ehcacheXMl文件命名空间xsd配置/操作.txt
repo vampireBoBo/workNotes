@@ -1,0 +1,15 @@
+1、https://blog.csdn.net/weixin_41045798/article/details/80201783
+
+2、xmlns:xsi---->可用的 XML Schema 实例命名空间，同时需要使用xsi:schemaLocation 【例如：xsi:schemaLocation="http://www.runoob.com note.xsd"】或者 xsi:noNamespacheSchemaLocation 指出命名空间的xsd文件的位置
+
+https://zhidao.baidu.com/question/2271579326173504108.html
+	通过xsd文件中是否申明targetNamespace来判断来命名空间实例是否具有命名空间，若有则用xsi:schemaLocation关联xsd文件的位置，若没有则用：xsi:noNamespacheSchemaLocation来关联xsd文件的位置
+
+3、diskStore ；java.io.tmpdir 表示系统默认的临时文件路径 也可以直接根据自己项目运行系统自行设置 http://www.cnblogs.com/nbjin/p/7392541.html
+	java.io.tmpdir表示：【所以该系统参数的具有系统兼容性】
+		System.getproperty(“java.io.tmpdir”)是获取操作系统缓存的临时目录，不同操作系统的缓存临时目录不一样，
+
+		在Windows的缓存目录为：C:\Users\登录用户~1\AppData\Local\Temp\
+
+		Linux：/tmp
+

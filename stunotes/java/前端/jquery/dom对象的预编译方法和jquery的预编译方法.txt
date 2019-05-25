@@ -1,4 +1,6 @@
 
+https://www.jb51.net/article/87005.htm
+
 1、window对象  这个不需要引入js
 <script type="text/javascript" >
 	window.onload=function(){

@@ -1,0 +1,10 @@
+{ field: 'subject', title: '标题', width:'30%',halign:'center',valign:'middle',events:'actionEvents',formatter:function (value,row,index){
+          return  '<div style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;width:99%;" title="'+value+'">'+value+'</div>';
+        }},
+		
+		
+		
+		
+		<div style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;width:99%;"> </div>
+		
+		====注意：该属性需要放置在div中  span标签内的话是不会生效的

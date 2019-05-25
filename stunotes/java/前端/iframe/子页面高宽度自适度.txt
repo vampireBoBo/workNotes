@@ -1,14 +1,13 @@
 1、iframe的父页面添加：
 	 function iFrameHeight(){
-	        var ifm= document.getElementById("myiframe");  
-	        var subWeb = document.frames ? document.frames["myiframe"].document : ifm.contentDocument;  
-	        if(ifm != null && subWeb != null) {
-	            	subWeb.body.style.minWidth='auto';// 最低宽度自适应
-			
-			$("#myiframe").height(0);//此处关键处 莫忘  清除上一个子页面高度的影响
-	                $("#myiframe").height(subWeb.body.scrollHeight);
-	        }
-		} 
+       var ifm= document.getElementById("myiframe");  
+       var subWeb = document.frames ? document.frames["myiframe"].document : ifm.contentDocument;
+       if(ifm != null && subWeb != null) {    	  
+    	   subWeb.body.style.minWidth='auto';
+    	   ifm.style.height = 'auto';//此处关键处 莫忘  清除上一个子页面高度的影响
+           ifm.style.height = subWeb.body.scrollHeight + 'px';
+       }
+	} 
 2、iframe 子页面调用
 	
 	window.parent.iFrameHeight();
