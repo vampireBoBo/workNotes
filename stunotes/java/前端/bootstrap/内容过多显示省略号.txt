@@ -1,10 +1,19 @@
-{ field: 'subject', title: '标题', width:'30%',halign:'center',valign:'middle',events:'actionEvents',formatter:function (value,row,index){
+﻿{ field: 'subject', title: '标题', width:'30%',halign:'center',valign:'middle',events:'actionEvents',formatter:function (value,row,index){
           return  '<div style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;width:99%;" title="'+value+'">'+value+'</div>';
         }},
 		
 		
 		
-		
-		<div style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;width:99%;"> </div>
-		
+=======常见问题1
+	
+	问题：内容没有溢出  但隐藏的部分没有显示省略号  内容进行了重叠
+	
+	解决方法：<div style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;width:99%;"> </div>
 		====注意：该属性需要放置在div中  span标签内的话是不会生效的
+
+
+=======常见问题2
+	
+	问题：设置的省略符号不生效  表格的所占空间撑大  并出现横向滚动轴
+	
+	解决方法： <table id="sys-table" style="table-layout:fixed;"></table>

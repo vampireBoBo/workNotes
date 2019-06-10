@@ -52,7 +52,8 @@ spring对Junit进行包装形成spring-test
 	    <version>${spring.version}</version>
 	    <scope>test</scope>
 	</dependency>
-2、创建测试类
+2、创建测试类====【【【【如果被测试接口中包含外部的dubbo接口 则需要将多对应的注入文件也引入进来  locations={"classpath:spring/root-context.xml","classpath:spring/spring-dubbo.xml","classpath:spring/spring-activityMQ.xml"})】】】
+
 	@RunWith(SpringJUnit4ClassRunner.class)
 	@ContextConfiguration(locations={"classpath:spring/applicationContext.xml"})
 	public class SpringTestDemo{

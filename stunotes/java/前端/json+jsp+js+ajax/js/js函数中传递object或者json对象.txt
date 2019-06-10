@@ -17,12 +17,15 @@ var ele = '<a onclick="edit(\'' + JSON.stringify(user).replace(/"/g, '&quot;') +
 
 
 
-
-
-
 onclick事件中传递实体：JSON.stringify(_hasDepositResourceInfo[i]).replace(/"/g, '&quot;')
 在事件内部将传递的实体转换成json对象：var resource=JSON.parse(currentData.replace(/\n/g,"\\n").replace(/\r/g,"\\r"));
 
 
 =========================非拼接
 非拼接onclick事件中 实体的传递https://www.cnblogs.com/Y-zhiwei/p/6858004.html
+
+=====================使用字符串格式传值  通过对象方式取值
+1 传值 【注意转义符号 反斜杠】
+	var ele = '<a onclick="edit(\'' + JSON.stringify(user).replace(/"/g, '&quot;') + '\');">修改</a>';
+2 取值
+	var resource = JSON.parse(currentData.replace(/\n/g,"\\n").replace(/\r/g,"\\r"));

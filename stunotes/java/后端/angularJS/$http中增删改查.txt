@@ -1,0 +1,81 @@
+https://blog.csdn.net/qq_30638831/article/details/77688014
+https://www.runoob.com/angularjs/angularjs-http.html
+
+$http服务的设置对象:
+		当我们把$http当成函数来使用时即$http()，需要传入一个对象，这个对象可以包含以下键
+		1、method 字符串  表示发送的请求类型 get post jsonp等等
+		2、url 字符串 绝对或者相对的URL,请求的目标
+		3、params 字符串或对象 会被转化成查询字符串加到URL后面，如果不是字符串会被JSON序列化
+		4、data 字符串或者对象 这个对象包含了被当做消息体发送给服务器的数据，一般在POST请求中使用，并且从angular1.3开始可以在POST请求里发送二进制数据
+		  如var blob = new Blob({name:’张三’}); $http({method:’get’,url:’/‘,data:blob});
+		5、headers 对象 在我们做POST跨域和后台配合的时候就用到了headers，其代表随请求发送的HTTP头字符串
+		6、xsrfHeaderName 字符串 保存XSFR令牌的HTTP头的名称
+		7、xsrfCookieName  字符串 保存XSFR令牌的cookie的名称
+		8、transformRequest 函数或函数组 用来对HTTP请求头和体信息进行转换，并返回转化后的版本，通常用于在请求发送给服务器之前对其序列化
+		9、transformResponse 函数或函数组 用来HTTP响应头和响应体信息进行转换，并返回转化后的版本，通常用来反序列化
+		10、cache 布尔或缓存对象 如果设置为true angularjs会用默认的$http缓存对GET请求进行缓存
+		11、timout 数值或者promise对象，如果为数值那么请求会在指定的毫秒后结束(会跳到失败的error方法里) ，如果为对象那么promise对象在被resolve时请求会被中止，方法执行完毕再执行请求
+		12、responseType 字符串 该选项会在请求中设置XMLHttpResponseType属性有以下类型： “”字符串默认，”arraybuffer”(arraybuffer)，”blob”(blob对象)，“document”(HTTP文档)，”json“(从JSON对象解析出来的json字符串)，”text“(字符串)，”moz-blob“(Firefox的接收进度事件)，”moz-chunked-text“(文本流)，”moz-chunked-arraybuffer”(arraybuffer流)
+ 
+	$http服务的快捷方法
+		$http提供了一些快捷方法让我们使用，一共有六个(其实是六种请求模式)
+		1、$http.get(url字符串，config可选的配置-对象类型) 返回HttpPromise对象
+		2、$http.delete(url字符串，config可选的配置-对象类型) 返回HttpPromise对象
+		3、$http.head(url字符串，config可选的配置-对象类型) 返回HttpPromise对象
+		4、$http.jsonp(url字符串，config可选的配置-对象类型) 返回HttpPromise对象
+		5、$http.post(url字符串，data对象或字符串，config可选的配置-对象类型) 返回HttpPromise对象
+		6、$http.put(url字符串，data对象或字符串，config可选的配置-对象类型) 返回HttpPromise对象
+
+
+1、使用$http的公用方法执行增删改查
+
+	==================写法1
+	$http({
+		method:'POST', // DELETE PUT GET
+		url:''
+	}).then(successCallback:function(response){
+		// 成功回调
+	},errorCallback:function(response){
+		// 失败回调
+	});
+	
+	==================写法2
+	$http({
+		method:'POST', // DELETE PUT GET
+		url:''
+	}).then(function(response){
+		// 请求回调 具体是否成功  需自行判断
+	});
+
+	==================写法3
+	$http({
+		method:'POST', //DELETE PUT  GET 
+		url:'',
+	}).success(function(data,header,config,status){
+		// 成功回调
+	}).error(function(data,header,config,status){
+		// 失败回调
+	});
+	
+		【=========参数解析】
+		1. data（字符串或对象）：响应体,就是后台返回的数据
+		2. status:相应http的状态码,如200
+		3. headers(函数)：头信息的getter函数，可以接受一个参数，用来获取对应名字的值
+		4. config(对象)：生成原始请求的完整设置对象
+		5. statusText:相应的http状态文本，如"ok"
+	
+2,使用增删改查 对应简易方法调用
+	查询：$http.get
+	新增：$http.post
+	更新：$http.put
+	删除：$http.delete
+	跨域：$http.jsonp
+	？？：$http.head
+	？？：$http.patch
+	
+3、常见问题
+	在某些浏览器直接调用$http.delete会提示【缺少标识】，原因是在某些浏览器中将delete作为关词，所以解析错误。
+	故：可以使用其他等价调用方法：$http['delete']
+	https://www.cnblogs.com/shiddong/p/5474062.html
+	
+	

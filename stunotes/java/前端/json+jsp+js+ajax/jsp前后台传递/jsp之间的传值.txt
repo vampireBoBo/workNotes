@@ -14,3 +14,13 @@
 		         if(r!=null)return  unescape(r[2]); return null;
 		    }
 	</script>
+
+
+3、使用jsp的内置对象取值
+	取值如下：
+	<%
+		String id  = request.getParamter('id');
+	%>
+
+	使用的如下：
+	<%=id%>

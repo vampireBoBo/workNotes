@@ -1,0 +1,45 @@
+1、前端
+	$.ajax({
+			type:'POST',
+			url:'<%=request.getContextPath()%>/spring/notifyLog/selectList',
+			data:JSON.stringify(queryParams()),
+			contentType:'application/json;charset=UTF-8',  【注意！如果不添加该属性  则后端接收到的字符串后面有个等号 ===】
+			dataType:'json',
+			success:function(response){
+				_table.bootstrapTable('load',{
+					"total":response.total,
+					"rows":response.row
+				});
+			},
+			error:function(response){
+				layer.alert("服务异常,请稍后重试...");
+			}
+		});
+		
+2、后端  ===【 将string 转换成 HashMap对象】
+	@RequestMapping(value="/selectList",produces="application/json;charset=UTF-8")
+	public @ResponseBody JSON getList(HttpServletRequest req,@RequestBody(required=false) String params){
+		JSONObject json = new JSONObject();
+		json.put("status","false");
+		// 获取参数
+		Map<String, Object> map = new HashMap<>();
+		if(params!=null && !"".equals(params)){
+			JSONObject obj = JSONObject.parseObject(URLDecoder.decode(params));
+			map = (Map<String, Object>) obj;
+			// 重新设置分页查询
+			int start = (int) map.get("offset");
+			int limit = (int) map.get("limit");
+			map.put("offset",(start-1)*limit);
+		}
+		try {
+			List<NotifyLog> list = (List<NotifyLog>) notifyLogService.selectList(map);
+			int total = notifyLogService.selectCount(map);
+			json.put("status", "true");
+			json.put("row", list);
+			json.put("total",total);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			return json;
+		}
+	}

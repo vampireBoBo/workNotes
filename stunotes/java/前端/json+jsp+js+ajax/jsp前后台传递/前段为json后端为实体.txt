@@ -1,0 +1,10 @@
+1、前段
+	无论何种请求方式  参数设置成json格式的字符串即可
+
+2、后端
+	@RequestMapping(value="/selectList",consumes="application/json;charset=UTF-8")
+	public @ResponseBody JSON getList(HttpEntity<NotifyLog> param,HttpServletRequest req,@RequestBody(required=false) String params){
+		NotifyLog notify = param.getBody();
+	}
+	
+	关键：设置consumes  设置httpentity
