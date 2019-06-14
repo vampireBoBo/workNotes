@@ -1,0 +1,1 @@
+select GROUP_CONCAT(id)  from organization where uuid in ('3263895c356f4252af39768b133f74e0','8fa500f092e747cfa4e608ba3fef0c85')

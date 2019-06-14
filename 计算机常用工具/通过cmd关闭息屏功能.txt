@@ -1,0 +1,1 @@
+以系统管理员进入  cmd  输入指令：powercfg -h off     【提示  off 表示关闭  on表示打开】

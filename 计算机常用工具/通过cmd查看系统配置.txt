@@ -1,0 +1,2 @@
+查看基本配置：进入cmd  输入：msinfo32   
+查看磁盘大小：进入cmd  输入：diskmgmt.msc
