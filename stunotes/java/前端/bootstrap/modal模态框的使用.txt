@@ -1,3 +1,7 @@
 https://blog.csdn.net/jxq0816/article/details/79250738
 
 使用draggable 方法
+
+
+1、存在多个模态框时  模态框的声明顺序会影响展现
+	例如：存在a b两个模态框时  若需要先展示a然后再在a中展示b时 则b需要显示在a的上面  故在申明时b要声明在a的后面
