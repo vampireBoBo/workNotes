@@ -1,0 +1,47 @@
+学习资料：https://blog.csdn.net/zezezuiaiya/article/details/79639820
+
+quartz与timer的选择  推荐使用quartz
+一、概念
+	quartz是一个定时框架，可以灵活方便与高效的管理配置各种不同的定时任务，其可以嵌套到任何框架中，与spring也是无缝结合。timer是java内置的定时处理类，配置单一同时具有异常导致定时失败的风险。
+二、使用
+	1、timer 创建定时器 调用对应的timertask去配置对应的定时类型。其方法单一，需要配置初次任务的开始时间与循环执行的间隔时间值。
+		https://blog.fondme.cn/apidoc/jdk-1.8-baidu/   查看对应的java.util.timer类的解释即可
+
+	2、quartz 
+		使用方式：1）事项Job接口并重写里面的唯一接口，其内容即为定时执行的任务体     
+				  2）创建普通类并随意配置方法，然后再xml中执行定时类与定时方法即可，灵活度高故推荐此方法
+		关键字：job【预先定义的定时任务类】
+					例如：<bean id="refreshMonitorJob" class="com.lhb.synch.job.RefreshMonitorJob" />
+				
+				jobDetail【配置定时任务的实例，并在实例中指定定时任务的类与定时任务的方法体--实例：MethodInvokingJobDetailFactoryBean】
+					例如：<bean id="synchroVmToMonitorJob" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+								<property name="targetObject" ref="refreshMonitorJob"/>
+								<property name="targetMethod" value="synchroVMToMonitor"/>
+								<!-- false表示等上一个任务执行完后再开启新的任务 -->
+								<property name="concurrent" value="false"/>
+						  </bean>
+				
+				tigger【触发器，定时任务的触发规则与执行时间配置。触发器的实例有两类：simpleTigger/cronTigger  推荐使用CronTriggerFactoryBean，可以根据cron表达式方便的执行触发时间】
+					例如：<bean id="synchroVmToMonitorTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+								<property name="jobDetail" ref="synchroVmToMonitorJob"/>
+								<!-- 表示多久执行一次   目前配置值为：每天凌晨一点执行一次-->
+								<property name="cronExpression" value="0 0 1 * * ?"/>
+						  </bean>
+				
+				scheduler【管理各种定时任务的调度程序-任务执行计划表---scheduler.scheduleJob方法安排进执行计划】
+					例如：<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+								<property name="triggers">
+									<list>
+										<!--此处可以配置多个定时任务-->
+										<ref bean="synchroVmToMonitorTrigger"/>
+									</list>
+								</property>
+						  </bean>
+
+三、比较
+	1、
+	   精确度和功能 :Quartz可以通过cron表达式精确到特定时间执行，而TimerTask不能。Quartz拥有TimerTask所有的功能，而TimerTask则没有。
+	2、
+	   Quartz每次执行任务都创建一个新的任务类对象，而TimerTask则每次使用同一个任务类对象。
+	3、
+	   Quartz的某次执行任务过程中抛出异常，不影响下一次任务的执行，当下一次执行时间到来时，定时器会再次执行任务；而TimerTask则不同，一旦某个任务在执行过程中抛出异常，则整个定时器生命周期就结束，以后永远不会再执行定时器任务。
