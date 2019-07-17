@@ -1,0 +1,5 @@
+_vmInfo+='		 <form id="form1"  action="" method="post"  data-validator-option="{timely:3,theme:\'mhb_right\',focusCleanup:true}" >';
+
+
+需要添加转移字符\  即为：theme:\'mhb_right\'  否则提示找不到mhb_right
+html中写时为theme:'mhb_right'
