@@ -1,7 +1,28 @@
-https://blog.csdn.net/jxq0816/article/details/79250738
 
-使用draggable 方法
+原理：模态框只加载一次 ，后期都是调用的时候显示不用的时候隐藏。
 
+一、按钮
+	1.当模态框中的按钮没有指定type="button"属性时，该按钮执行完点击事件后不执行其回调函数，模态框自动隐藏。
+	2.当模态框中的按钮指定了type="button"属性时，该按钮执行完点击事件正常不执行其回调函数，需手动隐藏模态框。
+二、缓存数据
+	1.每个模态框中包含一个form标签，并包含一个隐藏的重置类型button【type=reset,隐藏属性设置为display：none，不要设置visible，因为display隐藏时不占用空间visible会占用空间。】
+	2.添加模态隐藏监听，当其中某个模态框关闭时  执行所有表单中的重置按钮事件，避免脏数据。
+		$(document).on("hide.bs.modal",".modal",function(){
+			$('button[type=reset]').trigger('click');
+		});
+三、动态加载模态框数据
+	1.添加单击事件
+		<a data-toggle="modal" data-targer="#modalDivId" onclick="toShow();">
+		 会在modalDivId显示之前执行toShow事件，可以在该事件中动态加载数据然后手动赋值到modalDivId模态框中即可。
+	2.给模态框中直接引入一个jsp页面，在jsp页面初始化时完成数据的动态获取
+		TODO  后期补充  目前还没有做过
+												
+四、模态框的拖动
+	1.使用draggable方法====https://blog.csdn.net/jxq0816/article/details/79250738
+	2.当modal-dialog的div设置了width：60%,则在拖动模态框时会改变其大小。上下拖动为移动，左右拖动会改变大小。
+							
 
-1、存在多个模态框时  模态框的声明顺序会影响展现
+五、存在多个模态框时  模态框的声明顺序会影响展现
 	例如：存在a b两个模态框时  若需要先展示a然后再在a中展示b时 则b需要显示在a的上面  故在申明时b要声明在a的后面
+	
+	
