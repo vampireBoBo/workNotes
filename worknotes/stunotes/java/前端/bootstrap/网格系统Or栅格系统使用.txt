@@ -1,0 +1,42 @@
+1、基本使用格式
+<div class="container">
+   <div class="row">
+      <div class="col-*-*"></div>
+      <div class="col-*-*"></div>      
+   </div>
+   <div class="row">...</div>
+</div>
+<div class="container">....
+
+
+2、每列样式的划分
+
+对应容器   超小设备手机（<768px）   小型设备平板电脑（≥768px）	中型设备台式电脑（≥992px）	大型设备台式电脑（≥1200px）
+Class 前缀	.col-xs-	      .col-sm-	                    .col-md-	                   .col-lg-
+
+
+3、响应式的列重叠时 （具体还没有使用过）
+	<div class="clearfix visible-xs"></div>
+
+
+4、列偏移（具体还没有使用过）
+	为了在大屏幕显示器上使用偏移，请使用 .col-md-offset-* 类。这些类会把一个列的左外边距（margin）增加 * 列，其中 * 范围是从 1 到 11。
+【是利用margin-left实现的，只能想要偏移】
+
+5、列排序
+	【col-md-push-*/col-md-pull-*是利用相对定位实现的。】
+	 .col-md-push-* 和 .col-md-pull-* 类的内置网格列的顺序，其中 * 范围是从 1 到 11。
+
+6、4和5的区别
+	A、offset(偏移)  push(推)  pull（拉）
+	B、偏移、推、拉，都有一个参照物，即相对的位置，那就是左侧， 相对于左侧偏移、推、拉 
+	C、实现方式的区别：col-md-offset-*，是利用margin-left实现的，col-md-push-*/col-md-pull-*是利用相对定位实现的。
+
+效果的区别，col-md-offset-*只能向右便宜，因为实现方式就是margin-left，而push/pull因为是相对定位，既可以左偏移也可以右偏移
+
+还有一点，如果一行的偏移量+实际的宽度综合超过12，col-md-offset会换行显示，也是因为margin，而push/pull只会一部分不可见（超出容器），因为是相对自身定位。
+
+从功能上来看，push和pull可以用来给元素换位置，比较灵活。
+
+
+7、

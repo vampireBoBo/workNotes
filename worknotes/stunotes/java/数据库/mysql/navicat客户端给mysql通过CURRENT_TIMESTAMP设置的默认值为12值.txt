@@ -1,0 +1,7 @@
+1、navicat 给时间字段设置默认值CURRENT_TIMESTAMP
+2、自动插入时间为12值不是24小时值时，先设置电脑操作系统的时间为24小时制
+3、通过mysql的安装路径进入bin路径
+4、mysql -u name -p
+ 输入密码
+5、SET GLOBAL time_zone = '+8:00';
+6、通过select now();即可查看是否修改正确

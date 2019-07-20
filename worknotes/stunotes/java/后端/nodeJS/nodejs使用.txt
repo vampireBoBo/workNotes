@@ -1,0 +1,33 @@
+1、下载安装 
+	http://www.runoob.com/nodejs/nodejs-npm.html
+	
+2、概念
+	https://blog.csdn.net/mozuncangtianbaxue/article/details/78393839
+	用于运行服务器端的javascript，具有非阻塞和事件驱动两大特性
+	
+3、npm 【下列所有cmd指令窗口皆以管理员的角色进入】
+	概念：nodeJS的包管理工具，旧版本的nodeJS需要手动安装npm，新版的nodeJS已经携带npm，个不需要重新安装。
+	查看：以管理员的角色进入cmd （随便路径都可以），输入指令：npm -v   输出结果：若已安装显示版本号  若没有则需要手动安装
+	作用：用于存储共享javascript，个人可以分享自己的javascript，也可以通过npm共享比人的javascript
+	npm调整为国内淘宝下载源：cnpm   进入cmd输入指令：npm install -g cnpm --registry=https://registry.npm.taobao.org【通过cnpm安装时若淘宝npm中有则直接通过淘宝npm安装，若没有淘宝会在后台从官方npm同步，然后再提供cnpm的安装。用于提高效率解决网络问题】
+	npm全局目录路径设置：
+		进入cmd查看当前npm全局目录路径，输入指令：npm root -g  默认路径为c盘下的appdate下。
+		设置指定文件夹为全局目录：1、【根据自己需要设置，此处指定为安装目录下的文件夹】，在nodeJS的安装目录node_modules下创建文件夹：node_global node_cache
+								  2、进入cmd，输入指令:npm config set prefix “D:\Program Files\nodejs\node_modules\node_global” 回车
+											  输入指令：npm config set cache “D:\Program Files\nodejs\node_modules\node_cache” 回车
+								  3、进入D:\Program Files\nodejs\node_modules\npm  修改文件npmrc，修改内容为：
+											  prefix=D:\Program Files\nodejs\node_modules\node_global
+											  cache=D:\Program Files\nodejs\node_modules\node_cache
+								  4、输入 npm  root -g 查看是否为修改过的全局目录
+4、express
+	概念：web开发常用组件
+	安装：全局安装和本地安装
+			全部安装：npm install express -g
+			本地安装：npm install express
+		  区别：
+			 https://www.cnblogs.com/wuyinghong/p/7738296.html
+			包存放位置：全局安装包存放在全局目录下。本地安装包会存放在 ./node_modules 下（运行 npm 命令时所在的目录），如果没有 node_modules 目录，会在当前执行 npm 命令的目录下生成 node_modules 目录。会存放在当前运行js的同级目录下创建package.json及npm_modules文件夹。
+			
+			调用方式：全部安装可通过cmd中的指令行调用，本地安装通过require进行调用
+			
+	

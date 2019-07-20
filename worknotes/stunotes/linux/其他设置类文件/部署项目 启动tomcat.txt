@@ -1,0 +1,11 @@
+==1、更换war包
+
+==2、停止tomcat服务  cd /usr/local/tomcat/apache-tomcat-7.0.85/bin         sh shutdown.sh或者./shutdown.sh  
+
+==3、查看tomcat进程是否接口 ps -ef |grep tomcat  若没有结束 直接杀死进程  kill -9 进程ID
+
+==4、当tomcat进程结束后  进入bin路径 启动   sh startup.sh或者./startup.sh
+
+==5、查看启动日志
+	进入日志路径  cd ../logs    
+	动态显示日志信息  tail -f  catalina.2018-12-24.log

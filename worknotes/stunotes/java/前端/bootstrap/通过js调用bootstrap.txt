@@ -1,0 +1,11 @@
+1、修改分页参数 并重新查询list
+	 doneTable.bootstrapTable('refreshOptions',{pageNumber:1});
+2、获取预定义的参数
+	doneTable.bootstrapTable('getOptions')
+3、对查询结果加载到预定义列表中
+	 doneTable.bootstrapTable('load', {
+	                      "total": _d.total,
+	                      "rows":_d.rows
+	                  });
+4、
+	

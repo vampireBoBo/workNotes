@@ -1,0 +1,59 @@
+1、通过form表单提交数据
+	学习链接：https://blog.csdn.net/qq_34651764/article/details/76373846
+	
+	前端：表单提交，需要设置如下参数：
+		action：提交url
+		method：提交方式 默认为get
+		需要标明name属性 后端根据name属性作为参数的key获取对应的value值
+		
+	前端:禁止表单提交
+		<form onsubmit="return false;">
+	
+	前端：form表单手动校验触发：
+		$("#form1").bind("submit", function(){  
+			var file=$("#file_sc").val();
+			if(file == ""){  
+				alert("请选择文件！！！");
+				return false;  
+			}  
+		});
+		
+		
+	前端：form表单提交之后的回调函数
+	$(function(){
+		/** 验证文件是否导入成功  */
+		$("#form1").ajaxForm(function(data){  
+			if(data=="1"){
+				alert("提交成功！");   
+			}
+		});     
+	});	
+	
+	后端：
+		采用默认get请求方式=====================特征：参数以?问号的形式拼接在url中  缺陷：不安全
+		Request Method: GET
+		Request URL: http://127.0.0.1:8080/demo1/spring/student/add?sno=111&name=%E7%9C%81%E6%95%99%E8%82%B2%E5%8E%85
+		后端进行获取对应参数：
+			前端的参数标签必须设置name属性，后端获取方式有两种，一种为注解，一种从request对象获取，具体如下：
+				name；通过注解获取  sno：通过request对象获取
+				public @ResponseBody boolean toAdd(HttpServletRequest req,@RequestParam String name){
+					boolean result = false;
+					String sno = req.getParameter("sno");
+					System.out.println("姓名："+name+"====学号："+sno);
+					try {
+						result = true;
+					} catch (Exception e) {
+						e.printStackTrace();
+					}finally {
+						return result;
+					}
+				}
+				
+		get：使用占位符方式传参。将参数作为url的组成部分进行传值 === 链接中直接设置值  后端通过注解的方式进行取值
+		传值：http://127.0.0.1:8080/demo1/spring/student/add/idValue
+		取值：注解：@RequestMapping(value="add/{flag}")
+					public @ResponseBody boolean toAdd(HttpServletRequest req,@PathVariable String id){
+				【此处应该还有通过request取值的方式  目前没有找到 后期进行补充】
+	
+	后端：中文乱码	
+		

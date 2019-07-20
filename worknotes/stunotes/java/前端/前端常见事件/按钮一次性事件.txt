@@ -1,0 +1,5 @@
+给按钮添加一次性单击事件 ，由jquery提供的one方法 ，给方法可以用户点赞场景的开发
+
+	$('#applyButt').one("click",function(){
+		alert('成功没？');
+	});

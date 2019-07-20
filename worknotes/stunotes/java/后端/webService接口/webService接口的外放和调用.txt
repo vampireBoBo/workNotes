@@ -1,0 +1,40 @@
+
+学习连接;
+https://blog.csdn.net/qazwsxpcm/article/details/70370490/
+https://blog.csdn.net/GoGleTech/article/details/78616121
+
+
+================================================================================================
+注意点：
+(1)用jdk1.6.0_21以后的版本发布；
+(2)与Web服务相关的类，都位于Javax.jws.*包中：
+
+    @WebService——此注解用在类上指定将此类发布成一个WebService；
+    EndPoint——此类为端点服务类，其中publish()方法用于将一个已经添加了@WebService注解对象绑定到一个地址的端口上，用于发布。
+
+
+======== 外放
+
+1、外放类的注解为：@WebService  
+2、创建需要发布的方法时需注意，static方法和在@WebMethod中设置参数exclude=true 不能被发布，被final修饰的方法也不能被发布。
+3、创建main方法使用端点服务器类 EndPoint中的publish方法将该类，发布到指定端口上，即完成webservice接口的外放
+4、外放校验，执行main，项目运行成功以后，在浏览器中输入路径并在后面拼上？wsdl,如果出现xml格式文件，表示外放成功。 
+
+========= 调用
+第一种调用方式 普通的class类就可以 ，因为会通过 JaxWsDynamicClientFactory 类去创建client类，第二种调用方式，需要创建右键src，找到Web Service Client，并输入wsdl地址，选择下载代码的路径
+
+1、JaxWsDynamicClientFactory dcf = JaxWsDynamicClientFactory.newInstance();
+URL managerxUrl=cons.getManagerxCodeURL();
+//接口url
+String wsUrl = managerxUrl+"/service/ProcessService?wsdl";
+String method ="start";                      //调用方法名
+Client client = dcf.createClient(wsUrl)；
+Object[] objects=client.invoke(method,json.toString());
+
+2、//调用webservice
+JwsServiceHello hello=new JwsServiceHelloService().getJwsServiceHelloPort();
+String name=hello.getValue("panchengming");
+		
+
+
+

@@ -1,0 +1,34 @@
+1、概念
+jdbc是通过java编写的，其实现了在java中连接数据库并操作数据库数据的功能，提供了一套完整JDBC
+ API(java data base connection) ,用于连接不同的数据库，譬如：mysql、oracle、sqlserser、db2
+ 
+2、JDBC连接数据库的操作
+	加载数据库驱动
+		Class.forName("com.mysql.jdbc.Driver");
+	与数据库创建连接
+		Connection conn = DriverManager.getConnetion("jdbc:mysql://127.0.0.1:3306/my",userName,password);
+		=======connection.setAutoCommit(false);   通过conn对象的autocommit属性来控制sql执行结果是不是进行提交到数据库
+	创建执行sql命令的对象
+		Statement stt = conn.createStatement();
+	执行sql数据【execute:创建表   executeUpdate:增删改  executeQuery：查（返回值：ResultSet）】
+		创建表：stt.execute("create table test(id int not null primary key auto_increment,name varchat(20) not null)");
+		增：stt.executeUpdate("insert into test(id,name) values (1,"张三"),(2,"李四")");
+		改：stt.executeUpdate("update test set name='李斯' where id =2 ");
+		删：stt.executeUpdate("delete from test where id =2 ");
+		查：ResultSet rs = stt.executeQuery("select id ,name  from test ");
+	关闭连接从下到上
+	rs.close();
+	stt.close();
+	conn.close();
+
+3、statement 和 preparedStatement
+	preparedSatement继承于statement，故包含其父类所有方法并开发自己特有的接口，更具有优势。
+	优势如下：
+		预编译：在创建preparedStatement对象时对sql语句进行预编译  提高语句的执行效率 如果数据量庞大区别会比较明显
+		占位符：提供除了占位符的概念，在sql语句预编译时可以用?作为占位符，在具体执行数据时对占位符数据进行动态赋值。
+			=====占位符赋值：setXXX 方法来完成，其中 XXX 是与该参数相应的类型，setXXX 方法的第一个参数是要设置的参数的序数位置，第二个参数是设置给该参数的值。参数位置序列号从1开始。
+						   ：
+		接口变更：增删改查的接口不在不要sql语句参数，而是直接进行执行
+		批量执行：关闭conn的自动提交功能，然后启动pst.addBatch()进行缓存，pst.executeBatch()执行所有的缓存数据，最后使用conn.commit() 提交所有的执行结果
+4、注意点
+	通过JDBC API 可以很方便的连接所需要的数据 同时链接数据库的不同 其对应的驱动和连接url也是不一样的

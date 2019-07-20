@@ -1,0 +1,445 @@
+1、手动设置
+
+https://blog.csdn.net/u011687579/article/details/79239886
+
+
+
+2、自动计算
+
+https://blog.csdn.net/zengdeqing2012/article/details/38560865?locationNum=13
+
+
+==================================最终比较简单的解决方案：https://blog.csdn.net/qq_31980421/article/details/79662988
+
+简单的解决方式：通过浏览器响应通过附件下载的方式 导出pdf出现一行分两页的情况  可子ftl的模板中添加样式；、
+<style>
+	tr{page-break-inside:avoid; page-break-after:auto;}
+  	table{page-break-inside:auto;-fs-table-paginate:paginate;border-spacing:0;table-layout:fixed;       word- break:break- strict; cellspacing:0;cellpadding:0 ;border: solid 1px #ccc; padding: 2px 2px;}
+</style>
+
+
+=======================模板
+
+【-fs-table-paginate:paginate;  当列中的字体不够换行 稍微溢出时  可以使用该字段进行控制  但是表格会出现双边框  测试在用border-spacing:0; 样式控制即可】
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">   
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />  
+<title>业务系统部署模板</title>
+<style>
+	table{page-break-inside:auto;-fs-table-paginate:paginate;border-spacing:0;}
+	tr{page-break-inside:avoid; page-break-after:auto;}
+</style>
+</head>
+<body style="font-family: SimSun">
+				<div style="text-align:center;"><h2>陕西省电子政务公共平台服务实施任务单</h2></div>
+				<div>
+					<div style="width:70%;float:left;font-size: 12pt;text-align:left;">表单编号：${infos!}</div>
+					<div style="width:30%;float:left;font-size: 12pt;text-align:center;">填表日期：${(create_date)?string("yyyy年MM月dd日")}</div>
+				</div>
+				<div style="margin-top:3%;">
+				<table style="padding-left: auto;padding-right: auto;text-align:center;font-size: 12pt;width:100%;border-collapse: collapse;table-layout:fixed;word-wrap:break-word;"  cellSpacing="0" cellPadding="0" align="center" border="1"> 
+					<tr>
+			            <td rowspan="8">服务申请有关单位信息</td>
+			            <td>单位名称</td>
+			            <td colspan="3">${org_name}</td>
+			            <td>单位地址</td>
+			            <td colspan="3">${org_address}</td>
+			        </tr>
+			        <tr>
+			            <td>责任部门</td>
+			            <td colspan="3">${dept_name}</td>
+			            <td>隶属关系</td>
+			            <td colspan="3">${dept_affiliation}</td>
+			        </tr>
+			        <tr>
+			        	<td>部门责任人</td>
+			        	<td>${dept_responsible_name}</td>
+			        	<td>办公电话</td>
+			        	<td>${dept_tel}</td>
+			        	<td>手机</td>
+			        	<td>${dept_phone}</td>
+			        	<td>邮箱</td>
+			        	<td>${dept_email}</td>
+			        </tr>
+			        <tr>
+			        	<td>业务应用责任人</td>
+			        	<td>${sys_responsible_name}</td>
+			        	<td>职务</td>
+			        	<td>${sys_responsible_position}</td>
+			        	<td>办公电话</td>
+			        	<td>${sys_responsible_tel}</td>
+			        	<td>手机</td>
+			        	<td>${sys_responsible_phone}</td>
+			        </tr>
+			        <tr>
+			        	<td>技术支持单位</td>
+			        	<td>${support_orgName}</td>
+			        	<td>联系人</td>
+			        	<td>${support_orgLinkman}</td>
+			        	<td>职务</td>
+			        	<td>${support_orgPosition}</td>
+			        	<td>手机</td>
+			        	<td>${support_orgPhone}</td>
+			        </tr>
+			        <tr>
+			        	<td>系统名称</td>
+			        	<td colspan="7">${sysName}</td>
+			        </tr>
+			        <tr>
+			        	<td>服务对象</td>
+			        	<td>${service_object}</td>
+			        	<td>营运性质</td>
+			        	<td>${nature_operations}</td>
+			        	<td>保密要求</td>
+			        	<td>${security_demand}</td>
+			        	<td>实施类型</td>
+			        	<td>业务系统部署</td>
+			        </tr>
+			        <tr>
+			        	<td>服务实施的主要内容、工作计划与要求</td>
+			        	<td colspan="7">${implement_content!}</td>
+			        </tr>
+			        <tr>
+			        	<td colspan="9"><b>新增资源信息</b></td>
+			        </tr>
+			        <tr>
+			        	<td><b>序号</b></td>
+			        	<td><b>资源类型</b></td>
+			        	<td colspan="3"><b>主要指标</b></td>
+			        	<td><b>数量</b></td>
+			        	<td colspan="3"><b>备注</b></td>
+			        </tr>
+					<#assign sort = 0>
+					<#if vmList?? && vmList?size gt 0>
+						<#list vmList as vm>
+							<tr>
+					        	<td>${sort+1}</td>
+					        	<td>虚拟机</td>
+					        	<td colspan="3">型号：${vm.model}、操作系统：${vm.os}</td>
+					        	<td>${vm.num}</td>
+					        	<td colspan="3">${vm.description}</td>
+					    	</tr>
+					    	<#assign sort = sort + 1>
+						</#list>
+					</#if>
+					<#if storeList?? && storeList?size gt 0>
+						<#list storeList as store>
+							<tr>
+					    		<td>${sort+1}</td>
+					        	<td>存储</td>
+					        	<td colspan="3">大小：${store.size}G</td>
+					        	<td></td>
+					        	<td colspan="3">${store.description}</td>
+					    	</tr>
+					    	<#assign sort = sort + 1>
+						</#list>
+					</#if>
+					<#if dbList?? && dbList?size gt 0>
+						<#list dbList as db>
+							<tr>
+					        	<td>${sort+1}</td>
+					        	<td>数据库实例</td>
+					        	<td colspan="3">型号：${db.db_type}</td>
+					        	<td></td>
+					        	<td colspan="3">${db.description}</td>
+					        </tr>
+					    	<#assign sort = sort + 1>
+						</#list>
+					</#if>
+					<#if vpnList?? && vpnList?size gt 0>
+						<#list vpnList as vpn>
+							<tr>
+					        	<td>${sort+1}</td>
+					        	<td>维护VPN</td>
+					        	<td colspan="3"></td>
+					        	<td>${vpn.number}</td>
+					        	<td colspan="3">${vpn.description}</td>
+					        </tr>
+					    	<#assign sort = sort + 1>
+						</#list>
+					</#if>
+					<#if ipList?? && ipList?size gt 0>
+						<#list ipList as ip>
+							<tr>
+					        	<td>${sort+1}</td>
+					        	<td>公网IP</td>
+					        	<td colspan="3"></td>
+					        	<td>${ip.number}</td>
+					        	<td colspan="3">${ip.description}</td>
+					        </tr>
+					    	<#assign sort = sort + 1>
+						</#list>
+					</#if>
+					<#if lbList?? && lbList?size gt 0>
+						<#list lbList as lb>
+							<tr>
+					        	<td>${sort+1}</td>
+					        	<td>负载均衡</td>
+					        	<td colspan="3"></td>
+					        	<td></td>
+					        	<td colspan="3">${lb.description}</td>
+					        </tr>
+					    	<#assign sort = sort + 1>
+						</#list>
+					</#if>
+					<#if cabinetList?? && cabinetList?size gt 0>
+						<#list cabinetList as cabinet>
+							<tr>
+					        	<td>${sort+1}</td>
+					        	<td>托管机柜</td>
+					        	<td colspan="3">服务内容：${cabinet.service_content}</td>
+					        	<td></td>
+					        	<td colspan="3">${cabinet.description}</td>
+					        </tr>
+					    	<#assign sort = sort + 1>
+						</#list>
+					</#if>
+					<#if otherList?? && otherList?size gt 0>
+						<#list otherList as other>
+							<tr>
+						        <td>${sort+1}</td>
+						        <td>其它</td>
+						        <td colspan="3"></td>
+						        <td></td>
+						        <td colspan="3">${other.description}</td>
+						   	</tr>
+						    <#assign sort = sort + 1>
+						</#list>
+					</#if>
+					<#if sort==0>
+						<tr>
+				        	<td>&nbsp;</td>
+				        	<td></td>
+				        	<td colspan="3"></td>
+				        	<td></td>
+				        	<td colspan="3"></td>
+				        </tr>
+					</#if>
+			        <tr>
+			        	<td colspan="9"><b>迁入设备信息</b></td>
+			        </tr>
+			        <tr>
+			        	<td><b>序号</b></td>
+			        	<td><b>设备类型</b></td>
+			        	<td><b>设备品牌</b></td>
+			        	<td><b>设备型号</b></td>
+			        	<td colspan="2"><b>设备配置</b></td>
+			        	<td colspan="3"><b>备注</b></td>
+			        </tr>
+			        <#assign sort = 0>
+			        <#if machineList?? && machineList?size gt 0>
+						<#list machineList as machine>
+							<tr>
+					        	<td>${sort+1}</td>
+					        	<td>${machine.machine_type}</td>
+					        	<td>${machine.brand}</td>
+					        	<td>${machine.model}</td>
+					        	<td colspan="2">供电：${machine.powerSupply}V，规格：${machine.specifications}U</td>
+					        	<td colspan="3">${machine.description}</td>
+					        </tr>
+					    	<#assign sort = sort + 1>
+						</#list>
+					</#if>
+			        <#if sort==0>
+						<tr>
+				        	<td>&nbsp;</td>
+				        	<td></td>
+				        	<td></td>
+				        	<td></td>
+				        	<td colspan="2"></td>
+				        	<td colspan="3"></td>
+				        </tr>
+					</#if>
+					<tr>
+			        	<td colspan="9">
+			       			<b>服务内容及需求确认</b>
+			       			<#assign flag = 0>
+			       			<#if historyList?? && historyList?size gt 0>
+								<#list historyList as history>
+									<#if history.taskName == "用户申请">
+										<div>
+						       				<div style="width:50%;float:left;text-align:left;">&nbsp;用户单位责任人：${history.auditorName}</div>
+						       				<div style="width:45%;float:left;text-align:left;">${(history.completeTime)?string("yyyy年MM月dd日")}</div>	
+						       			</div>
+						    			<#assign flag = 1>
+									</#if>
+								</#list>
+							</#if>
+							<#if flag==0>
+								<div>
+				       				<div style="width:50%;float:left;text-align:left;">&nbsp;用户单位责任人：</div>
+				       				<div style="width:45%;float:left;text-align:left;">年&nbsp;月&nbsp;日</div>	
+				       			</div>
+			       			</#if>
+			       			<#assign flag = 0>
+			       			<#if historyList?? && historyList?size gt 0>
+								<#list historyList as history>
+									<#if history.taskName == "管理审核">
+										<div>
+						       				<div style="width:50%;float:left;text-align:left;">&nbsp;管理办公室责任人：${history.auditorName}</div>
+						       				<div style="width:45%;float:left;text-align:left;">${(history.completeTime)?string("yyyy年MM月dd日")}</div>	
+						       			</div>
+						    			<#assign flag = 1>
+									</#if>
+								</#list>
+							</#if>
+							<#if flag==0>
+								<div>
+				       				<div style="width:50%;float:left;text-align:left;">&nbsp;管理办公室责任人：</div>
+				       				<div style="width:45%;float:left;text-align:left;">年&nbsp;月&nbsp;日</div>	
+				       			</div>
+			       			</#if>
+			       			<#assign flag = 0>
+			       			<#if historyList?? && historyList?size gt 0>
+								<#list historyList as history>
+									<#if history.taskName == "技术审核">
+										<div>
+						       				<div style="width:50%;float:left;text-align:left;">&nbsp;服务提供机构责任人：${history.auditorName}</div>
+						       				<div style="width:45%;float:left;text-align:left;">${(history.completeTime)?string("yyyy年MM月dd日")}</div>	
+						       			</div>
+						    			<#assign flag = 1>
+									</#if>
+								</#list>
+							</#if>
+							<#if flag==0>
+								<div>
+				       				<div style="width:50%;float:left;text-align:left;">&nbsp;服务提供机构责任人：</div>
+				       				<div style="width:45%;float:left;text-align:left;">年&nbsp;月&nbsp;日</div>	
+				       			</div>
+			       			</#if>
+			        	</td>
+			        </tr>
+			        <tr>
+			        	<td colspan="2">服务的实施及交付情况</td>
+			        	<td colspan="7">
+			        		<div class="col-lg-12" style="text-align: left;">
+			       				&nbsp;交付完成情况：
+			       				<#if pay_state! == '1'>全部完成</#if>
+			       				<#if pay_state! == '2'>部分完成</#if>
+			       				<#if pay_state! == '3'>未交付</#if>
+			       			</div>
+			       			<div class="col-lg-12" style="text-align: left;">
+			       				&nbsp;系统运行的应急预案：
+			       				<#if isPlan! == '0'>不需要</#if>
+			       				<#if isPlan! == '1'>已制定</#if>
+			       				<#if isPlan! == '2'>未制定</#if>
+			       			</div>
+			       			<div class="col-lg-12" style="text-align: left;">
+			       				&nbsp;是否上线：
+			       				<#if isLine! == '0'>是</#if>
+			       				<#if isLine! == '1'>否</#if>
+			       			</div>
+			       			<div class="col-lg-12" style="text-align: left;">
+			       				&nbsp;遗留问题及解决方案：${other_problems!}
+			       			</div>
+			       			<div class="col-lg-12" style="text-align: left;">
+			       				&nbsp;用户满意度：
+			       				<#if csr! == '1'>非常满意</#if>
+			       				<#if csr! == '2'>满意</#if>
+			       				<#if csr! == '3'>不满意</#if>
+			       			</div>
+			       			<div class="col-lg-12" style="text-align: left;">
+			       				&nbsp;用户建议：${user_advice!}
+			       			</div>
+			       			<#assign flag = 0>
+			       			<#if historyList?? && historyList?size gt 0>
+								<#list historyList as history>
+									<#if history.taskName == "运维实施">
+										<div>
+						       				<div style="width:50%;float:left;text-align:left;">&nbsp;服务单位责任人：${history.auditorName}</div>
+						       				<div style="width:45%;float:left;text-align:left;">${(history.completeTime)?string("yyyy年MM月dd日")}</div>	
+						       			</div>
+						    			<#assign flag = 1>
+									</#if>
+								</#list>
+							</#if>
+							<#if flag==0>
+								<div>
+				       				<div style="width:50%;float:left;text-align:left;">&nbsp;服务单位责任人：</div>
+				       				<div style="width:45%;float:left;text-align:left;">年&nbsp;月&nbsp;日</div>	
+				       			</div>
+			       			</#if>
+			       			<#assign flag = 0>
+			       			<#if historyList?? && historyList?size gt 0>
+								<#list historyList as history>
+									<#if history.taskName == "上线确认及转运维">
+										<div>
+						       				<div style="width:50%;float:left;text-align:left;">&nbsp;用户单位责任人：${history.auditorName}</div>
+						       				<div style="width:45%;float:left;text-align:left;">${(history.completeTime)?string("yyyy年MM月dd日")}</div>	
+						       			</div>
+						    			<#assign flag = 1>
+									</#if>
+								</#list>
+							</#if>
+							<#if flag==0>
+								<div>
+				       				<div style="width:50%;float:left;text-align:left;">&nbsp;用户单位责任人：</div>
+				       				<div style="width:45%;float:left;text-align:left;">年&nbsp;月&nbsp;日</div>	
+				       			</div>
+			       			</#if>
+			        	</td>
+			        </tr>
+			        <tr>
+			        	<td colspan="2">安全审核意见</td>
+			        	<td colspan="7">
+			       			<div class="col-lg-12" style="text-align: left;">
+			       				&nbsp;是否提供测评：
+			       				<#if isTest! == '0'>是</#if>
+			       				<#if isTest! == '1'>否</#if>
+			       			</div>
+			       			<div class="col-lg-12" style="text-align: left;">
+			       				&nbsp;是否具备上线条件：
+			       				<#if isConditions! == '0'>是</#if>
+			       				<#if isConditions! == '1'>否</#if>
+			       			</div>
+			       			<#assign flag = 0>
+			       			<#if historyList?? && historyList?size gt 0>
+								<#list historyList as history>
+									<#if history.taskName == "安全审核">
+										<div>
+						       				<div style="width:50%;float:left;text-align:left;">&nbsp;安全部门负责人：${history.auditorName}</div>
+						       				<div style="width:45%;float:left;text-align:left;">${(history.completeTime)?string("yyyy年MM月dd日")}</div>
+						       			</div>
+						    			<#assign flag = 1>
+									</#if>
+								</#list>
+							</#if>
+							<#if flag==0>
+								<div>
+				       				<div style="width:50%;float:left;text-align:left;">&nbsp;安全部门负责人：</div>
+				       				<div style="width:45%;float:left;text-align:left;">年&nbsp;月&nbsp;日</div>	
+				       			</div>
+			       			</#if>
+			        	</td>
+			        </tr>
+			        <tr>
+			        	<td colspan="2">运维部门接收意见</td>
+			        	<td colspan="7">
+			        		<#assign flag = 0>
+			       			<#if historyList?? && historyList?size gt 0>
+								<#list historyList as history>
+									<#if history.taskName == "运维确认">
+										<div>
+						       				<div style="width:50%;float:left;text-align:left;">&nbsp;运维部门负责人：${history.auditorName}</div>
+						       				<div style="width:45%;float:left;text-align:left;">${(history.completeTime)?string("yyyy年MM月dd日")}</div>	
+						       			</div>
+						    			<#assign flag = 1>
+									</#if>
+								</#list>
+							</#if>
+							<#if flag==0>
+								<div>
+									<div style="width:50%;float:left;text-align:left;">&nbsp;运维部门负责人：</div>
+									<div style="width:45%;float:left;text-align:left;">年&nbsp;月&nbsp;日</div>
+				       			</div>
+			       			</#if>
+			        	</td>
+			        </tr>
+			    </table>
+			</div>
+				
+</body>
+</html>

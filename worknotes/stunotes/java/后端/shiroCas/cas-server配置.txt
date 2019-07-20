@@ -1,0 +1,47 @@
+cas-server:官方下载网址：https://www.apereo.org/projects/cas/download-cas
+cas-server:下载部署教程：http://www.cnblogs.com/miskis/p/6393780.html
+
+
+一、利用jdk安装tomcat证书，使其支持https协议，因为官方提供的cas-server需要使用https协议。
+	配置网址：https://www.cnblogs.com/wanghaoyuhappy/p/5267702.html
+
+	1、从命令行窗口进入到jdk安装目录下的bin中，如我本机：C:/Program Files/Java/jdk1.7.0_45/bin，使用如下命令：
+	keytool -genkey -alias tomcat -keyalg RSA  -validity 365 -keystore d:/mykey/tomcat.keystore
+		说明：-alias tomcat 是表示生成的这个证书的别名叫tomcat；-keyalg RSA 指的是采用的RSA算法；-keystore d:/mykey/tomcat.keystore是指证书生成后保存到d:/mykey/tomcat.keystore
+		-validity 指定创建的证书有效期多少天(默认 90)
+	2、将.store文件导入到证书中
+	keytool -export -file d:/mykey/tomcat.crt -alias tomcat -keystore d:/mykey/tomcat.keystore
+	将d:/mykey/tomcat.keystore导入到d:/mykey/tomcat.crt证书中
+
+
+	3、将证书tomcat.crt导入到JVM中
+	 
+	keytool -import -keystore ../jre/lib/security/cacerts -file D:/mykey/tomcat.crt -alias tomcat
+	 将tomcat.crt导入到C:/Program Files/Java/jdk1.7.0_45/jre/lib/security/cacerts 
+
+二、tomcat配置https
+
+        在tomcat下找到/conf/server.xml,默认tomcat是没有打开https的，找到如下代码：
+
+		<Connector port="8443" protocol="HTTP/1.1" SSLEnabled="true" maxThreads="150" scheme="https" secure="true" clientAuth="false" sslProtocol="TLS" />
+			   打开注释，修改成：
+
+		<Connector SSLEnabled="true" clientAuth="false" keystoreFile="d:/mykey/tomcat.keystore" keystorePass="changeit" maxThreads="150" port="443" protocol="HTTP/1.1" scheme="https" secure="true" sslProtocol="TLS"/>
+			端口号改成https的默认端口号：443，keystoreFile证书所在位置，keystorePass证书密码
+
+三、配置域名
+
+        http://www.luoshengsha.com本来就是可以访问的域名，但是此例中我们用它测试证书，所以不能让他访问真实的服务器，我们应该让他访问到本机，只有这样我们安装到本地JVM的证书才有效，方法如下：
+
+        打开C:WindowsSystem32driversetchosts，拉到最下面添加：
+
+		127.0.0.1 www.luoshengsha.com
+四、启动tomcat
+
+        所有的配置都已完成，现在就让我们来启动tomcat吧。
+
+        输入：https://www.luoshengsha.com，会提示你该网站的安全证书不受信任，没错，这就是为什么让你到证书提供商购买的原因。
+
+
+
+		不用管它，点击仍然继续，出现如下信息：

@@ -1,0 +1,32 @@
+【ssm整合】==========================
+1、创建maven project项目 指定为web项目
+2、右键-项目配置-动态发布-添加tomcat的lib库，此时项目的架构就会有出现指定格式的文件。或者直接手动创建。
+3、添加ssm的pom依赖
+4、配置db.properties spring-mybatis,xml  spring-mvc.xml web.xml
+5、使用maven update更新项目 此时项目会从java项目标识转换成spring项目标识，即出现s标识。
+6、项目启动正常，使用mybaits-generator 自动生成代码，需注意，如果二次生成同一个数据表单数据时，则会在mapper.xml进行追加，则需要手动删除之前的。或者设置成不追加
+	mapper覆盖方式：https://blog.csdn.net/zengqiang1/article/details/79381418：
+7、启动项目
+
+
+
+【shiro整合】=======================https://www.cnblogs.com/tohxyblog/p/6870261.html  https://blog.csdn.net/donggua3694857/article/details/52157313
+1、添加shiro所需pom依赖
+2、web.xml中配置shirofilter，其中需要给出shirofilter所执行的bean的id，该bean的创在在shiro对应的xml文件中
+3、配置shiro的xml文件，其本质就是创建步骤（2）中所需要的shirofilter，shirofilter--->securityManager-->realm(该类包含shiro身份验证和权限验证的自定义，需要手动去创建)
+4、创建步骤（3）中所需要的realm，该类extends AuthorizingRealm
+
+[
+shiro从Realm获取安全数据，也就是说SecurityManager要验证身份，它需要从Realm获取相应的用户进行比较以确定用户的身份是否合法；
+我们可以把Realm看作是DataSource，安全数据源。
+实现自定义Realm主要是继承AuthrizingRealm这个父类，重写doGetAuthrizationInfo和doGetAuthenticationInfo这两个方法，
+其中doGetAuthenticationInfo是用来验证用户合法性的，根据输入的用户信息从数据库中查出用户，根据用户情况抛出不同的异常。
+doGetAuthrizationInfo是对当前用的用户进行授权的。在这里我把角色写死了。
+在实际项目开发中应该是在表中做权限和角色的定义再从数据库中查出一个集合然后迭代授权。
+]
+
+
+
+【shiro的taglib标签】=============================================http://jinnianshilongnian.iteye.com/blog/2026398
+1、guest/user/authenticated/notAuthenticated/principal/hasRole/hasAnyRoles/lackRole/hasPermission/lackPermission/
+

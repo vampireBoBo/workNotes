@@ -1,0 +1,10 @@
+		function  getStorage(vmInfo){
+			storageNum=0;
+			for(var i = 0;i<vmInfo.length;i++){
+				var _storage = vmInfo[i].storage;
+				storageNum += parseInt(_storage);
+			}
+		}
+
+
+ 在js中进行整数求和  若变成字符串拼接时  需要使用parseInt将其转换成数据型  再进行相加即可  

@@ -1,0 +1,28 @@
+一、概念
+	在 IntelliJ IDEA 中，没有类似于 Eclipse 工作空间（Workspace）的概念，而是提出了Project和Module这两个概念。
+	ntelliJ系中的Project相当于Eclipse系中的workspace。
+	IntelliJ系中的Module相当于Eclipse系中的Project。
+	IntelliJ中一个Project可以包括多个Module
+	Eclipse中一个Workspace可以包括多个Project
+
+二、创建项目及部署
+	https://www.cnblogs.com/jxldjsn/p/8203859.html
+	1、创建project
+	2、创建module
+	3、进行该项目的（快捷键：ctrl + shift + alt + s）系统配置，在WEB-INFO下创建classes lib文件夹，并指定该项目运行文件的存放地址为classes，jar包存放在lib文件夹中
+	4、创建tomcat容器，并部署该项目，执行该项目的访问名称和端口号
+	5、运行项目
+
+三、idea创建springboot
+	1、创建project--spring Initializr--web插件或所需插件
+	2、springboot 创建controller，使用@RestController等注解 最后返回数据信息。 自动集成web容器  通过使用主程序的main方法入口即可 。
+	3、访问时  自带的容器会默认访问路径为：http://localhost:8080/requestmappingURL 中间并无项目名称
+
+四、学习连接
+	1、创建springboot 和一些配置https://blog.csdn.net/u012702547/article/details/53740047
+
+注意事项
+	1、若是创建springboot则需要创建project  不能在其他的project创建module
+	2、将某一项目设置成web项目：进入该项目的配置，选中module，然后点击+号 添加web，然后选择web的路径为src/main/webapp,若文件不存在时需先进行创建（https://blog.csdn.net/lllllmc/article/details/76890231）
+	
+	

@@ -1,0 +1,19 @@
+1、template 前端模板
+2、bootstrap 使用mergeCells合并单元格 
+3、页面引入js时，必须使用爽标签<script></script>,不能使用省略标签<script />，否则引入文件不生效！
+4、前台jquery 插件的使用：http://www.superslide2.com/howToUse.html
+	jquery superSlide插件：http://www.superslide2.com/param.html
+	基本文档函数调用，譬如追加标签，修改属性：http://www.w3school.com.cn/jquery/jquery_ref_manipulation.asp
+5、jquery对dom对象的操作：
+	http://www.w3school.com.cn/jquery/jquery_ref_manipulation.asp
+6、bootstrap的使用http://www.runoob.com/bootstrap/bootstrap-tab-plugin.html
+7、jquery validator 使用:http://www.fivepx.net/demo/20140926/
+8、js中计算时间差 https://blog.csdn.net/wei_jie_zhang/article/details/45873837
+
+9、jquery.nav.js定位导航滚动插件  https://www.cnblogs.com/huanghuali/p/6776415.html
+
+10、页面新窗口打开方式  http://www.jb51.net/article/35691.htm   https://blog.csdn.net/hxy87/article/details/6155088
+	https://www.cnblogs.com/sflik/p/4498748.html
+	
+	1）、window.open（url） 是重新打开一个页面
+	2）、window.location=(url) 是在原来的页面位置重新加载一个页面

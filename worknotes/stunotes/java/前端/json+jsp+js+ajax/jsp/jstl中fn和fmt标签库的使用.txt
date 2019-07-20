@@ -1,0 +1,53 @@
+学习连接：https://blog.csdn.net/wu920604/article/details/51791760
+菜鸟教程：http://www.runoob.com/jsp/jsp-jstl.html
+
+一、fn
+=====================================================================
+定义：fn为fn函数，主要用于el表达式中
+使用：
+	1、引入<%@	taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+	2、调用：计算集合的长度，返回值是集合的长度 ${fn:length(userList)}、判断一个字符串是否包含子字符串返回值为true或者false
+${fn:contains("ABCD"，"B")};--->true、用于将一个数组的成员以特定的字符连接起来${fn:join(userArray,";")}假如userAarray的值为[aaa,bbb,ccc],返回值为aaa;bbb;ccc
+用于将一个字符串分割成数组${fn:split("A_&_B_&_C_&_D","_&_")}    //返回值为一个java数组 ：{“A”,"B","C","D"}
+	3、总结：fn的函数类似与String对象的某些方法，譬如判断是否以什么开头以什么结果。指定字符替换、判断是否包含某个字符、数组拼接成字符串、字符串分割成数组等，具体请参考学习；连接
+
+
+二、fmt
+=====================================================================
+定义：formatting标签库主要用于在JSP页面中实现国际化与格式化
+使用：
+	1、引入：<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+	2、调用：
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+<html>
+<head>
+  <title>JSTL fmt:dateNumber 标签</title>
+</head>
+<body>
+<h3>日期格式化:</h3>
+<c:set var="now" value="<%=new java.util.Date()%>" />
+
+<p>日期格式化 (1): <fmt:formatDate type="time" 
+            value="${now}" /></p>
+<p>日期格式化 (2): <fmt:formatDate type="date" 
+            value="${now}" /></p>
+<p>日期格式化 (3): <fmt:formatDate type="both" 
+            value="${now}" /></p>
+<p>日期格式化 (4): <fmt:formatDate type="both" 
+            dateStyle="short" timeStyle="short" 
+            value="${now}" /></p>
+<p>日期格式化 (5): <fmt:formatDate type="both" 
+            dateStyle="medium" timeStyle="medium" 
+            value="${now}" /></p>
+<p>日期格式化 (6): <fmt:formatDate type="both" 
+            dateStyle="long" timeStyle="long" 
+            value="${now}" /></p>
+<p>日期格式化 (7): <fmt:formatDate pattern="yyyy-MM-dd" 
+            value="${now}" /></p>
+
+</body>
+</html>

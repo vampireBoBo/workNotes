@@ -1,0 +1,141 @@
+=====【此处为：addForm 提交对象为student】
+
+1、angular的校验依赖于name属性 故表单及其元素需要设置对应的name
+
+2、表单属性
+	给表单添加 ng-autocomplete="off" 关闭表单元素的历史数据的显示
+
+	添加 novalidate = "novalidate"  关闭表单自身的校验功能
+	
+	添加name 用于标记该form表单 
+	
+3、表单元素属性
+	required：必填
+	tyle="number"：必须为数字   type="email":必须满足邮箱格式   type="url":必须满足url格式
+	ng-pattern = "/^\d{3,}$/"：必须满足指定的正则表达式
+	ng-minlength="3"：输入值的元素长度最小  ng-maxlength="20"：输入值的元素长度最大值
+	name：标记该标签的输入值
+	ng-model：将该值绑定到form表单对应的controller中
+	
+	表单元素校验提示语句：
+	$dirty:输入框的值发生变化时  
+	$invalid:输入值不满足校验条件
+	$error:输入值不满足校验条件时进行显示的语句  具体是啥 进行后缀在后面 例如:$error.require
+	ng-show= "表达式" ； 当表达式的值为true 该标签进行显示 否则处于屏蔽状态 同时 不会占用空间
+	<span class="warning text-danger" ng-show="addForm.sname.$dirty && addForm.sname.$invalid">
+		<span ng-show="addForm.sname.$error.require">该值不允许为空</span>
+	</span>
+
+4、提交按钮
+	type = "button"  
+	ng-click = "": 表单提交函数
+	ng-disabled = "!formName.$valid" : 当表单校验不通过时  该按钮为禁止提交模式
+	
+5、提交函数
+	在提交函数中  通过如下方法获取表单的校验结果  及 对应提交的对象数据
+	$scope.addForm.$valid : 输出表单的校验结果
+	$scope.obj: 输出表单中的对象 例如：$scope.addStu 即为需要新增的student对象信息
+	
+	
+6、实例
+		// 页面
+		<div ng-controller="addController">
+			<div class="modal fade" id="addModal" role="dialog">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header" style="background-color: #337ab7;color:white;font-size:16px;">
+							新增用户
+						</div>
+						<div class="modal-body">
+							<!-- novalidate="novalidate" 去除表单自带的校验功能  angularde 的表单校验依靠于name属性  -->
+							<form class="form form-horizontal" id="addForm" name="addForm" autocomplete="off" ng-model="addStu" novalidate="novalidate">
+								<div class="row">
+									<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 form-group">
+										<label class="control-label col-lg-3 col-md-3 col-sm-3 col-xs-4">学号</label>
+										<div class="col-lg-9 col-md-9 col-sm-9 col-xs-8">
+											<input type="text" class="form-control" placeholder="请输入学号" name="sno"  ng-model="addStu.sno" required ng-maxlength="80" ng-pattern="/^\d{3,}$/">
+											<span class="warning text-danger"  ng-show="addForm.sno.$dirty && addForm.sno.$invalid">
+												<apan ng-show="addForm.sno.$error.required">该字段为必填字段</apan>
+												<apan ng-show="addForm.sno.$error.pattern">该字段为3位以上纯数字</apan>
+											</span>
+										</div>
+									</div>
+									<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 form-group">
+										<label class="control-label col-lg-3 col-md-3 col-sm-3 col-xs-4">姓名</label>
+										<div class="col-lg-9 col-md-9 col-sm-9 col-xs-8">
+											<input type="text" class="col-lg-8 form-control" placeholder="请输入姓名" name="sname" ng-model="addStu.sname" required ng-maxlength="10">
+											<span class="warning text-danger" ng-show="addForm.sname.$dirty && addForm.sname.$invalid">
+												<span ng-show="addForm.sname.$error.required">该项为必填项</span>
+												<span ng-show="addForm.sname.$error.maxlength">该项允许接收10个字符</span>
+											</span>
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 form-group">
+										<label class="control-label col-lg-3 col-md-3 col-sm-3 col-xs-4">性别</label>
+										<div class="col-lg-9 col-md-9 col-sm-9 col-xs-8 radio">
+											<label><input type="radio" value="0" name="sex" ng-model="addStu.sex" required>男</label>
+											<label><input type="radio" value="1" name="sex" ng-model="addStu.sex" required>女</label>
+										</div>
+									</div>
+									<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 form-group">
+										<label class="control-label col-lg-3 col-md-3 col-sm-3 col-xs-4">年龄</label>
+										<div class="col-lg-9 col-md-9 col-sm-9 col-xs-8">
+											<input type="number" min="10" max="40" class="col-lg-8 form-control" name="age" ng-model="addStu.age" placeholder="年龄范围【10-40】" required>                                          
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 form-group">
+										<label class="control-label col-lg-3 col-md-3 col-sm-3 col-xs-4">email</label>
+										<div class="col-lg-9 col-md-9 col-sm-9 col-xs-8">
+											<input type="email" class="col-lg-8 form-control" placeholder="请输入邮箱" name="email" ng-model="addStu.email">
+											<span class="warning text-danger" ng-show="addForm.email.$dirty && addForm.email.$invaild">
+												<span ng-show="addForm.email.$error.email">邮箱格式错误</span>
+											</span>
+										</div>
+									</div>
+								</div>
+								<div class="row modal-footer" style="text-align:center;">
+									<button class="btn btn-primary" data-dismiss="modal">取消</button>	
+									<button class="btn btn-primary" type="reset" >重置</button>
+									<button class="btn btn-primary" ng-click="toAddStu()" ng-disabled="!addForm.$valid">提交</button>	
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		
+		
+		
+		// 函数
+		//============= 新增controller  
+		app.controller('addController',function($scope,$http){
+			 $scope.toAddStu = function (){
+				// $scope.addForm.$valid  即可获得表单的校验
+				 $scope.toAddStu = function (){
+					// 执行新增
+					$http({
+						method:'POST',
+						url:'<%=request.getContextPath() %>/spring/student/add',
+						data:$scope.addStu,
+					}).then(function successCallback(response){
+						$('#addModal').modal('hide');
+						if(response.data){
+							layer.alert('数据添加成功！',{icon:6});
+							// 刷新表单
+							
+						}
+					},function errorCallback(response){
+						layer.alert("服务器异常请稍后再试");
+					});
+				 }
+			 }
+		});
+	
+	
+	

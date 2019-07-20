@@ -1,0 +1,71 @@
+学习连接：
+	http://lovexz365.iteye.com/blog/1337457
+	https://www.cnblogs.com/jiqing9006/p/5795799.html
+	https://blog.csdn.net/qq_33594380/article/details/79738423
+
+
+
+代码：
+	1.引入样式 和基础js
+	2.设置日历显示的div信息
+	3.给日历div自动读取数据
+	
+	$('#calendar').fullCalendar({
+			      	header: {
+			          	left: 'prev,next today',
+			          	center: 'title',
+			          	right: 'month'
+			     	},
+			     	locale: 'zh-cn', // 语言  
+			     	monthNames: ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"],  
+			        monthNamesShort: ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"],  
+			        dayNames: ["周日", "周一", "周二", "周三", "周四", "周五", "周六"],  
+			        dayNamesShort: ["周日", "周一", "周二", "周三", "周四", "周五", "周六"],  
+			        today: ["今天"],  
+			        buttonText: {  
+			              today: '本月',  
+			              month: '月',  
+			              week: '周',  
+			              day: '日',  
+			              prev: '上一月',  
+			              next: '下一月'  
+			        },  
+			        currentTimezone: 'Asia/Beijing', 
+			        height:2,
+			        aspectRatio:6,
+			        editable: true,
+			        droppable: true, 
+			        drop: function(date, allDay) { 
+			            var originalEventObject = $(this).data('eventObject');
+			            var copiedEventObject = $.extend({}, originalEventObject);
+			            copiedEventObject.start = date;
+			            copiedEventObject.allDay = allDay;
+			            $('#calendar').fullCalendar('renderEvent', copiedEventObject, true);
+			            if ($('#drop-remove').is(':checked')) {
+			                $(this).remove();
+			            }
+			        },
+			        events:function(start,end,callback){
+			        	//获取数据信息
+		                $.ajax({
+				            url: '<%=request.getContextPath()%>/spring/serviceCatalogApply/allServiceCatalog',
+				            dataType: 'json',
+				            type:'GET',
+				            success: function(json) { // 获取当前月的数据
+				                var events = [];
+				                if (json.length > 0) {
+				                    $.each(json,function(i,c) {
+				                    	//转变时间参数
+				                    	_apply_time=moment(json[i].apply_time).format('YYYY-MM-DD hh:mm:ss');
+				                    	events.push({
+			                                title: json[i].title,
+			                                start: _apply_time,  // will be parsed
+			                                color: '#ff9f89'
+			                            });
+				                    });
+				                }
+				                callback(events);
+				            }
+					     })
+			        } 
+			    });

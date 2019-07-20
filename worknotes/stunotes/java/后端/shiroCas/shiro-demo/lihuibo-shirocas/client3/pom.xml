@@ -1,0 +1,90 @@
+<?xml version="1.0"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <parent>
+    <groupId>com</groupId>
+    <artifactId>lihuibo-shirocas</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+  </parent>
+  
+  <modelVersion>4.0.0</modelVersion>
+  <artifactId>client3</artifactId>
+  <packaging>war</packaging>
+  
+  <!-- 版本控制 -->
+  <properties>
+  	<slf4j.version>1.7.5</slf4j.version>
+  	<logback.version>1.0.13</logback.version>
+  </properties>
+  
+  <dependencies>
+  	<!-- shiro jar -->
+    <dependency>
+  		<groupId>org.apache.shiro</groupId>
+  		<artifactId>shiro-aspectj</artifactId>
+  	</dependency>
+  	<dependency>
+  		<groupId>org.apache.shiro</groupId>
+  		<artifactId>shiro-spring</artifactId>
+  	</dependency>
+  	<dependency>
+  		<groupId>org.apache.shiro</groupId>
+  		<artifactId>shiro-core</artifactId>
+  	</dependency>
+  	
+  	<!-- 日志 jar -->
+  	<!--slf4j jar  -->
+  	<dependency>
+  		<groupId>org.slf4j</groupId>
+  		<artifactId>slf4j-api</artifactId>
+  		<version>${slf4j.version}</version>
+  		<scope>compile</scope>
+  	</dependency>
+  	<!-- logback jar maven等能够自动处理依赖的工具可以不用引入core包 -->
+  	<dependency>
+  		<groupId>ch.qos.logback</groupId>
+  		<artifactId>logback-classic</artifactId>
+  		<version>${logback.version}</version>
+  	</dependency>
+  	<dependency>
+	    <groupId>org.logback-extensions</groupId>
+	    <artifactId>logback-ext-spring</artifactId>
+    <version>0.1.4</version>
+</dependency>
+  	
+  </dependencies>
+  <build>
+    <finalName>client3</finalName>
+    <plugins>
+    	<plugin>
+    		<groupId>org.mybatis.generator</groupId>
+    		<artifactId>mybatis-generator-maven-plugin</artifactId>
+    		<configuration>
+    			<verbose>true</verbose>
+    			<overwrite>true</overwrite>
+    			<configurationFile>src/main/resources/util/generatorConfig.xml</configurationFile>
+    		</configuration>
+    		<dependencies>
+    			<dependency>
+    				<groupId>mysql</groupId>
+    				<artifactId>mysql-connector-java</artifactId>
+    				<version>5.1.30</version>
+    			</dependency>
+    		</dependencies>
+    	</plugin>
+    	
+    	<!-- tomcat -->
+    	<plugin>
+    		<groupId>org.apache.tomcat.maven</groupId>
+    		<artifactId>tomcat7-maven-plugin</artifactId>
+    		<version>2.1</version>
+    		<configuration>
+    			<path>/${project.build.finalName}</path>
+    			<port>8083</port>
+    			<uriEncoding>UTF-8</uriEncoding>
+    			<update>true</update>
+    		</configuration>
+    	</plugin>
+    </plugins>
+  </build>
+</project>

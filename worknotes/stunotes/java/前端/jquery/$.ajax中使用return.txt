@@ -1,0 +1,14 @@
+1、success函数中  不执行return
+
+
+解决方案：
+1、在该方法中声明一个方法变量 
+2、在success函数中给变量赋值
+3、在$.ajax函数结束之后 执行return 变量
+4、$.ajax的请求方法不能为异步  否则 success函数中的结果值的作用于只能是success函数类
+
+
+https://blog.csdn.net/qq_36411874/article/details/77151375
+
+https://www.cnblogs.com/AllenChou/p/7680650.html
+

@@ -1,0 +1,15 @@
+1、win+R  进入运行窗口  输入：slmgr.vbs -xpr  查看当前系统的有效期限
+
+2、准备好对应的密钥
+	以管理员身份进入cmd界面
+	1输入指令：slmgr /ipk VK7JG-NPHTM-C97JM-9MPGT-3V66T  回车 等待处理结果
+	2输入指令：slmgr /skms kms.xspace.in 回车 等待处理结果
+	3输入指令：slmgr /ato 回车等待处理结果
+	
+	处理完毕  通过slmgr.vbs -xpr 查看对应期限
+	
+3、核心指令
+	slmgr /ipk VK7JG-NPHTM-C97JM-9MPGT-3V66T
+	slmgr /skms kms.xspace.in
+	slmgr /ato
+	

@@ -1,0 +1,43 @@
+https://blog.csdn.net/yangfeisc/article/details/40191025
+
+
+https://blog.csdn.net/dreamxiaowei/article/details/76223073
+
+弹出框的样式或者弹出层不是最高级时设置属性：----https://bbs.csdn.net/topics/390930559
+
+创建JFileChooser fc=new JFileChooser(FileSystemView.getFileSystemView());  需要指定参数，则将会根据当前系统的ui来显示弹出框
+
+public ModelAndView getPDF(HttpServletRequest request,@PathVariable String id){
+		ModelAndView mv = new ModelAndView();
+		//定义文件保存格式
+		FileNameExtensionFilter filter=new FileNameExtensionFilter("*.pdf","pdf");
+		//获取文件操作对象
+		JFileChooser fc=new JFileChooser(FileSystemView.getFileSystemView());
+		//将文件格式显示在窗口内
+		fc.setFileFilter(filter);
+		//获取文件路径，参数为false时是指不能多选，
+		fc.setMultiSelectionEnabled(false);
+		//打开文件保存对话框
+		int result=fc.showSaveDialog(null);
+		//获取选择文件的绝对路径
+		if (result==JFileChooser.APPROVE_OPTION) {
+			File file=fc.getSelectedFile();
+			String pdfUrl="";
+			if (!file.getPath().endsWith(".pdf")) {
+				pdfUrl=file.getPath()+".pdf";
+			}else{
+				pdfUrl=file.getPath();
+			}
+			String basePath = request.getSession().getServletContext().getRealPath("/");  		
+			DisposeApply disposeApply = getDisposeApply(id);
+			try {
+				FileOutputStream out = new FileOutputStream(new File(pdfUrl));
+				PDFTemplateUtil.createPDF(disposeApply, out, basePath, "busSysDeploy.ftl");
+				mv.setViewName("../../pages/other/busSysExport");
+				mv.addObject("disposeApply", disposeApply);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return mv;
+	}

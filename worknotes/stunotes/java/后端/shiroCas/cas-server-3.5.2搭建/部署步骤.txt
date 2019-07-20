@@ -1,0 +1,26 @@
+1、解压cas-server-3.5.2-release.zip,获取modules下面的cas-server-webapp-3.5.2.war到tomcat的webapp下，浏览器访问：http://localhost:8080/cas-server-webapp-3.5.2/login，看到登录页面页面表示成功
+	需注意cas-server的下载现在从github进行下载，3.0以后的版本没有war，使用的协议也是https。故此处使用该版本则不需要打包及变更协议。
+	
+2、连接本地数据库
+	A、添加下载文件中的modules下面的cas-server-support-jdbc-3.5.2.jar，还需要mysql-connector-java-5.1.40.jar。然后将这两个jar包放置在WEB-INF下的lib下
+	
+	B、调整webapp下运行后的cas-server-webapp-3.5.2项目文件，WEB-INF下的deployerConfigContext.xml
+		<!-- lhb1注释掉默认认证 -->
+		<!--<bean 
+			class="org.jasig.cas.authentication.handler.support.SimpleTestUsernamePasswordAuthenticationHandler" /> -->
+			
+		<!-- lhb2重新设置shiro-cas 并配置对应的sql数据  指定数据源信息 -->
+		<bean class="org.jasig.cas.adaptors.jdbc.QueryDatabaseAuthenticationHandler">  
+		   <property name="dataSource" ref="dataSource" ></property>  
+		   <property name="sql" value="select loginPassword from s_user where loginName=?" ></property>  
+		</bean> 
+		
+		<!-- lhb3配置数据源信息 -->
+		<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+			  <property name="driverClassName" value="com.mysql.jdbc.Driver" />
+			  <property name="url" value="jdbc:mysql://127.0.0.1:3306/lhb-shiro" />
+			  <property name="username" value="root" />
+			  <property name="password" value="11111111" />
+		</bean>
+		
+3、浏览器访问，使用对应用户和密码进行登录，登录成功表示成功。

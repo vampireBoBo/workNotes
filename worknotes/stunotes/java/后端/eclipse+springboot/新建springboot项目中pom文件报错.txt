@@ -1,0 +1,3 @@
+ 常见原因：
+	1、eclispe中的maven插件进行更新   https://blog.csdn.net/Crazy_Java1234/article/details/70322243
+

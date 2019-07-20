@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="error" monitorInterval="1800">
+	<!-- <properties>
+		<property name="fileName">demo.log</property>
+		<property name="backupFilePatch"></property>
+	</properties> -->
+	
+	<appenders>
+		<!-- 控制台 -->
+		<Console name="Console" target="SYSTEM_OUT">
+			<PatternLayout pattern="%d {HH:mm:ss.sss} [%t] %-5level %logger{36} - %msg%n"></PatternLayout>
+		</Console>
+		
+		<!-- 文件  -->
+		<File name="demo" fileName="log/demo.log" append="false">
+			<PatternLaout pattern="%d {HH:mm:ss.SSS} %-5level%class{36} %L %M - %msg%xEx%n"></PatternLaout>
+		</File>
+		
+		<!-- 文件追加  -->
+		<RollingFile name="RollingFile" fileName="${sys:catalina.home}/log/app.log" filePattern="log/$${date:yyyy-MM}/app-%d{MM-dd-yyyy}-%i.log.gz">
+			<PatternLayout pattern="%d{yyyy-MM-dd 'at' HH:mm;ss z} %-5level %class{36} %L %M - %msg%xEx%n"></PatternLayout>
+			<SizeBasedTriggeringPolicy size="50M"></SizeBasedTriggeringPolicy>
+			<DefaultRolloverStrategy max="20"/>
+		</RollingFile>
+	</appenders>
+	
+	<loggers >
+		<root level="error">
+			<appender-ref ref="Console"></appender-ref>
+			<appender-ref ref="RollingFile"></appender-ref>
+		</root>
+		
+		<logger name="druid.sql.Statement" level="debug" additivity="false">
+          <appender-ref ref="Console"/>
+          <appender-ref ref="RollingFileName"/>
+        </logger>
+		
+		<!-- jdbcTemplate sql语句及参数打印 -->
+		<!-- <logger name="org.springframework.jdbc.core" level="debug" /> -->
+		<logger name="org.springframework.jdbc.core.StatementCreatorUtils" level="traces"/>
+		
+		<!-- <logger name="org.springframework.core">
+			<level value="info" />
+		</logger>
+		
+		<logger name="org.springframework.beans">
+			<level value="info" />
+		</logger>
+		
+		<logger name="org.springframework.context">
+			<level value="info" />
+		</logger>
+	
+		<logger name="org.springframework.web">
+			<level value="info" />
+		</logger>
+		
+		<logger name="org.hibernate">
+			<level value="warn" />
+		</logger>
+		
+		<logger name="com.lhb" additivity="false">
+			<level value="info" />
+			<appender-ref ref="LOCAL-INFO" />
+		</logger>
+ -->	</loggers>
+
+</Configuration>

@@ -1,0 +1,9 @@
+学习连接：
+https://blog.csdn.net/u010028869/article/details/44087699
+
+
+注意点：如果使用了icheck给checkbox更换了样式 则它的默认时间也被改写了  需要用类似如下方式进行设置：
+
+$('input').on('ifChecked', function(event){
+  alert(event.type + ' callback');
+});

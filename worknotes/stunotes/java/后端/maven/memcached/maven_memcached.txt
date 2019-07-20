@@ -1,0 +1,37 @@
+学习连接：http://www.cnblogs.com/longshiyVip/p/4889077.html
+背景：由于官方的仓库中没有memcached的jar，故通过pom的依赖是无法获取memcached的依赖，需要手动下载并打包到本地的maven仓库中
+
+操作如下：下载jar包（https://github.com/gwhalin/Memcached-Java-Client/downloads）
+	1、随便盘符创建文件夹存放jar包，例如：d:\lib ---将下载的jar放在lib中
+	2、因为memcached需要依赖其他的包，故新增一个pom文件，并将其存放在lib中与下载的jar本列。pom内容如下：
+		<?xml version="1.0" encoding="UTF-8"?>
+		<project xmlns="http://maven.apache.org/POM/4.0.0"
+				 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+				 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+			<modelVersion>4.0.0</modelVersion>  
+			<groupId>com.danga</groupId>  
+			<artifactId>memcached</artifactId>  
+			<!--版本号可根据实际情况调整-->
+			<version>2.6.6</version>   
+			<dependencies>  
+				<dependency>  
+					<groupId>org.slf4j</groupId>  
+					<artifactId>slf4j-simple</artifactId>  
+					<version>1.6.1</version>  
+				</dependency>  
+				<dependency>  
+					<groupId>org.slf4j</groupId>  
+					<artifactId>slf4j-api</artifactId>  
+					<version>1.6.1</version>  
+				</dependency>  
+				<dependency>  
+					<groupId>commons-pool</groupId>  
+					<artifactId>commons-pool</artifactId>  
+					<version>1.6</version>  
+				</dependency>  
+			</dependencies>  
+		</project>  
+	3、通过管理员指令进入dos并进入D:\lib中执行如下命令：
+		mvn install:install-file -Dfile=java_memcached-release_2.6.6.jar -DgroupId=com.danga -DartifactId=memcached -Dversion=2.6.6 -Dpackaging=jar
+	4、执行成功后查看本地仓库是否存在jar	

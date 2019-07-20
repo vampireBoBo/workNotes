@@ -1,0 +1,14 @@
+====================
+报错：No operation was found with the name {http://impl.service.com/}Hello.
+原因：ws的接口类和接口实现类的namespace不一致
+解决方案：在实现类的申明中，在@webService注解中添加参数targetNameSpace使其与接口类的保持一致即可
+学习连接：https://blog.csdn.net/qq_18675693/article/details/52134805?locationNum=15&fps=1
+
+====================
+报错：Cannot create a secure XMLInputFactory
+解决方案：在接口调用前进行参数配置，添加如下代码：
+			Properties props = System.getProperties(); 
+			props.setProperty("org.apache.cxf.stax.allowInsecureParser", "1"); 
+			props.setProperty("UseSunHttpHandler", "true");
+			
+====================

@@ -1,0 +1,1 @@
+如果存在多个子表的校验  则子表中的name不能重复，应为validator是根据name进行校验的，因为id本身是不可以被重复，此处要求name也不能重复，否则校验结果不是true或者false而是undefined

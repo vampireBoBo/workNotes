@@ -1,0 +1,24 @@
+https://www.cnblogs.com/super-yu/p/9045775.html
+
+
+方法1：
+document.getElementById('iframeId').contentWindow.location.reload(true);
+方法2：
+document.getElementById('iframeId').src=url;
+方法3：
+$("#iframeId").attr('src', url);
+
+
+
+
+例子：
+在子页面拼接父页面导航  并给导航绑定点击事件  使其重新加载当前子页面内容
+		var _html = '<li><a href="javascript:;" id="materCenter" target="myiframe" >事项中心</a></li>';
+		_html += '<li id="mater_nav"><a>待办事项</a></li>';
+		$("#nav_item", window.parent.document).append(_html);
+		window.parent.formatterNavItem("mater_nav");  
+  
+		parent.$('#materCenter').on('click',function(){
+			parent.document.getElementById('myiframe').contentWindow.location.reload(true);
+		});
+		

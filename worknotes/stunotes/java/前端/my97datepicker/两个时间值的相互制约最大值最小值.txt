@@ -1,0 +1,6 @@
+<input class="form-control" type="text" id="startTime" name="startTime" autocomplete="off" placeholder="开始时间" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',maxDate:'#F{$dp.$D(\'endTime\')}',isShowClear:true})">
+
+<input class="form-control" type="text" id="endTime" name="endTime" autocomplete="off" placeholder="截止时间" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',minDate:'#F{$dp.$D(\'startTime\')}'})">
+
+
+https://www.cnblogs.com/lstory/p/6897509.html?utm_source=itdadao&utm_medium=referral

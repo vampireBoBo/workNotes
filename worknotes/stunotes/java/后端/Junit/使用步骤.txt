@@ -1,0 +1,59 @@
+https://www.cnblogs.com/zhizhao/p/7814350.html
+
+https://veiking.iteye.com/blog/2364788【详细】
+
+
+========================================================================================
+概念：junit为单独的测试工具类  后面spring针对于junit的一些不足由整合形成了springTest 但其底层仍然使用的junit自己的包
+========单独使用JUnit对spring模块进行测试【即测试spring的控制反转和依赖注入功能】
+
+	
+
+
+
+
+
+=====================================================================================
+所有用Junit进行单元测试，都需要下面的配置
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = {"classpath:applicationContext.xml"})
+​ applicationContext.xml 是整个项目的Spring的配置文件。包括数据源配置、MVC配置和各种Bean的注册扫描。如果你是多个文件，就用都好隔开写多个，像这样
+{ "classpath:applicationContext.xml","classpath:servlet-context.xml"}
+
+=====================================================================================
+2.常用的注解
+
+1.@BeforeClass – 表示在类中的任意public static void方法执行之前执行
+
+2.@AfterClass – 表示在类中的任意public static void方法执行之后执行
+
+3.@Before – 表示在任意使用@Test注解标注的public void方法执行之前执行
+
+4.@After – 表示在任意使用@Test注解标注的public void方法执行之后执行
+
+5.@Test – 使用该注解标注的public void方法会表示为一个测试方法
+
+一个JUnit4 的单元测试用例执行顺序为：
+@BeforeClass –> @Before –> @Test –> @After –> @AfterClass
+每一个测试方法的调用顺序为：
+@Before –> @Test –> @After
+
+=====================================================================================
+spring测试dao service
+	1、pom添加
+		 <dependency>
+		  <groupId>junit</groupId>
+		  <artifactId>junit</artifactId>
+		  <version>3.8.1</version>
+		  <scope>test</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<version>5.1.2.RELEASE</version>
+			<scope>test</scope>
+		</dependency>
+	2、
+
+

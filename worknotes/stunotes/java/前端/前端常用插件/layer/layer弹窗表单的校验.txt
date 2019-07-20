@@ -1,0 +1,26 @@
+弹窗内容拼接时 ，在需要进行校验的字段中添加data-rule="required;" 这样类似的校验
+
+
+
+$('#depDevice_add_btn').click(function(){
+			layer.open({
+			    type: 1,
+			    title: '托管设备清单',
+			    shadeClose: true, //点击遮罩关闭
+			    area: ['1200px', '200px'],
+			    content:_depDeviceInfo,// 弹窗显示的内容 ，这里是将显示内容在外部进行拼接获取了 
+			    offset:'600px',
+			    btn: ['确认', '取消'], //按钮
+			    yes: function(index,layero) {  // 点击确认按钮执行的函数，及表单的验证在这里执行
+			    	$("#inputForm").isValid(function(){
+			    		// 执行新增
+			    		addDeposit();
+			    	})
+			    },
+			    no:function(index,layero){ // 点击取消按钮执行的函数
+			    },
+			    success: function (layero) { // 设置提交按钮的显示位置 left right center
+			    	layero.find('.layui-layer-btn').css('text-align', 'center')
+			    }
+			});
+});

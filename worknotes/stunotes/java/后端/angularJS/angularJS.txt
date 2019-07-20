@@ -1,0 +1,5 @@
+1、在同一个jsp中定义多个ng-app时，除第一个其余皆为无效
+
+2、一个ng-app中可以定义多个ng-controller
+
+3、

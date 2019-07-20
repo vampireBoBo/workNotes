@@ -1,0 +1,6 @@
+1、bootstrapTable预定义时在指定列的位置，添加属性====》 cellStyle:myCellStyle（自定义函数名）
+
+2、创建样式函数
+	function myCellStyle(val,row,style){
+		return {css:{background:'red',color:'white'}};
+	}

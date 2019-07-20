@@ -1,0 +1,39 @@
+1.ajax跨域请求问题 
+	http://www.abc.com/a/b 调用 http://www.abc.com/d/c（非跨域）
+
+	http://www.abc.com/a/b 调用 http://www.def.com/d/c （跨域：域名不一致）
+
+	http://www.abc.com:81/a/b 调用 http://www.abc.com:82/d/c （跨域：端口不一致）
+
+	http://www.abc.com/a/b 调用 https://www.abc.com/d/c （跨域：协议不同）
+
+	请注意：localhost和127.0.0.1虽然都指向本机，但也属于跨域。
+2.解决方案
+	1）使用jsonp（请求数据格式为：jsonp）
+		$.ajax({    
+       			 url:"",    		
+			 dataType:'jsonp',    
+        		 data:'',    
+       			 jsonp:'callback',  //传递给请求处理程序或页面的，用以获得jsonp回调函数名的参数名(默认为:callback)  
+  
+        		 success:function(result) {    
+        	    	   //成功的处理  
+        		 },  
+       			 error:function(){  
+            			//错误处理  
+			 }   
+		});
+
+	2）服务器代理（推荐）
+		apache的代理设计
+
+	3）在服务端设置response header中Access-Control-Allow-Origin字段。
+	        // 指定允许其他域名访问   
+    		response.setHeader("Access-Control-Allow-Origin", "*");  
+    		// 响应类型   
+    		response.setHeader("Access-Control-Allow-Methods", "POST");  
+    		// 响应头设置   
+    		response.setHeader("Access-Control-Allow-Headers", "x-requested-with,content-type");  
+
+3、学习连接：
+	https://blog.csdn.net/csdn_ds/article/details/73691134

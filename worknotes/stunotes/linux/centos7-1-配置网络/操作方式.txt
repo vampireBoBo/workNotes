@@ -1,0 +1,10 @@
+﻿1、创建虚拟机的时候，需要选择网络的链接方式为：nat
+2、虚拟机创建完毕后，登录
+	ip addr   【查看是否有有ens33下有无itel的ip】
+		若无ip：进入路径 vi /etc/sysconfig/network-scripts/ifcfg-ens33   【注意后面的文件夹名称需要与ip add指令查询后的第二个大目录想匹配】
+			修改里面的no为yes
+			重启网卡：service network restart
+
+
+
+看到的第一个ip即后面有/24的为真正的ip

@@ -1,0 +1,31 @@
+$.get(param1,param2,function(){}，param4);
+
+param1:请求路径
+param2:请求参数
+param3：请求成功以后的回调函数
+param4：参数格式 可选值  默认为字符串  可选json，   一般使用json，使用时需要用单引号引起来
+
+
+
+function loadTableDatas(temp){
+		var _opts = bsTable.bootstrapTable('getOptions'),_limit = _opts.pageSize,_offset = _opts.pageNumber||1;
+		_offset = temp == 'find'?1:_offset;
+		var requestParam = {limit : _limit,offset:_offset};
+		requestParam.findJson=JSON.stringify({'business_name':$('#business_name').val(),'type':$('#type').val(),'state':$('#state').val(),'startTime':$('#startTime').val(),'endTime':$('#endTime').val()});
+		$.get('<%=request.getContextPath()%>/spring/inOutApply/getInOutList',
+				requestParam,function (_d){
+				if(_d.status==0){
+					bsTable.bootstrapTable('load', {
+						"total": _d.total,
+						"rows":_d.rows
+					});
+				}else{
+					layer.msg("系统异常",{icon: 2});
+				}
+				// 子页面高度自适应
+				if(parent.iFrameHeight!=undefined){
+			    	window.parent.iFrameHeight();
+			    }
+			},'json'
+		);
+  } 

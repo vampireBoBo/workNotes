@@ -1,0 +1,16 @@
+$ #取值区别  ====https://blog.csdn.net/hao65103940/article/details/79099159  
+
+1.优先使用#{paramName,jdbcType=VARCHAR} 写法，除了可以防止sql注入以外，它还能在参数里含有单引号的时候自动转义，
+
+而${paramName}由于是类似于拼接sql的写法，不具备此功能。
+
+2.注意，使用 #{paramName,jdbcType=VARCHAR} 写法的时候，模糊查询的写法为：'%'||#{paramName,jdbcType=VARCHAR}||'%' 
+
+
+
+#{}: 解析为一个 JDBC 预编译语句（prepared statement）的参数标记符，一个 #{ } 被解析为一个参数占位符 。
+
+${}: 仅仅为一个纯碎的 string 替换，在动态 SQL 解析阶段将会进行变量替换。
+
+
+一般情况下推荐使用#防止sql注入  特殊情况下必须要使用$

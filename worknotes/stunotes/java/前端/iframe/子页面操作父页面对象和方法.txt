@@ -1,0 +1,8 @@
+===调用属性
+window.parent.document.getElementById("itemCount").innerHTML=_d.total;
+
+===调用方法
+if(window.parent.getNum!=undefined){
+	console.info('开始统计数量');		    			
+	window.parent.getNum();
+}

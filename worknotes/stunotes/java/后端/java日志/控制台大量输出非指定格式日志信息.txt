@@ -1,0 +1,12 @@
+学习网址：https://blog.csdn.net/weixin_34405332/article/details/87252464
+
+
+1、使用了日志架构是slf4j + log4j12 ，控制台除了指定格式的log4j日志的打印，还大量输出11:20:13.787 [localhost-startStop-1]该格式无用日志信息
+
+2、一般情况下，检查maven dependies中是否包含logback日志类jar包
+
+	A、本项目pom引入了logback，则去掉即可。
+	B、本项目引入的外部jar中包含logback的依赖，则找到对应的jar排除logback的依赖即可。
+	
+	
+	拓展：【若为eclise研发工具，则打开pom文件通过窗口下方的dependency hierarchy 中查看具体是本项目中的那个jar引入了logback 的依赖，然后进行exclusion标签进行排除即可】

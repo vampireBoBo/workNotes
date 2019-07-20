@@ -1,0 +1,22 @@
+ $.ajaxSetup({
+        	 cache:false,
+             contentType:"application/x-www-form-urlencoded;charset=utf-8",
+             complete:function(XMLHttpRequest,textStatus){
+                 //通过XMLHttpRequest取得响应头，sessionstatus，
+                 var sessionstatus=XMLHttpRequest.getResponseHeader("sessionstatus");
+                 if(sessionstatus=="sessionout"){
+                	//如果超时就处理 ，指定要跳转的页面(比如登陆页)
+                    window.location.replace('${pageContext.request.contextPath}/logout');
+                 }
+              }
+           });  
+
+
+====
+ ajaxSetup  该函数用于更改jQuery中AJAX请求的默认设置选项。之后执行的所有AJAX请求，如果对应的选项参数没有设置，将使用更改后的默认设置。
+
+该函数属于全局jQuery对象
+cache:false,属性的设置会使IE在请求时，纵使数据没有发生任何变化也会重新请求 不会直接从缓存中取值
+
+
+学习连接：https://blog.csdn.net/u012963866/article/details/76262297

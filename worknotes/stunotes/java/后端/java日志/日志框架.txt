@@ -1,0 +1,8 @@
+1、学习链接
+	https://my.oschina.net/xianggao/blog/523401
+	
+2、接口框架
+	slf4j  jcl
+
+3、除接口框架外 其他皆为日志实现jar，在使用接口时需配置对应的实现jar
+	
