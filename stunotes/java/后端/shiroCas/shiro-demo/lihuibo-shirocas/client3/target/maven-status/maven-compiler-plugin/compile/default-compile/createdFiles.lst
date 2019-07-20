@@ -1,0 +1,15 @@
+com\lhb\dao\UserMapper.class
+com\lhb\util\Result.class
+com\lhb\service\impl\PermissionServiceImpl.class
+com\lhb\entity\Permission.class
+com\lhb\service\impl\UserServiceImpl.class
+com\lhb\dao\PermissionMapper.class
+com\lhb\dao\RoleMapper.class
+com\lhb\controller\LoginController.class
+com\lhb\service\IRoleService.class
+com\lhb\realm\MyRealm.class
+com\lhb\entity\Role.class
+com\lhb\service\IUserService.class
+com\lhb\service\impl\RoleServiceImpl.class
+com\lhb\entity\User.class
+com\lhb\service\IPermissionService.class

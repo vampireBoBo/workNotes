@@ -1,0 +1,19 @@
+/**
+	 * 将monitorEvent对象转换成MonitorEventHistory对象
+	 * @param monitorEvent
+	 * @return
+	 */
+	@SuppressWarnings("finally")
+	private MonitorEventHistory compateEntity(MonitorEvent monitorEvent){
+		MonitorEventHistory history = new MonitorEventHistory();
+		try {
+			JSON json = (JSON) JSON.toJSON(monitorEvent);
+			history = JSONObject.toJavaObject(json, MonitorEventHistory.class);
+			history.setMonitorevent_id(monitorEvent.getId());
+			history.setId(null);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			return history;
+		}
+	}

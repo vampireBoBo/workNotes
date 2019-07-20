@@ -1,0 +1,9 @@
+1、通过cmd打包时，-DskipTests=true 与 -Dmaven.test.skip=true 对比
+	-DskipTests=true：执行测试test-resource源码的编译打包，但跳过测试源码打包
+	-Dmaven.test.skip=true：跳过测试test-resource源码编译打包
+	
+2、 clean ：清空原先的测试包
+	package：在项目的target包下生成的对应的打包文件
+	install：将打包文件发布到本地的maven仓库中
+	deploy：将打包文件发布到远程maven仓库中
+	

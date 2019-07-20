@@ -1,0 +1,18 @@
+slf4j的对象的创建 可以使用@slf4j注解记性快速使用  同时lombox中有多个get set打印方法 
+
+1、maven项目添加依赖
+	<!-- @slf4j的提供包 -->
+    <dependency>
+        <groupId>org.projectlombok</groupId>
+        <artifactId>lombok</artifactId>
+        <version>1.16.22</version>
+    </dependency>
+	
+2、添加依赖包后 使用@Slf4j 但在使用其默认对象log时 提示没有改对象  此时需要在eclipse等idea中安装lombox
+	此处以eclipse为例：A、进入仓库找到项目下载的lombox依赖包，双击jar包，出现一个弹窗，会显示eclipse的安装位置，然后点击安装。
+					   B、进入eclipse安装路径查看eclipse.ini统计文件夹下是否存在lombox.jar包 然后查看eclipse.ini 最后一行是否添加：-javaagent:D:\eclipse_mars\eclipse\lombok.jar
+
+3、安装以后 进入项目查看默认对象log是否可以引用使用 若可以则表示成功
+
+下列为学习的网址   思路类似  追加语句不一致 需要注意
+https://www.jianshu.com/p/5f5d416f8cee

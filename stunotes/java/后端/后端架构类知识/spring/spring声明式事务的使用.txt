@@ -1,0 +1,135 @@
+学习连接：https://blog.csdn.net/wzy18210825916/article/details/82737326
+
+注意：
+spring的配置文件需要提前开启基础包的扫描和开启spring注解
+	开启spring注解：
+		<!-- 启用Spring基于annotation的DI, 使用户可以在Spring MVC中使用Spring的强大功能。 激活 @Required 
+			@Autowired,JSR 250's @PostConstruct, @PreDestroy and @Resource 等标注 -->
+		<context:annotation-config />
+
+	基础包扫描【基础包的扫描要去掉controller层扫描，因为controller的扫描要在springMvc的配置文件中进行开启，避免二次扫描问题，故在spring的配置文件中进行剔除】：
+		<context:component-scan base-package="com.future">
+			<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>	
+		</context:component-scan>
+
+一、配置文件
+	1、引入tx和apo的命名空间。
+		<beans xmlns="http://www.springframework.org/schema/beans"
+			   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+			   xmlns:p="http://www.springframework.org/schema/p"
+			   xmlns:aop="http://www.springframework.org/schema/aop"
+			   xmlns:tx="http://www.springframework.org/schema/tx"
+			   xmlns:context="http://www.springframework.org/schema/context"
+			   xsi:schemaLocation="http://www.springframework.org/schema/beans
+				http://www.springframework.org/schema/beans/spring-beans.xsd
+				http://www.springframework.org/schema/tx
+				http://www.springframework.org/schema/tx/spring-tx.xsd
+				http://www.springframework.org/schema/aop
+				http://www.springframework.org/schema/aop/spring-aop.xsd
+				http://www.springframework.org/schema/context
+				http://www.springframework.org/schema/context/spring-context.xsd
+		">	
+	2、配置数据源，即DataSource的托管
+		<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+			<property name="driverClassName" value="${jdbc.driver}"></property>
+			<property name="url" value="jdbc:mysql://${mysql.path}/my?useUnicode=true&amp;autoReconnect=true&amp;characterEncoding=utf-8&amp;zeroDateTimeBehavior=round" />
+			<property name="username" value="${db_username}" />
+			<property name="password" value="${db_password}" />
+			<!-- 初始化连接大小 -->    
+       			<!--  <property name="initialSize" value="${jdbc.initialSize}"></property> -->    
+        		<!-- 连接池最大数量 -->    
+      			<!--   <property name="maxActive" value="${jdbc.maxActive}"></property>    --> 
+        		<!-- 连接池最大空闲 -->    
+       			<!--  <property name="maxIdle" value="${jdbc.maxIdle}"></property> -->    
+        		<!-- 连接池最小空闲 -->    
+       			<!--  <property name="minIdle" value="${jdbc.minIdle}"></property>  -->   
+        		<!-- 获取连接最大等待时间 -->    
+       			<!--  <property name="maxWait" value="${jdbc.maxWait}"></property>   -->
+		</bean>
+	3、配置持久层框架，即sqlsessionfactory的托管。其中需指定属性mapperLocations的值，其值mapper文件的扫描路径。指定属性typeAliasesPackage的值，其值为mapper文件中对应的entity包的路径。
+		<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">    
+        		<property name="dataSource" ref="dataSource" />
+       			<property name="typeAliasesPackage" value="com.future.entity"></property>    
+        		<!-- 自动扫描mapping.xml文件 -->    
+        		<property name="mapperLocations" value="classpath:mapper/*.xml"></property> 
+    		</bean>
+	4、通过sqlsessionfactory配置接口动态扫描路径（动态代理）。例如：
+		<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">    
+        		<property name="basePackage" value="com.future.dao" />    
+        		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>    
+    		</bean> 
+	5、配置事务管理器。需要指定数据库DataSource
+		<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+			<property name="dataSource" ref="dataSource"></property>
+		</bean>
+二、完成以上即声明式事务的声明基本完成，其使用方式有两种，一种以aop方式，一种以注解的方式。
+	【aop切面事务的使用】
+		6、配置事务的传播特性，及在什么方法上进行执行
+			<!-- 配置事务的传播特性 -->
+			<tx:advice id="userTxAdvice" transaction-manager="transactionManager">
+				<tx:attributes>
+					<tx:method name="delete*" propagation="REQUIRED" read-only="false"
+						rollback-for="java.lang.Exception" no-rollback-for="java.lang.RuntimeException" />
+					<tx:method name="insert*" propagation="REQUIRED" read-only="false"
+						rollback-for="java.lang.RuntimeException" />
+					<tx:method name="update*" propagation="REQUIRED" read-only="false"
+						rollback-for="java.lang.Exception" />
+					<tx:method name="find*" propagation="SUPPORTS" />
+					<tx:method name="get*" propagation="SUPPORTS" />
+					<tx:method name="select*" propagation="SUPPORTS" />
+					<tx:method name="batch*" propagation="REQUIRED" read-only="false" />
+				</tx:attributes>
+			</tx:advice>
+		7、配置aop切面事务
+			<aop:config>
+				<aop:pointcut id="transactionPointcut"
+					expression="execution(*  com.future.service.*.impl.*.*(..))" />
+				<aop:advisor pointcut-ref="transactionPointcut"
+					advice-ref="userTxAdvice" />
+			</aop:config>
+		8、完成以上两步  表示aop切面事务已经配置完毕，程序在指定的方法上面会进行事务的触发。核心步骤
+			a、引入tx和aop命名空间；
+			b、定义事务管理器Bean，并为其注入数据源Bean；
+			c、通过<tx:advice>配置事务增强，绑定事务管理器并对不同方法定义事务规则；
+			d、配置切面，将事务增强与方法切入点组合。
+	【注解事务的使用】
+		6、使用事务管理器开启事务的注解
+			<tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true"/>
+			
+			【proxy-target-class属性值决定是基于接口的还是基于类的代理被创建。首先说明下proxy-target-class="true"和proxy-target-class="false"的区别，
+			为true则是基于类的代理将起作用（需要cglib库），为false或者省略这个属性，则标准的JDK 基于接口的代理将起作用。】
+		7、在对应的方法上使用注解，进行事务的配置，例如：@Transactional其注解的参数有：
+			属性                    类型                                   说明
+			value	                String	                               可选的限定描述符，指定使用的事务管理器
+			propagation	            enum: Propagation	                   可选的事务传播行为设置
+			isolation	            enum: Isolation	                       可选的事务隔离级别设置
+			readOnly	            boolean	                               读写或只读事务，默认读写
+			timeout	                int (in seconds granularity)	       事务超时时间设置
+			rollbackFor	            Class对象数组，必须继承自Throwable     导致事务回滚的异常类数组
+			rollbackForClassName    类名数组，必须继承自Throwable	       导致事务回滚的异常类名字数组
+			noRollbackFor	        Class对象数组，必须继承自Throwable	   不会导致事务回滚的异常类数组
+			noRollbackForClassName	类名数组，必须继承自Throwable	       不会导致事务回滚的异常类名字数组
+			
+			默认情况下当程序抛出运行时异常才会进行事务的回滚  若需要当受检查异常发成时事务也进行回滚的话 则需要设置@Transactional(rollbackFor=Exception.class)  即回滚的类是Exception夸大了回滚异常的范围
+			
+		8、事务注解一般是放在service 进行调用的  但是也可以放在controller层进行调用，具体用法：https://www.cnblogs.com/garfieldcgf/p/5666891.html
+		9、完成以上步骤就可以使用注解事务的配置，需注意：
+			@Transactional 可以作用于接口、接口方法、类以及类方法上。当作用于类上时，该类的所有 public 方法将都具有该类型的事务属性，同时，我们也可以在方法级别使用该标注来覆盖类级别的定义。
+
+			虽然 @Transactional 注解可以作用于接口、接口方法、类以及类方法上，但是 Spring 建议不要在接口或者接口方法上使用该注解，因为这只有在使用基于接口的代理时它才会生效。另外， @Transactional 注解应该只被应用到 public 方法上，这是由 Spring AOP 的本质决定的。如果你在 protected、private 或者默认可见性的方法上使用 @Transactional 注解，这将被忽略，也不会抛出任何异常。
+
+			默认情况下，只有来自外部的方法调用才会被AOP代理捕获，也就是，类内部方法调用本类内部的其他方法并不会引起事务行为，即使被调用方法使用@Transactional注解进行修饰。
+			
+			
+			Spring团队的建议是你在具体的类（或类的方法）上使用 @Transactional 注解，而不要使用在类所要实现的任何接口上。你当然可以在接口上使用 @Transactional 注解，但是这将只能当你设置了基于接口的代理时它才生效。因为注解是不能继承的，这就意味着如果你正在使用基于类的代理时，那么事务的设置将不能被基于类的代理所识别，而且对象也将不会被事务代理所包装（将被确认为严重的）。因此，请接受Spring团队的建议并且在具体的类上使用 @Transactional 注解。
+			@Transactional 注解标识的方法，处理过程尽量的简单。尤其是带锁的事务方法，能不放在事务里面的最好不要放在事务里面。可以将常规的数据库查询操作放在事务前面进行，而事务内进行增、删、改、加锁查询等操作。
+
+			
+三、事务回滚
+	http://www.voidcn.com/article/p-bozwatyd-st.html
+	1、需要触发事务的回滚必须调用的方法抛出了运行时异常；
+	2、受检查异常事务不会回滚，只有运行时异常事务才会回滚；
+	3、若手动抛出异常，例如：throw new Exception("异常描述")，因为需要进行throw或者try-cahche的异常都是受检查异常，故事务也不会回滚；
+	
+
+			

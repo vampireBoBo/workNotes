@@ -1,0 +1,36 @@
+
+https://www.jb51.net/article/87005.htm
+
+1、window对象  这个不需要引入js
+<script type="text/javascript" >
+	window.onload=function(){
+		// 计算 资源子页面高度  --- 设置myiframe高度
+		if(parent.iFrameHeightExport!=undefined){
+			window.parent.iFrameHeightExport();
+		}
+	} 
+</script>
+
+
+
+2、document这个需要引入jquery的js
+<script type="text/javascript" >
+	$(function () {
+		// 计算 资源子页面高度  --- 设置myiframe高度
+		if(parent.iFrameHeightExport!=undefined){
+			window.parent.iFrameHeightExport();
+		}
+	});
+</script>
+
+
+3、学习资料  https://www.cnblogs.com/a546558309/p/3478344.html
+
+4、基本概念
+jquery的预编译函数：:$(function(){}) 和$(document).ready(function(){})
+document的预编译函数：window.onload=function(){}
+
+
+5、区别：
+jquery是在dom文档树加载完之后执行一个函数（注意，这里面的文档树加载完不代表全部文件加载完）。
+window.onload是在dom文档树加载完和所有文件加载完之后执行一个函数。也就是说$(document).ready要比window.onload先执行。

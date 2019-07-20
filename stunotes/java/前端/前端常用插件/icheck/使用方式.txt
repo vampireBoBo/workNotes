@@ -1,0 +1,14 @@
+1、引入js等css文件
+2、给标签添加指定的class样式
+3、在页面的初始函数中激活icheck
+	$(function(){
+		$('.ickbox').iCheck({
+	       		checkboxClass: 'icheckbox_square-blue',
+	       		radioClass: 'iradio_square-blue',
+	       		increaseArea: '20%'
+		});
+	});
+4、若需要事件设置一些事件，由于使用了icheck之后，checkbox的原有事件已经被改写，故要使用改写之后的函数、
+	$('input').on('ifChecked', function(event){
+		// 需要执行的函数体
+	});

@@ -1,0 +1,13 @@
+当前最新版本下载地址：http://www.oracle.com/technetwork/java/javase/downloads/index.html
+
+　　历史版本下载地址：　　http://www.oracle.com/technetwork/java/javase/archive-139210.html  
+
+
+
+账号密码
+1579404542@qq.com
+139190BOBObobo
+
+======================================================
+tomcat下载网址：
+	https://tomcat.apache.org/download-70.cgi#7.0.92

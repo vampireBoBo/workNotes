@@ -1,0 +1,27 @@
+https://niceue.com/validator/demo/match.php
+
+1、使用方法
+
+	添加自定义检验方法： 
+	方法作用：判断当前输入值 是否在指定参数的集合中。
+	方法参数：param1:【当前输入框对象 即页面录入的值，取值时，需要通过$(param1).val()】  
+			  param2:【需要进行比对的数组信息，取值时，可通过param2.construction 判断数据类型，判断结果是Array。
+					   页面传递的数组信息被以","拼接param2中的第一个值。故对比的参数获取为param[0],取到值以后用","分割成数组 进行一一比对即可
+					  】
+	方法调用：data-rule="checkRepeat(param2)"; 【调用时只需要传参数2即可  参1不需要传递】
+	
+	方法实现：
+	checkRepeat:function(currInfo,checkInfo){
+  		  var _curr = $(currInfo).val();
+  		  var _checkArr = new Array();
+  		  _checkArr = checkInfo[0].split(",");
+  		  console.info(_checkArr[0]);
+  		  var flag = "no";
+  		  for(var i=0;i<_checkArr.length;i++){
+  			  if(_checkArr[i] == _curr){
+  				  flag = "yes";
+  				  break;
+  			  }
+  		  }
+  		  return  flag == "no" || this.renderMsg("该值已经存在");
+  	  }

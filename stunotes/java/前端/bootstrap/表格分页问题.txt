@@ -1,0 +1,6 @@
+背景：当列表根据条件检索之后 重新跳转至第一页		
+
+// 根据检索条件重新检索时  将页码刷新回到1。
+ 		if(_offset==1){
+ 			bsTable.bootstrapTable('refreshOptions',{pageNumber:1});
+ 		}

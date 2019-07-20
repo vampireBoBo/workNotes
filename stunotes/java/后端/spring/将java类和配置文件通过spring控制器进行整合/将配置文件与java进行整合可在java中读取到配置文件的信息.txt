@@ -1,0 +1,27 @@
+1、创建配置文件sys_config.properties
+	以键值对的方式配置，例如：
+	
+	page.rows=10
+	webPage.rows=20
+	default.avatar.man=avatar1.jpg
+	default.avatar.woman=avatar0.jpg
+	
+	
+2、创建实体类，必须继承PropertyPlaceholderConfigurer，然后重新方法processProperties
+	创建静态方法通过key读取value，例如：
+	public static Optional<String> getValue(String name){
+        String value = propertyMap.get(name);
+        if (Strings.isNullOrEmpty(value)) {
+            return Optional.absent();
+        }
+        return Optional.of(value);
+    }
+3、spring将该类与配置文件进行关联
+	<!--配置读取系统配置文件的Properites文件-->
+    <bean id="propertyConfigurer" class="PropertyUtils【此处为类的全限定名及全路径】">
+        <property name="locations">
+            <list>
+                <value>classpath:sys_config.properties</value>
+            </list>
+        </property>
+    </bean>

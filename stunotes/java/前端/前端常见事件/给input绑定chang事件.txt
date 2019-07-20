@@ -1,0 +1,9 @@
+1、直接在input标签中设置成 change是不会起作用的 
+2、给指定id绑定chang事件 也是不会起作用的 ，例如：$('input[name=myInput]').change(function() { ... });
+2、需要   
+    $("#input_id").on('input',function(e){  
+       alert('Changed!')  
+    });  
+
+
+学习连接;https://blog.csdn.net/arkblue/article/details/18039091

@@ -1,0 +1,34 @@
+===========================================================
+安装X System 系统包
+ 指令：yum groupinstall "X Window System"
+
+===========================================================https://jingyan.baidu.com/article/0964eca26fc3b38284f53642.html
+安装gnome图形界面
+	指令：yum grouplist 查看可批量安装的系统文件
+	指令: yum groupinstall "GNOME Desktop"
+
+【然后安装我们需要的图形界面软件，GNOME(GNOME Desktop)
+
+这里需要特别注意！！！！
+
+一定要注意 名称必须对应 不同版本的centOS的软件名可能不同 其他Linux系统类似
+
+否则会出现No packages in any requested group available to install or update 的错误。】
+
+===========================================================
+需要在linux安装图形界面插件：
+   图形界面工具类安装GTK--https://blog.csdn.net/u012394808/article/details/20204075
+
+
+安装必要文件包：yum install libgnomeui-devel
+
+安装必要组件：yum install gtk2 gtk2-devel gtk2-devel-docs
+
+安装可选组件：yum install gnome-devel gnome-devel-docs
+
+
+安装以后可用指令：gedit调用文本编辑框 若显示编辑框则表示成功
+===========================================================
+ 安装时钟插件：yum  install xclock xterm xorg* -y
+
+通过指令：xclock 若显示时钟弹窗  则表示成功  

@@ -1,0 +1,14 @@
+https://blog.csdn.net/yangliuhbhd/article/details/80644712
+
+================================================
+1、查看所有docker进程
+ docker ps -a 
+
+2、进入某个docker容器内部
+ docker exec -it containerID /bin/bash
+
+3、需要安装什么插件，使用yum命令安装即可
+
+4、安装完毕 exit 退出容器编辑器
+
+5、通过dockui重新启动容器即可

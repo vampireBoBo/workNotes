@@ -1,0 +1,23 @@
+1、创建配置文件
+	resShortname4a = zwy
+	key4a =  7727656213482279 
+2、在application文件中引入配置文件
+3、创建对应的实体  存放配置文件的内容
+
+	@Service
+	public class Constants {
+		
+		@Value("${resShortname4a}")
+		public String resShortname4a;
+		
+		@Value("${key4a}")
+		private String key4a; 
+		
+		// GET SET方法 也是需要的
+	}
+4、java调用
+	@Autowired
+	private Constants  constants; // 读取配置参数
+	
+	// ....
+	String key4a = constants.getKey4a();

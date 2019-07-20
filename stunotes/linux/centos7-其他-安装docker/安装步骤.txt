@@ -1,0 +1,36 @@
+1、学习网站
+	安装docker：https://www.cnblogs.com/yufeng218/p/8370670.html
+	拉取镜像registry：https://www.cnblogs.com/Tempted/p/7768694.html
+	拉取centos镜像，并配置tomcat容器：https://www.cnblogs.com/areyouready/p/8949991.html
+	创建自己所需镜像:https://blog.csdn.net/u013547284/article/details/78476586
+	
+2、docker默认存放位置：/var/lib/docker
+
+3、为docker添加国内镜像，加速下载镜像：【https://blog.csdn.net/hellozhxy/article/details/80239388---请测非常有效   https://blog.csdn.net/u012790055/article/details/80669165】
+
+	修改配置文件/etc/docker/daemon.json，如果该文件没有则进行创建：
+
+	[root@docker ~]# cat /etc/docker/daemon.json 
+	{
+		"dns": ["192.168.101.2","8.8.8.8"],
+		"registry-mirrors": ["https://docker.mirrors.ustc.edu.cn"]
+	}
+
+4、docker镜像拉取
+	docker镜像有很多种，例如：centos、registry等【docker官方镜像库：https://hub.docker.com/search/?q=&type=image&page=2】。要用于java研发，故选择centos镜像，具体操作如下：
+	1)docker pull  centos：安装docker服务并启动服务以后，使用该指令拉取对应的镜像，器存储位置为默认位置：/var/lib/docker
+	2)
+	
+
+5、docker服务常用指令
+	docke images /docker image ls -a :查看本地镜像
+	docker rmi name【镜像的名称】/docker image rm  name【name为要删除的镜像的名称】
+	uname -r:查看系统内核版本，docker的安装要在3.1及以上
+	docker version:查看docker版本或者是否安装
+	systemctl status docker：查看docker服务当前状态
+	systemctl start/stop/restart docerk :启动/停止/重启docker服务
+	systemctl enable docker：docker服务开机自启
+	
+
+	
+	

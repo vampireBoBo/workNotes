@@ -1,0 +1,44 @@
+学习网址：https://www.2cto.com/database/201804/740795.html
+
+
+1、下载地址
+	http://mirrors.sohu.com/mysql/
+	https://dev.mysql.com/downloads/repo/yum/
+
+2、在线安装
+	安装wget指令：yum -y install wget
+	创建存放mysql安装文件的文件夹
+	进入存放文件夹路径，下载安装源：wget https://dev.mysql.com/get/mysql57-community-release-el7-8.noarch.rpm
+	安装：yum localinstall mysql57-community-release-el7-8.noarch.rpm
+	检测是否安装成功：yum repolist enabled | grep "mysql.*-community.*"
+	
+	===========
+	从安装源中选择需要安装的mysql的版本，需要进行如下操作：
+	修改 默认安装的 Mysql 版本  vi /etc/yum.repos.d/mysql-community.repo  将5.7源的 enabled=0 改为 endaled=1
+
+	==========
+	安装mysql，yum install mysql-community-server
+	启动 Mysql 服务，systemctl start mysqld
+	查看是否启动成功：ps -ef | grep mysql
+	查看状态：systemctl status mysqld
+	开机自启：systemctl enable mysqld 
+	立即生效新配置：systemctl daemon-reload
+
+	==========
+	修改root  登录密码，mysql 安装完成后，在 /var/log/mysql.log 文件中给 root 生成了一个默认密码。输入指令：grep 'temporary password' /var/log/mysqld.log，指令结果查看：root@localhost: 后面就是默认初始密码。【&XoQ1##*dg-j】
+
+	=======
+	登录mysql ，指令：mysql -u root -p  然后按回车 输入密码，控制台接收密码的录入但不进行显示。
+	
+	=======
+	修改密码：alter user  'root'@'localhost' identified by '新密码';【此处新密码必须符合数据库原先的要求,】
+	修改数据的密码要求，设置简单的数据库密码：https://blog.csdn.net/memory6364/article/details/82426052
+【注意：进入mysql模式时，所有的sql语句需要添加； 】
+
+	=======
+	退出mysql，重新登录：
+	mysql退出三种方法：
+	mysql > exit;
+	mysql > quit;
+	mysql > \q;
+	

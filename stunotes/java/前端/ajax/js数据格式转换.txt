@@ -1,0 +1,36 @@
+=========================================================前台================================================
+// 转换成对象
+ 
+var myObject = JSON.parse(_data); 
+alert("对象："+myObject.msg);
+ 
+ 
+// 转换成数组
+var myobj = eval("["+_data+"]");
+for (var i = 0; i < myobj.length; i++) {
+alert("数组："+myobj[i].msg);
+}
+ 
+ 
+//把json格式的字符串转成JSON对象
+ 
+var json1 = '{"department": "中兵","address": "北京","contacts": "李硕","telphone": "15201274666","email": "li_shilei@yeah.NET","fax": "0108596666"}';
+var json2 = '{"department": "中兵2","address": "北京2","contacts": "李硕2","telphone": "152012746662","email": "li_shilei2@yeah.Net","fax": "01085966662"}';
+var jsonObj = $.parseJSON(json1); 或用eval方法
+ 
+//把数组转成JSON对象
+ 
+var arr=new Array();
+arr.push(json1);
+arr.push(json2);
+var b=JSON.stringify(arr)
+
+=================================================后台json====================================================
+String str = "[{name:'a',value:'aa'},{name:'b',value:'bb'},{name:'c',value:'cc'},{name:'d',value:'dd'}]" ; // 一个未转化的字符串
+JSONArray json = JSONArray.fromObject(str ); // 首先把字符串转成 JSONArray 对象
+if(json.size()>0){
+ for(int i=0;i<json.size();i++){
+  JSONObject job = json.getJSONObject(i); // 遍历 jsonarray 数组，把每一个对象转成 json 对象
+  System.out.println(job.get("name")+"=") ; // 得到 每个对象中的属性值
+ }
+}

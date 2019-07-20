@@ -1,0 +1,4 @@
+需要注意  在页面加载的时候  当在标签中遇到 ng-controlle时  会去加载执行对应的controller 完成初始化  
+1、controller的初始化顺序取决于 其对应的dom元素的声明顺序  而与其函数的存放顺序无关
+
+2、如果 某一个dom元素的controller函数中有错误  则 该dom元素下面的controller函数都不会进行初始  即因为错误而导致初始化的终止

@@ -1,0 +1,50 @@
+1】、访问路径中，配置去掉当前项目名称，直接访问。https://blog.csdn.net/Jianyiwei123456/article/details/79922252
+eclipse中在tomcat的运行文件中的server.xml中 设置当前项目的映射路径为/ ,而不是/projectName 就可以了
+
+
+2】相对路径：
+所有相对路径都是由”/”开头的
+
+比如：/image/a.gif，/user/main.jsp，
+
+大家知道在html中的相对路径是这样的：
+
+有个html文件：a.html，其中有
+
+<link href="one.css" rel="stylesheet" type="text/css">，
+
+one.css：表示one.css和a.hmtl处于同一个目录
+user/one.css：表示one.css处于a.html所在目录的子目录user中，即user是a.html在同一个目录 。
+../one.css：表示one.css位于a.hmtl上一级目录下，
+../../one.css：表示one.css位于a.hmtl上一级目录的上一级目录下，
+./：表示和a.hmtl同一目录
+我们称上述相对路径为html相对路径
+
+
+3】绝对路径，通过如下方法拼接成basePath  然后使用base标签统一当前页面的访问路径
+  request.getContextPath()  pageContext.request.contextPath  得到上下文项目的名称
+写<%=request.getContextPath() %>太麻烦，可以在每一个jsp文件顶部加入以下内容后， 
+<%
+    String path = request.getContextPath();
+    String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
+getContexPath();   得到当前应用的根目录
+
+getScheme();         它返回当前请求所使用的协议，一般的应用返回“http”，对于ssl则返回“https”
+
+getServerName();  获取服务器名字，如果是在本地的话就是localhost
+
+getServerPort();      获得服务器的端口号
+ 
+
+<head>
+    <base href="<%=basePath%>">
+    <script src="script/jquery-1.9.1.js"></script><!--这种最简洁-->
+</head>   
+
+就可直接使用
+
+<script src=" home/test.js"></script>了
+
+
+

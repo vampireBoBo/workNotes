@@ -1,0 +1,6 @@
+like "%"#{title}"%" 
+
+and sysName like concat('%',#{sysName},'%')
+
+
+有时候中文模糊查询时出现问题  需要将concat 设置成大写CONCAT

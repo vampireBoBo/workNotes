@@ -1,0 +1,16 @@
+1、请求方式：url/param1/param2
+   controller:
+		@responseBody
+		@requestMapping(value="url/{param1}/{param2}")
+		public String getOption(@pathVariable String param1,@pathVariable String param2){
+			// 方法体
+		}
+		
+
+2、请求方式：url?param1=val1&param2=val2
+   controlle:
+		@responseBody
+		@requestMapping(value="url")
+		public String getOption(@requestParam String param1,@pathVariable String param2){
+			// 方法体
+		}

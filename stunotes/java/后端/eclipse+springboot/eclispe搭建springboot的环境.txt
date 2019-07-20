@@ -1,0 +1,4 @@
+1、方式一：eclipse插件仓库中获取sts（spring tools suit）
+2、方式二：使用在线安装方式：
+	a、查看eclipse的版本号和位数（32、64） https://jingyan.baidu.com/article/fdffd1f8482c58f3e98ca12e.html
+	b、查找对应版本号的sts :https://blog.csdn.net/u012844147/article/details/78537119

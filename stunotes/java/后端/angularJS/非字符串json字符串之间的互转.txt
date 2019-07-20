@@ -1,0 +1,7 @@
+1、对象转字符串
+	JSON.stringify(obj);
+	angular.toJson(obj);
+	
+2、字符串转对象
+	JSON.parse(str);
+	angular.fromJson(str);

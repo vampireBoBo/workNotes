@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lhb.dao.UserMapper">
+  <resultMap id="BaseResultMap" type="com.lhb.entity.User">
+    <id column="uid" jdbcType="INTEGER" property="uid" />
+    <result column="loginName" jdbcType="VARCHAR" property="loginname" />
+    <result column="loginPassWord" jdbcType="VARCHAR" property="loginpassword" />
+    <result column="uname" jdbcType="VARCHAR" property="uname" />
+    <result column="age" jdbcType="INTEGER" property="age" />
+    <result column="gender" jdbcType="CHAR" property="gender" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    uid, loginName, loginPassWord, uname, age, gender
+  </sql>
+  <!-- 根据条件 查询用户信息 -->
+  <select id="selectByParams" resultType="com.lhb.entity.User">
+  	select 
+  	<include refid="Base_Column_List"/> 
+  	FROM s_user where 1=1 
+  	<if test="loginName!='' and loginName!=null">
+  		and loginName=#{loginName}
+  	</if>
+  	<if test="uid!='' and uid!=null">
+  		and uid = #{uid}
+  	</if>
+  	
+  </select>
+  
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from s_user
+    where uid = #{uid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from s_user
+    where uid = #{uid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.lhb.entity.User">
+    insert into s_user (uid, loginName, loginPassWord, 
+      uname, age, gender)
+    values (#{uid,jdbcType=INTEGER}, #{loginname,jdbcType=VARCHAR}, #{loginpassword,jdbcType=VARCHAR}, 
+      #{uname,jdbcType=VARCHAR}, #{age,jdbcType=INTEGER}, #{gender,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lhb.entity.User">
+    insert into s_user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="uid != null">
+        uid,
+      </if>
+      <if test="loginname != null">
+        loginName,
+      </if>
+      <if test="loginpassword != null">
+        loginPassWord,
+      </if>
+      <if test="uname != null">
+        uname,
+      </if>
+      <if test="age != null">
+        age,
+      </if>
+      <if test="gender != null">
+        gender,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="uid != null">
+        #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="loginname != null">
+        #{loginname,jdbcType=VARCHAR},
+      </if>
+      <if test="loginpassword != null">
+        #{loginpassword,jdbcType=VARCHAR},
+      </if>
+      <if test="uname != null">
+        #{uname,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null">
+        #{age,jdbcType=INTEGER},
+      </if>
+      <if test="gender != null">
+        #{gender,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lhb.entity.User">
+    update s_user
+    <set>
+      <if test="loginname != null">
+        loginName = #{loginname,jdbcType=VARCHAR},
+      </if>
+      <if test="loginpassword != null">
+        loginPassWord = #{loginpassword,jdbcType=VARCHAR},
+      </if>
+      <if test="uname != null">
+        uname = #{uname,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null">
+        age = #{age,jdbcType=INTEGER},
+      </if>
+      <if test="gender != null">
+        gender = #{gender,jdbcType=CHAR},
+      </if>
+    </set>
+    where uid = #{uid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lhb.entity.User">
+    update s_user
+    set loginName = #{loginname,jdbcType=VARCHAR},
+      loginPassWord = #{loginpassword,jdbcType=VARCHAR},
+      uname = #{uname,jdbcType=VARCHAR},
+      age = #{age,jdbcType=INTEGER},
+      gender = #{gender,jdbcType=CHAR}
+    where uid = #{uid,jdbcType=INTEGER}
+  </update>
+</mapper>

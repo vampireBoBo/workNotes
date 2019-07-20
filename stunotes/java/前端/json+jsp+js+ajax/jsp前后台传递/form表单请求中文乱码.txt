@@ -1,0 +1,61 @@
+https://www.cnblogs.com/sincoolvip/p/5746678.html?utm_source=itdadao&utm_medium=referral
+JSP表单提交中文乱码解决方案
+分2种提交方式，解决方案不同：
+
+1、form表单提交方式为get
+
+
+
+乱码：
+
+
+
+解决方案：
+
+因为get方法是参数在URL中显示，因为tomcat的URL编码默认是：IOS-8859-1所以要么改tomcat
+
+第1种方法(治本)：tomcat-config-sever.xml 
+
+加URIEncoding="utf-8"或者useBodyEncodingForURI="true"
+
+
+
+第2种方法(治标)：要么要针对性的对乱码的参数进行单独转码
+
+<%
+String username = request.getParameter("username");
+String name = new String(username.getBytes("ios-8859-1"),"utf-8");
+
+String password = request.getParameter("password");
+out.print("--用户名是："+name+"--密码是："+password);
+%>
+
+ 
+
+2、form表单提交方式为post
+
+直接在b.jsp中加入：
+
+对请求的中文乱码处理：
+
+1
+request.setCharacterEncoding("utf-8");
+对响应的中文乱码处理：
+
+1 response.setCharacterEncoding("utf-8");
+但是我们通常只用写Request就可以了，因为jsp页面头部charset就是对响应的编码
+
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+所以代码应该是这样写的：
+
+<%
+    request.setCharacterEncoding("utf-8");
+    String username = request.getParameter("username");
+    String password = request.getParameter("password");
+    out.print("--用户名是："+username+"--密码是："+password);
+ %>

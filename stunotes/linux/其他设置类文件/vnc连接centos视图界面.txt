@@ -1,0 +1,82 @@
+https://www.cnblogs.com/k98091518/p/6908364.html
+
+
+
+https://blog.csdn.net/u010638969/article/details/51244933
+
+
+https://www.jianshu.com/p/35640fc5672b
+
+
+https://www.jianshu.com/p/61f2b0965501
+
+
+http://www.360doc.com/content/17/0912/10/203871_686440894.shtml
+
+
+https://blog.csdn.net/hqwang4/article/details/78726438
+
+
+========================================https://blog.csdn.net/changzehai/article/details/78826354
+远程连接linux的图形界面，需先安装图形界面  https://blog.csdn.net/jincf2011/article/details/6362923
+
+1、安装x11协议 :yum groupinstall "X Window System" -y
+2、安装需要的视图界面如gnome或者kde。譬如安装gnome，通过指令：yum grouplist 查看当前系统版本支持的gnome指令 然后使用指令：yum groupinstll "GNOME Desktop" 【"GNOME Desktop"这个是通过前一个指令查询的当前系统对应的指令】
+3、安装vnc服务【vnc分为服务器server和客户端view】，在服务器端安装vncserver:https://blog.csdn.net/changzehai/article/details/78826354
+yum isntall vnc *vnc-server* 或者 yum install tigervnc-server
+
+4、中文乱码：yum install dejavu-lgc-sans-fonts、yum groupinstall "Fonts" -y
+
+5、关闭防火墙：systemctl stop firewalld.service、systemctl disable firewalld.service
+
+6、配置vnc服务器  如某个用户需要进行远程连接视图界面 则需要给此用户配置vncserver@.service文件
+给root用户配置服务
+
+复制文件：cp /lib/systemd/system/vncserver@.service /lib/systemd/system/vncserver@:1.service
+
+修改vncserver@:1.service  指令为：vim /lib/systemd/system/vncserver@:1.service
+
+
+
+【
+[Unit]
+Description=Remote desktop service (VNC)
+After=syslog.target network.target
+
+
+[Service]
+Type=forking  
+User=root
+
+
+# Clean any existing files in /tmp/.X11-unix environment
+ExecStartPre=-/usr/bin/vncserver -kill %i
+ExecStart=/usr/bin/vncserver %i
+PIDFile=/root/.vnc/%H%i.pid
+ExecStop=-/usr/bin/vncserver -kill %i
+
+
+[Install]
+WantedBy=multi-user.target
+】
+
+注意：若启动报错时，可将Type=forking   设置为simple  其他非root用户必须为simple
+
+7、运行命令systemctl daemon-reload更新systemctl；
+
+8、运行命令vncpasswd root设置vncserver的密码；
+
+9、运行命令systemctl start vncserver@:1.service(可以运行systemctl enable vncserver@:1.service命令设置为默认启动服务)；//启动不了则重启一下系统或则查看启动日志
+
+若启动报错：
+【Job for vncserver@:1.service failed because a configured resource limit was exceeded. See "systemctl status vncserver@:1.service" and "journalctl -xe" for details.】
+
+root用户解决方案：rm -rf /tmp/.X11-unix/*
+
+非root用户解决方案：https://blog.csdn.net/u010638969/article/details/51244933
+
+10.开机自启：systemctl enable vncserver@:1.service
+
+11、重启系统后使用VNC-Viewer连接：
+服务器端通过指令：ip addr  查看到ip  vncserver的端口为：5901  
+使用客户端vncview进行连接：譬如：192.168.58.128:5901   或者192.168.58.128:1 

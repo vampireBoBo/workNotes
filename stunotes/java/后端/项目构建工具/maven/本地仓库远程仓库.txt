@@ -1,0 +1,21 @@
+1、maven是一个项目构建工具，主要作用有：规范开发（整个项目架构已经分配好不同文件的存储路径）、统一管理jar
+2、maven的核心文件是pom.xml，里面的依赖成为构建，而所有构建在本地存放的位置称为本地仓库。
+3、安装maven服务，setting.xml文件中配置本地仓库的位置：
+	<localRepository>D:/apache/maven-rep/local</localRepository>
+4、maven构建是通过坐标去识别，<groupid><artifactoryid><version>,新项目在创建时会根据坐标从本地仓库获取jar，若本地仓库
+不存在，则将从中央仓库获取。
+5、maven的核心概念：仓库  镜像。仓库分为本地仓库、远程仓库。远程仓库分为：中央仓库、私服（nexus）、其他仓库。
+6、镜像：
+如果仓库X可以提供仓库Y存储的所有内容，那么就可以认为X是Y的一个镜像。换句话说，任何一个可以从仓库Y获得的构件，都胡够从它的镜像中获取。举个例子，http://maven.net.cn/content/groups/public/ 是中央仓库http://repo1.maven.org/maven2/ 在中国的镜像，由于地理位置的因素，该镜像往往能够提供比中央仓库更快的务。
+因此，可以配置Maven使用该镜像来替代中央仓库。编辑settings.xml，代码如下：
+<mirror>
+		
+	<id>alimaven</id>
+		
+	<name>aliyun maven</name>
+		
+	<mirrorOf>central</mirrorOf>
+		
+	<url>http://maven.aliyun.com/nexus/content/repositories/central</url>
+	 
+</mirror>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+					http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+					http://www.springframework.org/schema/context
+                    http://www.springframework.org/schema/context/spring-context-4.0.xsd">
+	<!-- web  shiro 过滤代理 -->                
+    <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+    	<property name="securityManager" ref="securityManager" />
+    	<property name="unauthorizedUrl" value="/403.jsp" />
+    	<property name="successUrl" value="${shiro.successUrl}"/>
+    	<!-- 自定义filter -->
+    	<property name="filters">
+    		<map>
+    			<entry key="casFilter" value-ref="casFilter"/>
+    			<entry key="logout" value-ref="logoutFilter" />
+    		</map>
+    	</property>
+    	<property name="filterChainDefinitions">
+    		<value>
+    			/shiro-cas = login
+    			/home = authc
+    			/logout = logout
+    			/** = anon
+    		</value>
+    	</property>
+    </bean>
+	 <!-- 配置安全管理器 -->
+    <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+    	<property name="realm" ref="myCasRealm"/>
+    	<property name="cacheManager" ref="cacheManager"/>
+    </bean>
+    
+    <!-- 自定义realm -->
+    <bean id="myCasRealm" class="com.lhb.realm.MyShiroCasRealm">
+    	<property name="casServerUrlPrefix" value="${shiro.cas.serverUrlPrefix}"/>
+    	<property name="casService" value="${shiro.cas.service}"/>
+    </bean>
+    
+    <!-- 托管 casFilter   -->
+    <bean id="casFilter" class="org.apache.shiro.cas.CasFilter">
+    	<property name="failureUrl" value="${shiro.failureUrl}" />
+    	<property name="successUrl" value="${shiro.successUrl}" />
+    </bean>
+    
+    <!-- 托管logoutFilter  -->
+    <bean id="logoutFilter" class="org.apache.shiro.web.filter.authc.LogoutFilter">
+    	<property name="redirectUrl" value="${shiro.logoutUrl}" />
+    </bean>
+    
+    <!-- shiro 生命周期  -->
+    <bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"></bean>
+	
+</beans>

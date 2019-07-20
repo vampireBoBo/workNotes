@@ -1,0 +1,1 @@
+在遍历的过程中 使用delete  data.key   就可以将data中的key属性移除掉

@@ -1,0 +1,120 @@
+一、概念
+	SpringBoot是一个框架，一种全新的编程规范，他的产生简化了框架的使用，所谓简化是指简化了Spring众多框架中所需的大量且繁琐的配置文件，
+	所以 SpringBoot是一个服务于框架的框架，服务范围是简化配置文件。即用于快速启动一个spring框架的项目的工具框架。boot为启动的意思。
+	
+	是用来简化新Spring应用的初始搭建以及开发过程。该框架使用了特定的方式来进行配置，从而使开发人员不再需要定义样板化的配置。
+	通过这种方式，Spring Boot致力于在蓬勃发展的快速应用开发领域（rapid application development）成为领导者。
+二、作用
+	简化配置。快速搭建一个web项目可适配于当前流程的ssm和ssh框架中。
+	1 去除了大量的xml配置文件
+
+	2 简化复杂的依赖管理
+
+	3 配合各种starter使用，基本上可以做到自动化配置
+
+	4 快速启动容器
+	
+三、使用
+
+==========环境准备==========================================================
+	1、eclipse中添加sts工具 即搭建springboot的插件。
+	
+=========最原始springboot访问==============================================
+	2、创建springboot项目，创建项目时打包方式需要设置成jar而不是war包，因为其已内置tomcat（spring-boot-starter-web），无需打war包，打成jar包直接运行。
+	3、在main方法的同级或以下路径中创建访问controller，因为目前不融入springmvc和mybaits框架，所以controller的访问使用注解@RestController，该注解为@ResponseBody 和 @Controller注解的融合。表示接口的返回值不需要经过spingmvc视图解析，可直接返回对应的数据信息。
+，创建一个controller类并设置对应的注解。
+	4、使用springboot的启动方式启动main主类。
+	5、由于springboot的访问 是使用自带的tomcat进行部署 并访问时不需要添加项目名称。直接通过controller层的请求路径进行访问。
+	6、项目若通过浏览器访问正常  则springboot项目创建成功
+	
+==========springboot关闭启动banner===========================================
+	这个banner可以更换也可以直接关闭
+	关闭步骤：在main启动中，将自动生成的启动方式：SpringApplication.run(Application.class, args);
+	调整成为：
+		SpringApplication app = new SpringApplication(Application.class);
+		app.setBannerMode(Mode.OFF);
+		app.run(args);
+	
+	BannerMode字段用于控制banner功能
+	
+==========springboot集成热部署=============================================
+	集成热部署以后  java文件或者jsp的修改项目会自动去加载 不需要重启就可以直接生效
+	pom文件添加devtools依赖：
+		<!-- 热部署 -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+		</dependency>
+	
+==========springboot集成spingmvc框架=============================================
+	1、pom文件添加jsp支持
+		scope的常量值有：https://www.cnblogs.com/asingna/p/5234908.html
+		注意改依赖的scope必须指定，否则打成jar包，启动项目时报错==>jasper的jar包冲突。https://blog.csdn.net/u013189824/article/details/80507849
+		
+		<!-- jsp -->
+		<dependency>
+			<groupId>org.apache.tomcat.embed</groupId>
+			<artifactId>tomcat-embed-jasper</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		
+	2、appcation配置文件夹中配置spring的视图解析路径
+		spring.mvc.view.prefix=/WEB-INF/views/
+		spring.mvc.view.suffix=.jsp
+		注意：有些springboot的版本不一致  所以key也可能为spring.view.prefix而不是spring.mvc.view.prefix  具体是多少 可在配置文件使用提示的方式进行配置 
+	3、学习连接：
+		springboot  使用外部tomcat：https://blog.csdn.net/fanshukui/article/details/80258793
+		pom中关于tomcat的一些配置讲解：https://blog.csdn.net/u013189824/article/details/80507849
+			
+			
+==========springboot集成mybatis框架=============================================		
+	application.properties  常见配置项：https://blog.csdn.net/lpfsuperman/article/details/78287265
+	1、		
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+	

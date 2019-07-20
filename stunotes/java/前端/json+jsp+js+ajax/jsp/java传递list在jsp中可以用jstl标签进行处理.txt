@@ -1,0 +1,4 @@
+后台   model.getModel().put("machineInfo",JSON.toJSON(machinelist));
+
+
+前台  <c:if test="${list.size()>0 }">

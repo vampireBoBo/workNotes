@@ -1,0 +1,5 @@
+1、[java.lang.ClassNotFoundException: com/sun/tools/internal/xjc/api/XJC]
+	可能情况：项目的运行环境设置成jre，需要修改成jdk
+2、项目启动时没有报错但启动一半就停止了 ，可能原因如下：
+	tomcat的启动时间不足
+	数据库的密码不正确【若使用maven tomcat7:run 指令启动时  若出现该情况 请先进行数据库密码的排查】

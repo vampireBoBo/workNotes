@@ -1,0 +1,20 @@
+1、table：visible:false
+
+2、js:
+
+$(table).bootstrapTable('showColumn', '要隐藏的字段')
+
+$(function () {
+  //初始化table
+  LoadingDataListOrderRealItems();
+  //隐藏列
+  $('#tableOrderRealItems').bootstrapTable('showColumn', 'ShopName');
+  $('#tableOrderRealItems').bootstrapTable('hideColumn', 'GoodsId');
+  $('#tableOrderRealItems').bootstrapTable('hideColumn', 'OrderItemId');
+  $('#tableOrderRealItems').bootstrapTable('hideColumn', 'ShopName');      
+  $('#tableOrderRealItems').bootstrapTable('hideColumn', 'SellerName');
+}); 
+
+
+
+https://blog.csdn.net/sevenzll/article/details/79465057

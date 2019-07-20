@@ -1,0 +1,49 @@
+https://elim.iteye.com/blog/2123030
+
+一、缓存作用
+	提高数据访问效率  及常用数据的存储
+	
+二、spring内置集成了chache  配置方式有两种xml 注解 ，spring caching一般作用于方法中，在方法调用时配置缓存，会将方法的结果集进行缓存。
+	
+	1、配置缓存管理器
+	xmlns:cache="http://www.springframework.org/schema/cache"
+	xmlns:p="http://www.springframework.org/schema/p"
+	http://www.springframework.org/schema/cache
+	http://www.springframework.org/schema/cache/spring-cache-4.0.xsd
+		
+	<!-- 启动spring自带缓存功能  mybatis与spring集成后由于托管机制导致mybaits的一级缓存失效【mybaits的一级缓存是针对于同一个sqlsession的，但是spring的托管后针对于数据库的时候是申请打开处理完后直接关闭，故导致mybatis的一级缓存失控】  -->
+   	<cache:annotation-driven cache-manager="cacheManager"/>
+    <bean id="cacheManager" class="org.springframework.cache.support.SimpleCacheManager">
+    	<property name="caches">
+    		<set>
+    			<bean class="org.springframework.cache.concurrent.ConcurrentMapCacheFactoryBean"  name="default"></bean>
+    			<!-- <bean class="org.springframework.cache.concurrent.ConcurrentMapCacheFactoryBean"  name="student"></bean> -->
+    			<!-- 使用P:name 这种格式设置属性时  需要引入p的命名空间 student为需要进行缓存的类的注入名称-->
+    			<bean class="org.springframework.cache.concurrent.ConcurrentMapCacheFactoryBean"  p:name="student"></bean>
+    		</set>
+    	</property>
+    </bean>
+		
+	2、配置缓存
+		1》xml
+		<cache:advice id="cacheAdvice" cache-manager="cacheManager">
+
+		  <cache:caching cache="users">
+
+			 <cache:cacheable method="findById" key="#p0"/>
+
+			 <cache:cacheable method="find" key="#user.id"/>
+
+			 <cache:cache-evict method="deleteAll" all-entries="true"/>
+
+		  </cache:caching>
+
+	   </cache:advice>
+	   
+	   2》注解	
+	   	<cache:annotation-driven cache-manager="cacheManager"/>
+			
+		@Cachable(value="cacheName",key="key值有默认值也可自定义",condition="springel表达式,当返回true执行缓存，若返回false则不执行")
+		@CacheEvict(value="同上",key="同上",condition="同上",allEntriet="默认为false，当为true时表示缓存全部清空",beforeInvocation="设置为true表示在当前方法执行之前执行该清除工作，因为默认情况下该清除工作要在当前方法执行完毕后执行成功进行执行。")
+		@Caching 可混合使用上面两个注解
+	

@@ -1,0 +1,23 @@
+================ 【通过url传递参数时】
+jsp:  var value = encodeURI(encodeURI(name));
+
+
+java:		//超链接传值乱码处理
+		String value = null;
+		try {
+			value = URLDecoder.decode(name, "UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+
+
+===================【jsp通过$.get 请求   java通过req.getParameter("bname")取值】
+方法一： 
+get方式提交的参数编码，只支持iso8859-1编码。因此，如果里面有中文。在后台就需要转换编码，如下
+String bname = request.getParameter("bname");
+bname = new String(bname .getBytes("iso8859-1"),"utf-8");
+前提是你页面编码就是utf-8，如果是gbk，那上面那句代码后面就改成gbk。
+
+
+
+https://blog.csdn.net/gg12365gg/article/details/52347214

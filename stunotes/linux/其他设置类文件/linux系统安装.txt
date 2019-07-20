@@ -1,0 +1,15 @@
+安装centos7 的图形界面
+
+
+https://help.aliyun.com/knowledge_detail/41227.html?spm=5176.100241.0.0.zFc4Px
+
+
+https://www.cnblogs.com/c-xiaohai/p/6509641.html
+
+
+http://zhoualine.iteye.com/blog/1806399
+
+xshell进入视图界面：gnome-panel
+
+
+常用指令：yum list installed 查询已经安装的软件包

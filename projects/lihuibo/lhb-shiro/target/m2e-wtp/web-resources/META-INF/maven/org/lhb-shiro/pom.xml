@@ -1,0 +1,135 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org</groupId>
+  <artifactId>lhb-shiro</artifactId>
+  <packaging>war</packaging>
+  <version>0.0.1-SNAPSHOT</version>
+  <name>lhb-shiro Maven Webapp</name>
+  <url>http://maven.apache.org</url>
+  <properties>
+  		<spring.version>4.3.7.RELEASE</spring.version>
+		<mybatis.version>3.4.2</mybatis.version>
+		<mybatis.spring.version>1.3.0</mybatis.spring.version>
+		<mysql.version>5.1.30</mysql.version>
+		<druid.version>1.0.28</druid.version>
+  </properties>
+  
+  <dependencies>
+	<dependency>
+	    <groupId>junit</groupId>
+	    <artifactId>junit</artifactId>
+	    <version>3.8.1</version>
+	    <scope>test</scope>
+	</dependency>
+	<!-- Mybatis -->
+	<dependency>
+		<groupId>org.mybatis</groupId>
+		<artifactId>mybatis</artifactId>
+		<version>${mybatis.version}</version>
+	</dependency>
+	<dependency>
+		<groupId>org.mybatis</groupId>
+		<artifactId>mybatis-spring</artifactId>
+		<version>${mybatis.spring.version}</version>
+	</dependency>
+	<!-- MySql -->
+	<dependency>
+		<groupId>mysql</groupId>
+		<artifactId>mysql-connector-java</artifactId>
+		<version>${mysql.version}</version>
+	</dependency>
+	<!-- 连接池 -->
+	<dependency>
+		<groupId>com.alibaba</groupId>
+		<artifactId>druid</artifactId>
+		<version>${druid.version}</version>
+	</dependency>
+	<!-- Spring -->
+	<dependency>
+		<groupId>org.springframework</groupId>
+		<artifactId>spring-context</artifactId>
+		<version>${spring.version}</version>
+	</dependency>
+	<dependency>
+		<groupId>org.springframework</groupId>
+		<artifactId>spring-beans</artifactId>
+		<version>${spring.version}</version>
+	</dependency>
+	<dependency>
+		<groupId>org.springframework</groupId>
+		<artifactId>spring-webmvc</artifactId>
+		<version>${spring.version}</version>
+	</dependency>
+	<dependency>
+		<groupId>org.springframework</groupId>
+		<artifactId>spring-jdbc</artifactId>
+		<version>${spring.version}</version>
+	</dependency>
+	<dependency>
+		<groupId>org.springframework</groupId>
+		<artifactId>spring-aspects</artifactId>
+		<version>${spring.version}</version>
+	</dependency>
+	<!-- shiro -->
+	<dependency>
+		<groupId>org.apache.shiro</groupId>
+		<artifactId>shiro-core</artifactId>
+		<version>1.4.0</version>
+	</dependency>
+	<dependency>
+		<groupId>org.apache.shiro</groupId>
+		<artifactId>shiro-spring</artifactId>
+		<version>1.4.0</version>
+	</dependency>
+	<!-- mybatis generator 自动化jar -->
+	<dependency>
+	    <groupId>org.mybatis.generator</groupId>
+	    <artifactId>mybatis-generator-core</artifactId>
+	    <version>1.3.5</version>
+	</dependency>
+  </dependencies>
+  <build>
+	  	<finalName>lhb-shiro</finalName>
+	    <plugins>
+    		<plugin>  
+		       	<groupId>org.apache.maven.plugins</groupId>  
+		       	<artifactId>maven-compiler-plugin</artifactId>  
+		       	<version>2.3.2</version>  
+		       	<configuration>  
+		        	<source>1.8</source>  
+		           	<target>1.8</target> 
+		           	<encoding>UTF-8</encoding> 
+		       	</configuration>  
+	   		</plugin> 
+    		<!-- 
+    			利用 mybaits-generator  自动生成代码 
+    			注意点：
+    				1、使用maven指令去自动生成代码 所以 不需要在项目的dependencies中添加对应jar依赖，只需要在plugin中指定后会获取对应jar
+    				2、若xml的路径及名称不是约定的，则需要在plugin中的configuration中指定xml的具体路径
+    				3、通过plugin中的dependenties中mysql的jar依赖 指定对应的mysql的驱动，则不需要在xml文件指定本地项目的mysql驱动包的位置
+    				4、xml的配置文件中context的元素具有一定的声明顺序，必须严格遵循。若项目的指定路径从src路径开始。则对应maven指令中文件则需要从工作空间中进行获取。
+    				5、maven指令：指定文件位置（通过工作空间获取）、 goals（mybatis-generator:generate） 、手动配置maven仓库setting文件路径及软件路径
+    				
+    		 -->
+		    <plugin>
+		        <groupId>org.mybatis.generator</groupId>
+		        <artifactId>mybatis-generator-maven-plugin</artifactId>
+		        <version>1.3.5</version>
+		        <configuration>
+			          <verbose>true</verbose>
+			          <overwrite>true</overwrite>
+			          <configurationFile>src/main/resources/util/generatorConfig.xml</configurationFile>	
+		        </configuration>
+		        <dependencies>
+		          	  <!-- 数据库驱动 -->
+			          <dependency>
+						    <groupId>mysql</groupId>
+						    <artifactId>mysql-connector-java</artifactId>
+						    <version>5.1.30</version>
+					  </dependency>
+		        </dependencies>
+		    </plugin>
+    	</plugins>
+  </build>
+</project>

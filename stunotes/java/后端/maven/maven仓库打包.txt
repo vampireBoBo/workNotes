@@ -1,0 +1,45 @@
+一、maven project存在多个module时  如何将module中的jar打入到本地仓库
+	1、需要进行打包发布的module，则在module  bulid插件中添加
+		<plugin>
+			<artifactId>maven-compiler-plugin</artifactId>
+			<!-- 这个是指定项目编译时的jdk版本 -->
+			<configuration>
+				<source>1.7</source>
+				<target>1.7</target>
+			</configuration>
+		</plugin>
+		<plugin>
+			<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-deploy-plugin</artifactId>
+		</plugin>
+		<plugin>
+			<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-install-plugin</artifactId>
+		</plugin>
+	2、不需要进行发布的module ，则需要在bulid中设置如下：
+		<plugin>
+			<artifactId>maven-compiler-plugin</artifactId>
+			<!-- 这个是指定项目编译时的jdk版本 -->
+			<configuration>
+				<source>1.7</source>
+				<target>1.7</target>
+			</configuration>
+		</plugin>
+		<plugin>
+			<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-deploy-plugin</artifactId>
+			<configuration>
+				<skip>true</skip>
+			</configuration>
+		</plugin>
+		<plugin>
+			<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-install-plugin</artifactId>
+			<configuration>
+				<skip>true</skip>
+			</configuration>
+		</plugin>
+	3、执行打包发布指令：
+		3.1 可在eclipse中直接run as install 指令即可  并查看console中是否有对应的install操作
+		3.2 找到项目的存放文件夹，进入cmd输入指令：mvn clean install -Dmaven.test.skip=true 。然后查看是否有install指令的执行
+	

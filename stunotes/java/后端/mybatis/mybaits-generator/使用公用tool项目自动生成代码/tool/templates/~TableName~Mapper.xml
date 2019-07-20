@@ -1,0 +1,137 @@
+config.~beanPath~
+-----------------head----------------------
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="~package~.mapper.~beanPath~.I~TableName~Mapper">
+	<!-- 新增信息 -->
+	<insert id="insertObject" parameterType="~TableName~" flushCache="true">
+		  insert into ~TableName~
+			<trim prefix="(" suffix=")" suffixOverrides="," >
+		  	~!iterator!~
+		  	<if test="~iterator.columnName~!=null and ~iterator.columnName~!=''">
+		  		~iterator.columnName~,
+		  	</if>
+		  	~!!iterator!~
+		  </trim>
+		 <trim prefix="values (" suffix=")" suffixOverrides="," >
+		 	~!iterator!~
+		   	<if test="~iterator.columnName~!=null and ~iterator.columnName~!=''">
+		  		#{~iterator.columnName~},
+		  	</if>
+		   	~!!iterator!~
+		  </trim>
+	</insert><!-- 注：最后一列的,应该删除 -->
+	
+	<!-- 更新信息 -->
+	<update id="updateObject" parameterType="~TableName~">
+	update ~TableName~
+		<set>
+		~!iterator!~
+		<if test="~iterator.columnName~!=null and ~iterator.columnName~!=''">
+	  		~iterator.columnName~=#{~iterator.columnName~},
+	  	</if>
+		~!!iterator!~
+		</set>
+		where id=#{id}
+	</update><!-- 注：最后一列的,应该删除 -->
+	
+	<!-- 根据id查询对象 -->
+	<select id="getObject" parameterType="~TableName~" resultType="~TableName~">
+		SELECT 
+			~!iterator!~ 
+	 		~iterator.columnName~,
+	 		~!!iterator!~ 
+		from ~TableName~
+		WHERE id=#{id}
+	</select>
+	
+	<!-- 逻辑删除 -->
+	<update id="logicDel" parameterType="~TableName~">
+	<!-- 注：id项可能需要删除 -->
+		update ~TableName~
+		set delMark='1' where id=#{id}
+	</update>
+	
+	<!-- 物理单个删除 -->
+	<delete id="deleteObject" parameterType="~TableName~">
+		DELETE FROM ~TableName~ WHERE  
+		id=#{id}
+	</delete>
+	
+	<!-- 多条件查询 -->
+	<select id="selectList" parameterType="java.util.Map"
+		resultType="java.util.Map">
+		select 
+			~!iterator!~ 
+	 		~iterator.columnName~,
+	 		~!!iterator!~ 
+		from ~TableName~ where 1=1
+		<if test="sort!=null and sort!=''">
+		  		ORDER BY ${sort} ${order}
+		</if>
+		<if test="sort==null or sort==''">
+				ORDER BY name asc
+		</if>
+	</select>
+	
+	<!-- 批处理添加  参数为是存储实体类的集合-->
+	<insert id="batchInsert" parameterType="java.util.List">
+		insert into ~TableName~ (
+				~!iterator!~ 
+	 				~iterator.columnName~,
+	 			~!!iterator!~ 
+	 		) values
+		<foreach collection="list" item="item" index="index"
+			separator=",">
+			( 
+				~!iterator!~ 
+	 				#{~iterator.columnName~},
+	 			~!!iterator!~ 
+			)
+		</foreach>
+	</insert>
+	
+	<!--批处理删除  参数为是存储id的数组-->
+	<delete id="batchDelete">
+		delete from ~TableName~ where id in
+		<foreach item="idItem" collection="array" open="(" separator=","
+			close=")">
+			#{idItem}
+		</foreach>
+	</delete>
+	
+	<!--批量更新   参数为是存储实体类的集合-->
+	<update id="batchUpdate">
+		<foreach collection="list" item="item" index="index" open=""
+			 separator=";" close="">
+			update ~TableName~
+			<set>
+				~!iterator!~
+			  		~iterator.columnName~=#{~iterator.columnName~},
+				~!!iterator!~
+			</set>
+			where id=#{item.id}
+		</foreach>
+	</update>
+	
+	<!--批量查询  参数为是存储id的数组-->
+	<select id="selectByIds" resultType="~TableName~">
+		select * from ~TableName~ where id in
+		<foreach item="idItem" collection="array" open="(" separator=","
+			close=")">
+			#{idItem}
+		</foreach>
+	</select>
+	
+	<!-- 查询code -->
+	<select id="searchCodeMax" parameterType="java.util.Map" resultType="java.lang.String">
+		<if test="parentCode!=null and parentCode!=''">
+			select MAX(code) code from ~TableName~ where code like '${parentCode}___'
+		</if>
+		<if test="parentCode==null or parentCode==''">
+			select MAX(code) code from ~TableName~ where LENGTH(code)=3
+		</if>
+	</select>
+		 
+</mapper>
