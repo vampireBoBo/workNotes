@@ -30,7 +30,9 @@ iptables、firewall的基本操作指令：https://blog.csdn.net/bbwangj/article
 	显示状态：firewall-cmd --state
 	查看外放端口：firewall-cmd --list-all
 	查看外放端口：firewall-cmd --zone=public --list-ports
+	添加端口：firewall-cmd --zone=public --add-port=80/tcp --permanent   （--permanent永久生效，没有此参数重启后失效）
 	更新防火墙规则：firewall-cmd --reload
+
 	
 	更新防火墙规则： firewall-cmd --reload
 	查看区域信息:  firewall-cmd --get-active-zones
