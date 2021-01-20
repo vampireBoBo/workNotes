@@ -15,7 +15,7 @@
     <!-- shiro -->
     <shiro.version>1.2.3</shiro.version>
     <!-- 工具类 -->
-    <jackson.version>2.2.3</jackson.version>
+    <jackson.version>2.12.1</jackson.version>
   </properties>
   
   <!-- 依赖管理  此模式下  子模块含有该模块下所有依赖-->
