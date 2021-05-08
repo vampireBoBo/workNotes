@@ -21,7 +21,7 @@
 		<jackson.version>2.2.3</jackson.version>
 		<fastjson.version>1.1.40</fastjson.version>
 		<!-- shiro版本号 -->
-		<org.apache.shiro.version>1.2.3</org.apache.shiro.version>
+		<org.apache.shiro.version>1.6.0</org.apache.shiro.version>
   </properties>
   
   <dependencies>
