@@ -11,7 +11,7 @@
   <!-- 项目配置  包含：各种插件版本号  编码方式 -->
   <properties>
   		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<spring.version>4.2.3.RELEASE</spring.version>  
+		<spring.version>5.3.18</spring.version>  
 		<!-- mybatis版本号 -->
 		<mybatis.version>3.2.6</mybatis.version>
 		<!-- log4j日志文件管理包版本 -->
