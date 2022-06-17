@@ -101,7 +101,7 @@
     <dependency>  
         <groupId>com.alibaba</groupId>  
         <artifactId>fastjson</artifactId>  
-        <version>1.1.41</version>  
+        <version>1.2.83</version>  
     </dependency> 
     
     <!-- jackson json  若ssm接口返回为responsebody而不是视图名称时 则需要进行该插件进行数据解析  否则接口详情报错406-->
