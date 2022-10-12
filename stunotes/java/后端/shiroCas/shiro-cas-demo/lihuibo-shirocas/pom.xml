@@ -13,7 +13,7 @@
     <mysql.version>5.1.30</mysql.version>
     <mybatis.version>3.2.1</mybatis.version>
     <!-- shiro -->
-    <shiro.version>1.2.3</shiro.version>
+    <shiro.version>1.10.0</shiro.version>
     <!-- 工具类 -->
     <jackson.version>2.2.3</jackson.version>
   </properties>
