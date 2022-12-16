@@ -9,7 +9,7 @@
   <!-- 版本号控制 -->
   <properties>
   	<!-- ssm -->
-  	<spring.version>4.0.5.RELEASE</spring.version> 
+  	<spring.version>5.2.20.RELEASE</spring.version> 
     <mysql.version>5.1.30</mysql.version>
     <mybatis.version>3.2.1</mybatis.version>
     <!-- shiro -->
